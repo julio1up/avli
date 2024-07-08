@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Start Game 2</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <style>
+
+        @font-face {
+            font-family: 'PFAmateurFlatSolid';
+            src: url('/fonts/PFAmateurFlatSolid.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'PFCosmonutProRegular';
+            src: url('/fonts/PFCosmonutProRegular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body{
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            background: #FBE0E8;
+        }
+        .container{
+            height: 100vh;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+        
+        .color_blue{
+            font-family: 'PFAmateurFlatSolid';
+            width: 100%;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 72px;
+            line-height: 72px;
+            text-align: center;
+            color: #5584EE;
+            margin: 42px 0 78px;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .color_pink{
+            font-family: 'PFAmateurFlatSolid';
+            width: 100%;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 64px;
+            line-height: 64px;
+            text-align: center;
+            color: #D2627C;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            padding-bottom: 78px;
+            margin-bottom: 0;
+        }
+
+        .button_container{
+            display: flex;
+            justify-content: center;
+            padding-top: 128px;
+            width: 100%;
+        }
+
+        button{
+            background-color: #5584EE;
+            filter: drop-shadow(7px 7px 11px rgba(0, 0, 0, 0.25));
+            font-family: 'PFCosmonutProRegular';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 80px;
+            line-height: 80px;
+            text-align: center;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 25px;
+            padding: 85px 70px;
+            cursor: pointer;
+        }
+
+        button:focus {
+            background-color: rgba(0, 255, 64, 0.74);
+            color: white;
+        }
+
+        #personage{
+            position: absolute;
+            left: 5%;
+            bottom: 1%;
+            display: none;
+        }
+
+        #bubble{
+            padding-left: 5%;
+            display: none;
+        }
+
+        #final-step{
+            padding-top: 20%;
+            display: none;
+        }
+
+        #final-step .color_blue {
+            font-size: 90px;
+            line-height: 90px;
+        }
+        /* button.btn-start-game {
+  -webkit-touch-callout: none; 
+} */
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="start-step">
+            <h2 class="color_blue">Πού ‘ναι η μπάλα, πού ‘ναι και τ’ αλογάκι...</h2>
+            <h2 class="color_pink">
+                Η Ελενίτσα μένει<br>
+                σε ένα από τα κτήρια της γειτονιάς.
+            </h2>
+            <img id="bubble" src="/images/games/bubble_3.png" />
+            <div id="buttonContent" class="button_container">
+                <button  id="1" class="btn-start-game" onClick="play_game(this.id)">
+                    Ξεκίνα το παιχνίδι
+                </button>
+            </div>
+            <img id="personage" src="/images/games/personage_3.png" />
+        </div>
+        <div id="final-step">
+            <h2 class="color_blue">
+                Το παιχνίδι είναι σε εξέλιξη
+            </h2>
+        </div>
+        
+    </div>
+    <script src = "/socket.io/socket.io.js"></script>
+    <script>
+        // JavaScript code
+// document.addEventListener('DOMContentLoaded', function() {
+//     var myButton = document.querySelector(".btn-start-game");
+
+//     myButton.addEventListener('touchstart', function(event) {
+//         event.preventDefault(); // Prevent default touch behavior
+//     });
+// });
+
+        // STOP ZOOM IN OR ZOOM OUT!
+        let myButton = document.querySelector(".btn-start-game");
+        myButton.addEventListener("click",function(){
+            console.log("clicked")
+        })
+        myButton.addEventListener('touchstart', function(event) {
+            event.stopPropagation();
+        });
+        document.addEventListener('touchmove', function(event) {
+            if (event.scale !== 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+    <script type="text/javascript">
+     var socket=io()
+        socket.on("resetGameMonitor", function (data){
+            if (data ==1){
+                // Reset visibility of elements
+            document.getElementById('buttonContent').style.display = 'flex';
+            document.getElementById('bubble').style.display = 'none';
+            document.getElementById('personage').style.display = 'none';
+            document.getElementById('start-step').style.display = 'block';
+            document.getElementById('final-step').style.display = 'none';
+            
+            }
+        })
+       function play_game(clicked_id){
+
+            document.getElementById('buttonContent').style.display='none';
+            document.getElementById("bubble").style.display = "inline";
+            document.getElementById("personage").style.display = "block";
+
+            setTimeout(
+            function() {
+                document.getElementById('start-step').style.display='none';
+                document.getElementById('final-step').style.display='block';
+
+                var socket = io();
+                socket.emit('messagegame2', clicked_id);
+
+            }, 5000);
+
+            // setInterval(function() {
+            //     window.location.reload();
+            // }, 300000); 
+
+        } 
+        
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Video</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            background-image: url('https://plaka-museum.1up.al/games/l15-oe2/assets/img/WALL_1.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            overflow: hidden;
+        }
+
+        .video-center{
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        /* Container for flexboxes */
+        section {
+            display: -webkit-flex;
+            display: flex;
+        }
+    </style>
+</head>
+   
+   <body>
+    
+    <section>
+        <video class="video-center"  autoplay loop muted playsinline>
+            <source src="https://plaka-museum.1up.al/games/l15-oe2/assets/video/characters/Pagopolis/Pagopolis/Pagopolis_Idle.webm" type="video/webm">
+        </video>
+
+        <video id="raftis_text_bubbles" class="video-center" muted >
+            <source
+                    id="raftis_text_bubbles_source"
+                    src="https://plaka-museum.1up.al/games/l15-oe2/assets/video/characters/Raftis/Raftis_Text_Bubbles/Raftis_Text_Bubbles_1.webm"
+                    type="video/webm"
+            >
+        </video>
+
+        <video id="raftis_talking" class="video-center" muted >
+            <source
+                    id="raftis_talking_source"
+                    src="https://plaka-museum.1up.al/games/l15-oe2/assets/video/characters/Raftis/Raftis_Talking_1.webm"
+                    type="video/webm"
+            >
+        </video>
+
+        <video class="video-center"  autoplay loop muted playsinline>
+            <source
+                    src="https://plaka-museum.1up.al/games/l15-oe2/assets/video/characters/Fwtografos/Fwtografos_Idle.webm"
+                    type="video/webm"
+            >
+        </video>
+
+    </section>
+
+   </body>
+
+   <script src = "/socket.io/socket.io.js"></script>
+   
+   <script>
+        console.log('zxczxczxczxc');
+        const socket = io();
+        socket.on('pagopolisStart', function(data) {
+            console.log('pagopolisStart:' + data);
+            
+        });
+   </script>
+
+</html>
+

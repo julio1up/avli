@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Interface</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+        }
+
+        .container {
+            position: relative;
+            display: grid;
+            grid-template-columns: 2300px 4424px 2300px 4359px;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        .link-container {
+            width: 100%;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        .link-container.last{
+            position: relative;
+            bottom: 10px;
+            left: 38px;
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            /* left: -120px; */
+            border: none;
+            overflow: hidden;
+            top: -5px;
+        }
+
+        .iframe-container.elenitsa{
+            height: 1200px;
+        }
+
+        iframe{
+            border: none;
+        }
+        
+    </style>
+
+</head>
+   
+   <body>
+    
+        <div class="container">
+            <div class="link-container">
+                <div class="iframe-container">
+                    <iframe src="http://localhost:3000/pappous" width="100%" height="100%">
+                        
+                    </iframe>
+                </div>
+            </div>
+        
+            <div class="link-container">
+                <div class="iframe-container elenitsa">
+                    <iframe src="http://localhost:3000/elenitsa" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+        
+            <div class="link-container">
+                <div class="iframe-container elenitsa">
+                    <iframe src="http://localhost:3000/giagia" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div class="link-container last">
+                <div class="iframe-container elenitsa">
+                    <iframe src="http://localhost:3000/" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+        </div>
+
+   </body>
+
+</html>

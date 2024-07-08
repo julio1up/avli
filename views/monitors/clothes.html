@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Clothes</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background-image: url("/images/monitors/clothes/BG.jpg");
+            height: 100vh;
+            object-fit: cover;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container>div {
+            display: flex;
+            width: 100%;
+            height: 50vh;
+            justify-content: center;
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+            height: 100%;
+            margin: 0 3%;
+            display: flex;
+            align-items: flex-end;
+            cursor: pointer;
+        }
+
+        button img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        button#image-5 img,
+        button#image-8 img {
+            height: 130%;
+        }
+
+        .wrong {
+            color: red;
+            background-color: rgba(169, 169, 169, 0.575);
+        }
+
+        .success {
+            color: green;
+            background-color: rgba(169, 169, 169, 0.575);
+        }
+
+        .borderBlu {
+            border: 5px solid blue;
+        }
+
+        #raftis_minigame {
+            z-index: 1;
+            position: absolute;
+
+        }
+
+        #openingImage {
+            transition: opacity 0.5s ease-in-out;
+            /* Smooth opacity transition */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- <button id="gameButton" style="z-index: 999999999999999999; position: absolute;" onclick="handleGame()">Start Game</button> -->
+        <img id="openingImage" src="/images/monitors/clothes/static-raftis-minigame.png"
+            style="object-fit:fill; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 99;">
+        <video id="raftis_minigame" class="video-center " muted preload="auto">
+            <source id="raftis_minigame" src="/Raftis/raftisMinigame" type="video/webm">
+        </video>
+        <div class="result" id="result_final"
+            style="position: absolute;text-align: center;width: 100%;font-size: 45px;height: auto;"></div>
+        <div>
+            <button id="image-2" onclick="getValue(1,event)">
+                <img class="wrongOnes" src="/images/monitors/clothes/1.png">
+            </button>
+            <button id="image-9" onclick="getValue(0,event)">
+                <img class="wrongOnes" src="/images/monitors/clothes/2.png">
+            </button>
+            <button id="image-4" onclick="getValue(0,event)">
+                <img class="wrongOnes" src="/images/monitors/clothes/3.png">
+            </button>
+            <button id="image-6" onclick="getValue(0,event)">
+                <img class="wrongOnes" src="/images/monitors/clothes/4.png">
+            </button>
+        </div>
+        <div>
+            <button id="image-7" onclick="getValue(0,event)">
+                <img class="wrongOnes" src="/images/monitors/clothes/5.png">
+            </button>
+            <button id="image-8" onclick="getValue(0,event)">
+                <img class="wrongOnes" src="/images/monitors/clothes/6.png">
+            </button>
+            <button id="image-1" onclick="getValue(0,event)">
+                <img class="wrongOnes" src="/images/monitors/clothes/7.png">
+            </button>
+            <button id="image-5" onclick="getValue(0,event)">
+                <img class="wrongOnes" src="/images/monitors/clothes/8.png">
+            </button>
+            <button id="image-3" onclick="getValue(0,event)">
+                <img class="wrongOnes" src="/images/monitors/clothes/9.png">
+            </button>
+            <button id="image-10" onclick="getValue(0,event)">
+                <img class="wrongOnes" src="/images/monitors/clothes/10.png">
+            </button>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // STOP ZOOM IN OR ZOOM OUT!
+        let myButton = document.querySelector("button");
+        myButton.addEventListener('touchstart', function (event) {
+            event.stopPropagation();
+        });
+        document.addEventListener('touchmove', function (event) {
+            if (event.scale !== 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+    <script type="text/javascript">
+        var elementsToControl = document.querySelectorAll('.wrongOnes'); 
+        var socket = io();
+        let timeoutID;
+        let isplayed = false;
+        let correctAnswerSelected = false
+        let gameStartedClothes = false
+
+        function resetGame() {
+            if (correctAnswerSelected === false) {
+            socket.emit("resetGameMonitorRafti", 1);
+            console.log("a behet reset nga rafti")
+            gameStartedClothes = false;
+            isplayed = false;
+            clearTimeout(timeoutID);
+            socket.emit("resetArrowRafti", 1)
+            document.getElementById("result_final").innerHTML = "";
+            document.getElementById('result_final').className = '';
+            elementsToControl.forEach(function (element) {
+                element.style.opacity = 1;
+            });
+            const openingImage = document.querySelector('#openingImage');
+            openingImage.style.display = "block";
+            openingImage.style.opacity = 1;
+
+            const minigameVideo = document.querySelector('#raftis_minigame');
+            minigameVideo.style.display = "none";
+            minigameVideo.currentTime = 0;
+            minigameVideo.pause();
+        }
+        }
+
+        socket.on("resetGameRafti", function (data) {
+            if (data == 1) {
+            socket.emit("resetGameMonitorRafti", 1);
+            console.log("a behet reset nga rafti")
+            gameStartedClothes = false;
+            isplayed = false;
+            clearTimeout(timeoutID);
+            document.getElementById("result_final").innerHTML = "";
+            document.getElementById('result_final').className = '';
+            elementsToControl.forEach(function (element) {
+                element.style.opacity = 1;
+            });
+            const openingImage = document.querySelector('#openingImage');
+            openingImage.style.display = "block";
+            openingImage.style.opacity = 1;
+
+            const minigameVideo = document.querySelector('#raftis_minigame');
+            minigameVideo.style.display = "none";
+            minigameVideo.currentTime = 0;
+            minigameVideo.pause();
+            }
+        });
+
+        function starttimeoutID() {
+            console.log(isplayed,"isplayed")
+            clearTimeout(timeoutID);
+            if (!isplayed) {
+                console.log(timeoutID)
+                timeoutID = setTimeout(resetGame, 50000); 
+            }
+        }
+
+        // function handleGame() {
+        //     gameStartedClothes = true
+        //     const openingImage = document.querySelector('#openingImage');
+        //     openingImage.style.opacity = 0;
+        //     setTimeout(() => {
+        //         openingImage.style.display = "none";
+        //     }, 500); // Wait for the transition to complete (0.5 seconds)
+
+        //     // Load and play the minigame video
+        //     const minigameVideo = document.querySelector('#raftis_minigame');
+        //     minigameVideo.load();
+        //     minigameVideo.play();
+        // }
+
+        socket.on('gameHasStarted3', function (data) {
+            if (data == 1) {
+                gameStartedClothes = true
+            correctAnswerSelected = false
+
+            }
+        })
+        socket.on('playMinigameRaftis', function (data) {
+            if (data == 1) {
+                document.querySelector('#openingImage').style.display = "none"
+                starttimeoutID();
+                document.querySelector('#raftis_minigame').play();
+            }
+        })
+        document.querySelector('#raftis_minigame').addEventListener('ended', function (evt) {
+            document.querySelector('#raftis_minigame').style.display = "none";
+
+        })
+
+        function getValue(id, event) {
+            if (gameStartedClothes) {   
+                clearTimeout(timeoutID);
+
+                if (id == 1) {
+
+                    isplayed = true;
+                    correctAnswerSelected = true;
+                    document.getElementById("result_final").innerHTML = "✓";
+                    const box = document.getElementById('result_final');
+                    box.className = '';
+                    box.classList.add("success");
+
+                    document.querySelector('.container').classList.remove('borderBlu');
+                    console.log('a behet ky emiti i rrobave kjtu?')
+                    document.querySelector('#openingImage').style.display = "block"
+
+                    document.querySelector('#raftis_minigame').style.display = "block";
+                    document.querySelector('#raftis_minigame').currentTime = 0;
+                    document.querySelector('#raftis_minigame').pause();
+
+
+
+
+                    socket.emit('messageClothes', 1);
+                    elementsToControl.forEach(function (element) {
+                        if (element !== event.target) {
+                            element.style.opacity = 1;
+                        }
+                    })
+
+                    gameStartedClothes = false
+                } else {
+                    starttimeoutID();
+                    correctAnswerSelected = false;
+                    event.target.style.opacity = 0.5;
+                }
+            }
+        }
+
+
+        // START GAME 
+        socket.on('messageRaftis_3_talkings', function (data) {
+            console.log('messageRaftis_3_talkings: ' + data);
+
+            if (data == 1) {
+                isplayed = false;
+
+            }
+
+        });
+
+    </script>
+</body>
+
+</html>

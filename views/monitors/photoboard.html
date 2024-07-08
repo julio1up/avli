@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Photo board</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background-image: url('/images/monitors/photoboard/background.jpg');
+            height: 100vh;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .container img {
+            position: absolute;
+            height: 100vh;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        #choose_correct {
+            width: 140px;
+            height: 200px;
+            position: absolute;
+            right: 9%;
+            top: 5%;
+            background-color: #ffffff00;
+            z-index: 99;
+        }
+
+        .wrong {
+            color: red;
+            background-color: rgba(169, 169, 169, 0.575);
+        }
+
+        .success {
+            color: green;
+            background-color: rgba(169, 169, 169, 0.575);
+        }
+
+        .borderBlu {
+            border: 5px solid blue;
+        }
+
+        .image-container-9 {
+            width: 188px;
+            height: 251px;
+            position: absolute;
+            left: 108px;
+            top: 72px;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-14 {
+            width: 203px;
+            height: 288px;
+            position: absolute;
+            right: 73%;
+            top: 21%;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-6 {
+            width: 203px;
+            height: 306px;
+            position: absolute;
+            right: 53%;
+            top: 14%;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-17 {
+            width: 188px;
+            height: 339px;
+            position: absolute;
+            right: 372px;
+            top: 72px;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-7 {
+            width: 346px;
+            height: 241px;
+            position: absolute;
+            right: 135px;
+            top: 440px;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-15 {
+            width: 204px;
+            height: 318px;
+            position: absolute;
+            right: 71%;
+            top: 37%;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-16 {
+            width: 382px;
+            height: 252px;
+            position: absolute;
+            right: 33%;
+            top: 37%;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-5 {
+            width: 204px;
+            height: 326px;
+            position: absolute;
+            right: 10%;
+            top: 37%;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-11 {
+            width: 222px;
+            height: 326px;
+            position: absolute;
+            right: 71%;
+            top: 56%;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-8 {
+            width: 222px;
+            height: 288px;
+            position: absolute;
+            right: 47%;
+            top: 51%;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-3 {
+            width: 179px;
+            height: 288px;
+            position: absolute;
+            right: 52%;
+            top: 67%;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-4 {
+            width: 191px;
+            height: 288px;
+            position: absolute;
+            right: 28%;
+            top: 59%;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-12 {
+            width: 211px;
+            height: 315px;
+            position: absolute;
+            right: 7%;
+            top: 57%;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-13 {
+            width: 420px;
+            height: 247px;
+            position: absolute;
+            right: 53%;
+            top: 83%;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-2 {
+            width: 234px;
+            height: 360px;
+            position: absolute;
+            right: 28%;
+            top: 77%;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+
+        .image-container-10 {
+            width: 208px;
+            height: 324px;
+            position: absolute;
+            right: 7%;
+            top: 80%;
+            background-color: rgba(3, 3, 3, 0);
+            z-index: 99;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="result" id="result_final"
+            style="position: absolute;text-align: center;width: 100%;font-size: 45px;height: auto;"></div>
+        <img src="/images/monitors/photoboard/1.png" onclick="getValue(1, event)">
+        <!-- <div class="image-container-1"> -->
+        <img class="wrongOnes" src="/images/monitors/photoboard/2.png" onclick="getValue(0, event)">
+
+        <!-- </div> -->
+        <img class="wrongOnes" src="/images/monitors/photoboard/3.png" onclick="getValue(0, event)">
+        <img class="wrongOnes" src="/images/monitors/photoboard/4.png" onclick="getValue(0, event)">
+        <img class="wrongOnes" src="/images/monitors/photoboard/5.png" onclick="getValue(0, event)">
+        <img class="wrongOnes" src="/images/monitors/photoboard/6.png" onclick="getValue(0, event)">
+        <img class="wrongOnes" src="/images/monitors/photoboard/7.png" onclick="getValue(0, event)">
+        <img class="wrongOnes" src="/images/monitors/photoboard/8.png" onclick="getValue(0, event)">
+
+
+        <img class="wrongOnes" src="/images/monitors/photoboard/9.png" onclick="getValue(9, event)">
+        <img class="wrongOnes" src="/images/monitors/photoboard/10.png" onclick="getValue(0, event)">
+        <img class="wrongOnes" src="/images/monitors/photoboard/11.png" onclick="getValue(0, event)">
+        <img class="wrongOnes" src="/images/monitors/photoboard/12.png" onclick="getValue(0, event)">
+        <img class="wrongOnes" src="/images/monitors/photoboard/13.png" onclick="getValue(0, event)">
+        <img class="wrongOnes" src="/images/monitors/photoboard/14.png" onclick="getValue(0, event)">
+        <img class="wrongOnes" src="/images/monitors/photoboard/15.png" onclick="getValue(0, event)">
+        <img class="wrongOnes" src="/images/monitors/photoboard/16.png" onclick="getValue(0, event)">
+        <img class="wrongOnes" src="/images/monitors/photoboard/17.png" onclick="getValue(0, event)">
+        <div id="choose_correct" data-selected="1" onclick="getValue(1,event)"></div>
+        <div class="image-container-9" data-selected="9" onclick="getValue(9,event)"></div>
+        <div class="image-container-14" data-selected="14" onclick="getValue(14,event)"></div>
+        <div class="image-container-6" data-selected="6" onclick="getValue(6,event)"></div>
+        <div class="image-container-17" data-selected="17" onclick="getValue(17,event)"></div>
+        <div class="image-container-7" data-selected="7" onclick="getValue(7,event)"></div>
+        <div class="image-container-15" data-selected="15" onclick="getValue(15,event)"></div>
+        <div class="image-container-16" data-selected="16" onclick="getValue(16,event)"></div>
+        <div class="image-container-5" data-selected="5" onclick="getValue(5,event)"></div>
+        <div class="image-container-11" data-selected="11" onclick="getValue(11,event)"></div>
+        <div class="image-container-8" data-selected="8" onclick="getValue(8,event)"></div>
+        <div class="image-container-3" data-selected="3" onclick="getValue(3,event)"></div>
+        <div class="image-container-4" data-selected="4" onclick="getValue(4,event)"></div>
+        <div class="image-container-12" data-selected="12" onclick="getValue(12,event)"></div>
+        <div class="image-container-13" data-selected="13" onclick="getValue(13,event)"></div>
+        <div class="image-container-2" data-selected="2" onclick="getValue(2,event)"></div>
+        <div class="image-container-10" data-selected="10" onclick="getValue(10,event)"></div>
+
+
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // STOP ZOOM IN OR ZOOM OUT!
+        let result = document.querySelector(".result");
+        result.addEventListener('touchstart', function (event) {
+            event.stopPropagation();
+        });
+        let myButton = document.querySelector("img");
+        myButton.addEventListener('touchstart', function (event) {
+            event.stopPropagation();
+        });
+        document.addEventListener('touchmove', function (event) {
+            if (event.scale !== 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+    <script type="text/javascript">
+        let startPlaying = false
+        var elementsToControl = document.querySelectorAll('.wrongOnes');
+        let socket = io();
+        let timeoutID;
+        let isplayed = false;
+        var gameStartedPhotoboard = false
+        let   correctAnswerSelected = false
+        let clickedOnce=false
+
+        function starttimeoutID() {
+            clearTimeout(timeoutID);
+            console.log(isplayed)
+            if (!isplayed) {
+                timeoutID = setTimeout(resetGame, 50000); // 50 seconds in milliseconds
+            }
+        }
+        socket.on('gameHasStarted3', function (data) {
+            if (data == 1) {
+                gameStartedPhotoboard = true
+                console.log(gameStartedPhotoboard, 'brenda socket')
+
+            }
+        })
+        if(clickedOnce){
+            socket.emit("itemClickedPhoto",1)
+
+        }
+        // let counter = 0;
+        var correctImageSelected = false;
+        function getValue(id, event) {
+
+            if (startPlaying) {
+            clickedOnce=true
+                // counter++;
+                console.log('this is: ' + id)
+
+                if (id == 1 && gameStartedPhotoboard) {
+                    console.log(correctImageSelected, "jasht")
+
+
+                    if (!correctImageSelected) {
+                        correctImageSelected = true;
+                        startPlaying = false
+                        correctAnswerSelected = true;
+
+                        event.target.onclick = null;
+                        const allImages = document.querySelectorAll("img.wrongOnes");
+                        console.log(allImages)
+                        for (const image of allImages) {
+                            console.log('ahyn ktu')
+                            image.style.opacity = 1;
+                        }
+                        ;
+                        isplayed = true;
+                        // clearTimeout(timeoutID);
+                        let socket = io()
+                        socket.emit('messagePhotoboard', 1);
+                        setTimeout(function () {
+                            correctImageSelected = false;
+                            event.target.onclick = function () {
+                                getValue(id, event);
+                            };
+                        }, 7000)
+                        clickedOnce=false
+
+                        elementsToControl.forEach(function (element) {
+                            if (element !== event.target) {
+                                element.style.opacity = 1;
+                            }
+                        })
+                    }
+
+                    gameStartedPhotoboard = false
+                } else if (id !== 1 && gameStartedPhotoboard) {
+                    console.log("a hyn ktu para se t bej reset?")
+                    starttimeoutID();
+                    const imageId = id
+                    const imageElement = document.querySelector(`img[src*="/images/monitors/photoboard/${imageId}.png"]`);
+
+                    if (imageElement) {
+                        // Set opacity of the corresponding image (if found)
+                        imageElement.style.opacity = 0.5;
+                    } else {
+                        console.error("Error: Image not found for clicked div", event.target);
+                    }
+
+                }
+
+                setTimeout(function () {
+                    document.getElementById("result_final").innerHTML = "";
+                    document.getElementById('result_final').className = '';
+
+                }, 3000);
+
+            }
+        }
+
+
+        // START GAME 
+        socket.on('messageFwtografos_3_talkings', function (data) {
+            console.log('messageFwtografos_3_talkings: ' + data);
+
+            if (data == 1) {
+                startPlaying = true
+                starttimeoutID();
+
+            }
+
+        });
+        function resetGame() {
+            if (!correctAnswerSelected) {
+            startPlaying = false;
+            isplayed = false;
+            socket.emit("resetArrowPhoto",1)
+            clickedOnce=false
+            correctImageSelected = false;
+            gameStartedPhotoboard = false;
+            clearTimeout(timeoutID);
+            socket.emit("resetGameRafti", 1)
+            const allImages = document.querySelectorAll("img.wrongOnes");
+            for (const image of allImages) {
+                image.style.opacity = 1;
+                image.onclick = function (event) {
+                    getValue(image.dataset.selected, event);
+                };
+            }
+            console.log("u be reset photo")
+            document.getElementById("result_final").innerHTML = "";
+            document.getElementById('result_final').className = '';
+        }
+        }
+
+        socket.on('messageFwtografos_End', function (data) {
+            if (data == 1) {
+                // resetGame();
+                console.log('Game reset');
+            }
+        });
+    </script>
+</body>
+
+</html>

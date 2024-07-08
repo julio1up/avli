@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Tic-Tac-Toe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            height: 100vh;
+            text-align: center;
+        }
+
+        .max-container {
+            display: inline;
+            margin: 0 auto;
+        }
+
+        .gameContainer {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 200px 200px 200px;
+            text-align: center;
+            position: absolute;
+            bottom: 120px;
+            left: 39%;
+            transform: rotate(2deg);
+            width: max-content;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            padding-left: 125px;
+        }
+
+        .gameContainer.disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+
+        .gameContainer>.blue {
+            color: blue;
+            padding: 20px;
+            font-size: 48px;
+        }
+
+        .gameContainer>.red {
+            color: red;
+            padding: 20px;
+            font-size: 48px;
+        }
+
+        .gameContainer>.gray {
+            background-color: transparent;
+            color: purple;
+            padding: 24px;
+            font-size: 24px;
+        }
+
+        .ilde-game {
+            position: absolute;
+        }
+
+        #nikolas_ilde_play {
+            opacity: 0;
+        }
+
+        .gameContainer>div {
+            border: 2px solid rgba(0, 0, 255, 0);
+            border-radius: 25px;
+            padding: 35px 110px;
+            color: green;
+        }
+
+        img,
+        video {
+            height: 100%;
+        }
+
+        .talking-bubble,
+        .start-play-game,
+        .ilde-play-game,
+        .end-game,
+        .computer-player,
+        img {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .talking-bubble,
+        .end-game,
+        .computer-player {
+            right: 0px;
+            margin: 0px auto;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+
+        .talking-bubble {
+            width: 100%;
+        }
+
+        #background-image {
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        #nikolas_start_1 {
+            position: relative;
+            opacity: 0;
+        }
+
+        .o-player {
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body style="overflow: hidden;">
+    <div class="container">
+
+        <!-- <button onclick="function_startGame()" style="position: absolute;z-index: 999999;padding: 12px;font-size: 16px;">
+            Start Game With button
+        </button> -->
+
+        <div class="max-container">
+            <section id="gameGrid" class="gameContainer">
+                <div class="item item-1 item_o_ul " id='one'> </div>
+                <div class="item item-2 item_o_uc" id='two'> </div>
+                <div class="item item-3 item_o_ur" id='three'> </div>
+
+                <div class="item item-4 item_o_ml" id='four'> </div>
+                <div class="item item-5 item_o_mc" id='five'> </div>
+                <div class="item item-6 item_o_mr" id='six'> </div>
+
+                <div class="item item-7 item_o_dl" id='seven'> </div>
+                <div class="item item-8 item_o_dc" id='eight'> </div>
+                <div class="item item-9 item_o_dr" id='nine'> </div>
+            </section>
+            <audio controls="controls" id="breakingWindowSound">
+                <source src="/videos/Efterpi/Breaking_window.wav" type="audio/wav">
+
+            </audio>
+            <!-- <button id="startGame" style="position: absolute; z-index: 9999999999;">Startgame</button> -->
+
+            <!-- me dritaren e hapur idle -->
+            <video id="nikolas_ilde" class="video-center ilde-game" muted autoplay loop preload="auto">
+                <source id="nikolas_source_ilde" src="/Nikolas/Nikolas_Idle.mp4" type="video/mp4">
+            </video>
+            <!-- idle me dritaren e mbyllur -->
+            <video id="nikolas_ilde_play" class="video-center ilde-play-game" muted autoplay loop preload="auto">
+                <source id="nikolas_source_ilde_play" src="/Nikolas/Nikolas_Play_Idle.mp4" type="video/mp4">
+            </video>
+            <!-- nikolas qe mbyll dritaren dhe nis lojen -->
+            <video id="nikolas_start_clean_play" class="video-center start-play-game" muted preload="auto">
+                <source id="nikolas_source_start_clean_play" src="/Nikolas/Nikolas_Play_Start_Clean.mp4"
+                    type="video/mp4">
+            </video>
+
+
+            <video id="nikolas_talking_1" class="video-center talking-bubble" muted preload="auto">
+                <source id="nikolas_source_talking_1" src="/Nikolas/Nikolas_Talking_1.webm" type="video/webm">
+            </video>
+            <video id="nikolas_talking_2" class="video-center talking-bubble" muted preload="auto">
+                <source id="nikolas_source_talking_2" src="/Nikolas/Nikolas_Talking_2.webm" type="video/webm">
+            </video>
+            <video id="nikolas_talking_3" class="video-center talking-bubble" muted preload="auto">
+                <source id="nikolas_source_talking_3" src="/Nikolas/Nikolas_Talking_3.webm" type="video/webm">
+            </video>
+            <video id="nikolas_talking_4" class="video-center talking-bubble" muted preload="auto">
+                <source id="nikolas_source_talking_4" src="/Nikolas/Nikolas_Talking_4.webm" type="video/webm">
+            </video>
+
+            <video id="nikolas_talking_5" class="video-center talking-bubble" muted preload="auto">
+                <source id="nikolas_source_talking_5" src="/Nikolas/Nikolas_Talking_5.webm" type="video/webm">
+            </video>
+
+
+            <video id="nikolas_end_o" class="video-center end-game" muted>
+                <source id="nikolas_source_end_o" src="/Nikolas/Nikolas_Play_End_O.webm" type="video/webm">
+            </video>
+
+            <video id="nikolas_end" class="video-center end-game" muted>
+                <source id="nikolas_source_end" src="/Nikolas/Nikolas_Play_End_Triliza.webm" type="video/webm">
+            </video>
+
+            <video id="nikolas_one_Clean" class="video-center computer-player clean-player" muted preload="auto">
+                <source id="nikolas_source_one_Clean" src="/Nikolas/Nikolas_Play_UL_Clean.mp4" type="video/mp4">
+            </video>
+            <video id="nikolas_two_Clean" class="video-center computer-player clean-player" muted preload="auto">
+                <source id="nikolas_source_two_Clean" src="/Nikolas/Nikolas_Play_UC_Clean.mp4" type="video/mp4">
+            </video>
+            <video id="nikolas_three_Clean" class="video-center computer-player clean-player" muted preload="auto">
+                <source id="nikolas_source_three_Clean" src="/Nikolas/Nikolas_Play_UR_Clean.mp4" type="video/mp4">
+            </video>
+            <video id="nikolas_four_Clean" class="video-center computer-player clean-player" muted preload="auto">
+                <source id="nikolas_source_four_Clean" src="/Nikolas/Nikolas_Play_ML_Clean.mp4" type="video/mp4">
+            </video>
+            <video id="nikolas_five_Clean" class="video-center computer-player clean-player" muted preload="auto">
+                <source id="nikolas_source_five_Clean" src="/Nikolas/Nikolas_Play_MC_Clean.mp4" type="video/mp4">
+            </video>
+            <video id="nikolas_six_Clean" class="video-center computer-player clean-player" muted preload="auto">
+                <source id="nikolas_source_six_Clean" src="/Nikolas/Nikolas_Play_MR_Clean.mp4" type="video/mp4">
+            </video>
+            <video id="nikolas_seven_Clean" class="video-center computer-player clean-player" muted preload="auto">
+                <source id="nikolas_source_seven_Clean" src="/Nikolas/Nikolas_Play_DL_Clean.mp4" type="video/mp4">
+            </video>
+            <video id="nikolas_eight_Clean" class="video-center computer-player clean-player" muted preload="auto">
+                <source id="nikolas_source_eight_Clean" src="/Nikolas/Nikolas_Play_DC_Clean.mp4" type="video/mp4">
+            </video>
+            <video id="nikolas_nine_Clean" class="video-center computer-player clean-player" muted preload="auto">
+                <source id="nikolas_source_nine_Clean" src="/Nikolas/Nikolas_Play_DR_Clean.mp4" type="video/mp4">
+            </video>
+
+
+            <video id="nikolas_start_1" class="video-center" muted>
+                <source id="nikolas_source_start_1" src="/Nikolas/Nikolas_Play_Start_Triliza.webm" type="video/webm">
+            </video>
+            <video id="nikolas_one" class="video-center computer-player" muted>
+                <source id="nikolas_source_one" src="/Nikolas/Nikolas_Play_UL_X.webm" type="video/webm">
+            </video>
+            <video id="nikolas_two" class="video-center computer-player" muted>
+                <source id="nikolas_source_two" src="/Nikolas/Nikolas_Play_UC_X.webm" type="video/webm">
+            </video>
+            <video id="nikolas_three" class="video-center computer-player" muted>
+                <source id="nikolas_source_three" src="/Nikolas/Nikolas_Play_UR_X.webm" type="video/webm">
+            </video>
+            <video id="nikolas_four" class="video-center computer-player" muted>
+                <source id="nikolas_source_four" src="/Nikolas/Nikolas_Play_ML_X.webm" type="video/webm">
+            </video>
+            <video id="nikolas_five" class="video-center computer-player" muted>
+                <source id="nikolas_source_five" src="/Nikolas/Nikolas_Play_MC_X.webm" type="video/webm">
+            </video>
+            <video id="nikolas_six" class="video-center computer-player" muted>
+                <source id="nikolas_source_six" src="/Nikolas/Nikolas_Play_MR_X.webm" type="video/webm">
+            </video>
+            <video id="nikolas_seven" class="video-center computer-player" muted>
+                <source id="nikolas_source_seven" src="/Nikolas/Nikolas_Play_DL_X.webm" type="video/webm">
+            </video>
+            <video id="nikolas_eight" class="video-center computer-player" muted>
+                <source id="nikolas_source_eight" src="/Nikolas/Nikolas_Play_DC_X.webm" type="video/webm">
+            </video>
+            <video id="nikolas_nine" class="video-center computer-player" muted>
+                <source id="nikolas_source_nine" src="/Nikolas/Nikolas_Play_DR_X.webm" type="video/webm">
+            </video>
+
+            <!--<img id="background-image" src="/videos/Nikolas/Nikolas_Play_Static_Triliza.png">-->
+            <img id="o_ul" class="playerO_one o-player" src="/videos/Nikolas/O_UL.png">
+            <img id="o_uc" class="playerO_two o-player" src="/videos/Nikolas/O_UC.png">
+            <img id="o_ur" class="playerO_three o-player" src="/videos/Nikolas/O_UR.png">
+            <img id="o_ml" class="playerO_four o-player" src="/videos/Nikolas/O_ML.png">
+            <img id="o_mc" class="playerO_five o-player" src="/videos/Nikolas/O_MC.png">
+            <img id="o_mr" class="playerO_six o-player" src="/videos/Nikolas/O_MR.png">
+            <img id="o_dl" class="playerO_seven o-player" src="/videos/Nikolas/O_DL.png">
+            <img id="o_dc" class="playerO_eight o-player" src="/videos/Nikolas/O_DC.png">
+            <img id="o_dr" class="playerO_nine o-player" src="/videos/Nikolas/O_DR.png">
+
+
+        </div>
+
+    </div>
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        // document.getElementById("startGame").addEventListener("click", function(){
+        // function_startGame();
+        // })
+        var timeoutID;
+
+
+        function startInactivityTimer() {
+            timeoutID = setTimeout(function () {
+                console.log("No touch events detected for 50 seconds, reloading page.");
+                socket.emit("resetGameEleni", 1)
+                window.location.reload();
+console.log("u therrit starti ipari")
+            }, 50000);
+        }
+
+        function resetInactivityTimer() {
+            clearTimeout(timeoutID);
+            startInactivityTimer();
+console.log("u therrit reseti ipari")
+        
+        }
+        function stopInactivityTimer() {
+        clearTimeout(timeoutID);
+    }
+        // document.addEventListener('touchstart', function(event) {
+        //     console.log('Touch event occurred.');
+        //     resetInactivityTimer();
+        // });
+
+        var socket = io();
+
+        // socket.on("resetGameElenitsa", function (data) {
+        //     console.log("reset tek nikola")
+        //     if (data == 1) {
+
+        //         window.location.reload();
+        //     }
+        // })
+        // STOP ZOOM IN OR ZOOM OUT!
+        let result = document.querySelector(".container");
+        result.addEventListener('touchstart', function (event) {
+            event.stopPropagation();
+        });
+        let myButton = document.querySelector("img");
+        myButton.addEventListener('touchstart', function (event) {
+            event.stopPropagation();
+        });
+        document.addEventListener('touchmove', function (event) {
+            if (event.scale !== 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById('breakingWindowSound').controls = false;
+
+        // function resetGame() {
+        //     document.querySelectorAll('video').forEach(video => {
+        //         video.pause();
+        //         video.currentTime = 0;
+        //     });
+
+        //     document.querySelectorAll('.video-center').forEach(element => {
+        //         if (element.id !== 'nikolas_ilde') {
+        //             element.style.opacity = '0';
+        //         }
+        //     });
+
+        //     document.querySelectorAll('.item').forEach(item => {
+        //         item.classList.remove('blue', 'red', 'gray', 'unclickable');
+        //     });
+
+        //     document.querySelector('#gameGrid').classList.remove('disabled');
+
+        //     $('#gameResult, #congratsOrSorry').addClass('displayNone');
+        //     $('#gameInfo').removeClass('displayNone');
+        // }
+
+
+        // Nikolas is Idle. The game has not started.
+        document.querySelector('#nikolas_ilde').load();
+        document.querySelector('#nikolas_ilde').play();
+
+        document.querySelector('#nikolas_start_1').load();
+        document.querySelector('#nikolas_ilde_play').load();
+        document.querySelector('#nikolas_start_clean_play').load();
+        document.querySelector('#breakingWindowSound').load();
+
+
+        function function_startGame() {
+            // Nikolas Start Game.
+            document.querySelector('#breakingWindowSound').play();
+
+            document.querySelector('#nikolas_start_clean_play').play();
+
+            document.querySelector('#nikolas_start_1').play();
+            jQuery('#nikolas_start_1').css('opacity', '1');
+            jQuery('#nikolas_start_clean_play').css('opacity', '1');
+            document.querySelector('#nikolas_start_clean_play').addEventListener('ended', function (evt) {
+                jQuery('#nikolas_start_clean_play').css('opacity', '0');
+
+                document.querySelector('#nikolas_ilde_play').play();
+                jQuery('#nikolas_ilde_play').css('opacity', '1');
+            });
+
+            document.querySelector('#nikolas_start_1').addEventListener('ended', function (evt) {
+                document.querySelector('#gameGrid').style.zIndex = "9999999";
+            });
+
+            startInactivityTimer()
+        }
+
+        // document.addEventListener('touchmove', function (event) {
+        //     console.log("touchmove detected")
+        //     if (event.scale !== 1) {
+        //         event.preventDefault();
+        //     }
+        //     resetInactivityTimer();
+        //     console.log('Touch move event occurred. Inactivity timer reset.');
+        // }, { passive: false });
+        // document.addEventListener('click', function(event) {
+        //         console.log("click detected")
+        //     if (event.scale !== 1) {
+        //         event.preventDefault();
+        //     }
+        //     resetInactivityTimer();
+        //     console.log('Touch move event occurred. Inactivity timer reset.');
+        // }, { passive: false });
+        //After Nicolas play set video ILDE.
+        const videos = document.querySelectorAll('.clean-player');
+        videos.forEach(video => {
+            video.addEventListener('ended', () => {
+                video.style.opacity = 0;
+                jQuery('#nikolas_ilde_play').css('opacity', '1');
+                jQuery('#gameGrid').removeClass('disabled');
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        function resetGame() {
+            socket.emit("resetGameElenitsa", 1)
+            window.location.reload()
+        }
+
+
+        //   document.getElementById('startGame').addEventListener('click', function_startGame);
+        function clickButton(event) {
+            clearTimeout(timeoutID);
+            
+            $(".item").click(function (event) {
+                resetInactivityTimer();
+                // Check if the clicked item already has the 'red' or 'blue' class
+                if (!$(this).hasClass('red') && !$(this).hasClass('blue')) {
+                    var playerOne = getPlayerOne();
+                    if (playerOne === "O") {
+                        $(this).addClass("blue") //playerOne is always blue
+                        jQuery('.playerO_' + this.id).css('opacity', '1');
+                        jQuery('#gameGrid').addClass('disabled');
+                    }
+                    playGame(); // Call playGame after every click to check for the winner & whose turn
+                } else {
+                    // Display a message to the user indicating that the cell is already occupied
+                    console.log("This cell is already occupied.");
+                }
+            });
+        }
+        clickButton(event)
+
+
+        function checkWhoseTurn() { //for this game, playerOne goes first
+            var currentTurn
+            var redCount = getRedCount()
+            var blueCount = getBlueCount()
+            var playerOneTurn = !blueCount || redCount > blueCount || blueCount && redCount == blueCount
+            var computerTurn = redCount < blueCount
+            if (playerOneTurn) {
+
+                var notBlueOrRed = document.querySelectorAll("div.item:not(.blue):not(.red)")
+                $(notBlueOrRed).removeClass('unclickable')
+
+                currentTurn = "playerOneTurn"
+                return currentTurn
+            }
+            if (computerTurn) {
+                console.log("checkWhoseTurn: it is computer's turn")
+                var allItems = document.querySelectorAll("div.item")
+                $(allItems).addClass('unclickable') //need to remove this on playerOne's turn
+                $("#yourTurn").removeClass('yellow blackText')
+                $("#compTurn").addClass('yellow blackText')
+                setTimeout(computerTakeTurn, 1000) //call after 1 second...
+                currentTurn = "computerTurn"
+                return currentTurn
+            }
+        }
+
+
+        function computerTakeTurn() {
+            const blusElement = [];
+            var computer = getComputer()
+            console.log('computerTakeTurn: computer is: ', computer)
+            var notBlueOrRed = document.querySelectorAll("div.item:not(.blue):not(.red)")
+            var isBlu = document.querySelectorAll("div.item.blue")
+
+            for (i = 0; i < isBlu.length; i++) {
+                blusElement.push(isBlu[i].id);
+            }
+
+
+            var one = jQuery.inArray('one', blusElement);
+            var two = jQuery.inArray('two', blusElement);
+            var three = jQuery.inArray('three', blusElement);
+            var four = jQuery.inArray('four', blusElement);
+            var five = jQuery.inArray('five', blusElement);
+            var six = jQuery.inArray('six', blusElement);
+            var seven = jQuery.inArray('seven', blusElement);
+            var eight = jQuery.inArray('eight', blusElement);
+            var nine = jQuery.inArray('nine', blusElement);
+
+            if ((one > -1) && (four > -1) && (document.querySelector(".item.item-7:not(.blue):not(.red)") != null)) {
+                var randomItem = document.querySelector(".item.item-7")
+                console.log('u fut te numri')
+            } else if ((seven > -1) && (four > -1) && (document.querySelector(".item.item-1:not(.blue):not(.red)") != null)) {
+                var randomItem = document.querySelector(".item.item-1")
+            } else {
+                //choose one at random
+                var randomItem = notBlueOrRed[Math.floor(Math.random() * notBlueOrRed.length)]
+
+            }
+            console.log("randomItem: " + randomItem.id);
+            console.log(randomItem);
+            //document.querySelector('#nikolas_' + randomItem.id).load();
+            document.querySelector('#nikolas_' + randomItem.id).play();
+            jQuery('#nikolas_' + randomItem.id).css('opacity', '1');
+            //addClass red to that random item and show computer chose it
+            jQuery(randomItem).addClass("red unclickable");
+
+            //document.querySelector('#nikolas_' + randomItem.id + '_Clean').load();
+            document.querySelector('#nikolas_' + randomItem.id + '_Clean').play();
+            jQuery('#nikolas_' + randomItem.id + '_Clean').css('opacity', '1');
+
+            playGame()
+        }
+
+
+        function getPlayerOne() {
+
+            var playerOne = "O";
+            return playerOne
+
+        }
+
+
+        function getComputer() {
+            var playerOne = getPlayerOne()
+            var computer = (playerOne === "X") ? ("O") : ("X")
+            return computer
+        }
+
+
+        function reset() {
+
+            console.log("reset: resetting game, for new game...")
+            jQuery('img').css('opacity', '0');
+            jQuery('.computer-player').css('opacity', '0');
+            $(".item").removeClass("blue red gray unclickable")
+
+            jQuery('#gameGrid').removeClass('disabled');
+
+        }
+
+
+        function resetO() {
+            stopInactivityTimer();
+            jQuery('img').css('opacity', '0');
+            jQuery('.computer-player').css('opacity', '0');
+            jQuery(".item").removeClass("blue red gray unclickable")
+
+            document.querySelector('#nikolas_end_o').load();
+            document.querySelector('#nikolas_end_o').play();
+            jQuery('#nikolas_end_o').css('opacity', '1');
+
+            document.querySelector('#nikolas_end_o').addEventListener('ended', function (evt) {
+                jQuery('#nikolas_end_o').css('opacity', '0');
+                jQuery('#nikolas_ilde').css('opacity', '1');
+
+                jQuery('#nikolas_ilde_play').css('opacity', '0');
+                jQuery('#nikolas_start_1').css('opacity', '0');
+
+                jQuery('#gameGrid').css('z-index', '0');
+                jQuery('#gameGrid').removeClass('disabled');
+
+            });
+
+        }
+
+        function resetX() {
+
+            jQuery('img').css('opacity', '0');
+            jQuery('.computer-player').css('opacity', '0');
+            jQuery(".item").removeClass("blue red gray unclickable")
+
+            document.querySelector('#nikolas_end_x').load();
+            document.querySelector('#nikolas_end_x').play();
+            jQuery('#nikolas_end_x').css('opacity', '1');
+
+            document.querySelector('#nikolas_end_x').addEventListener('ended', function (evt) {
+                jQuery('#nikolas_end_x').css('opacity', '0');
+                jQuery('#nikolas_ilde').css('opacity', '1');
+
+                jQuery('#nikolas_ilde_play').css('opacity', '0');
+                jQuery('#nikolas_start_1').css('opacity', '0');
+
+                jQuery('#gameGrid').css('z-index', '0');
+                jQuery('#gameGrid').removeClass('disabled');
+
+            });
+
+        }
+
+
+        function getRedCount() {
+            var redCount = $('#gameGrid .red').length
+            return redCount
+        }
+
+        function getBlueCount() {
+            var blueCount = $('#gameGrid .blue').length
+            return blueCount
+        }
+
+
+        function checkForWinner() {
+            console.log("checking for winner...")
+            var winner
+
+            var eightWinningCombos = [
+                "#one.COLOR, #two.COLOR, #three.COLOR",
+                "#four.COLOR, #five.COLOR, #six.COLOR",
+                "#seven.COLOR, #eight.COLOR, #nine.COLOR",
+                "#one.COLOR, #four.COLOR, #seven.COLOR",
+                "#two.COLOR, #five.COLOR, #eight.COLOR",
+                "#three.COLOR, #six.COLOR, #nine.COLOR",
+                "#one.COLOR, #five.COLOR, #nine.COLOR",
+                "#seven.COLOR, #five.COLOR, #three.COLOR"
+            ]
+
+            var blueWinArray = getWinningArray(eightWinningCombos, "blue")
+            var redWinArray = getWinningArray(eightWinningCombos, "red")
+            var blueWins = blueWinArray.includes(true)
+            var redWins = redWinArray.includes(true)
+            var fullGrid = getRedCount() + getBlueCount()
+            var draw = (fullGrid === 9) && (!blueWins) && (!redWins)
+
+            if (blueWins) { //playerOne is always blue
+                playerOneWins()
+                return winner = 'O';
+            }
+            if (redWins) { //red is computer
+                computerWins()
+                return winner = 'X';
+            }
+            if (draw) {
+                drawGame()
+                return winner = draw
+            } else {
+                console.log('game on...')
+            }
+        }
+
+        function getWinningArray(array, string) {
+            return array.map(function (combo) {
+                var eachCombo = combo.replace(/COLOR/g, string)
+                return eachCombo = $(eachCombo).length === 3
+            })
+        }
+
+        function playerOneWins() {
+            var playerOne = getPlayerOne()
+            console.log(`${playerOne} wins!`)
+            $("#gameResult").html(`<span class='yellowBig'>${playerOne} wins!</span>`)
+            $("#congratsOrSorry").html("<span class='yellow'>Congratulations! You won!</span>")
+            winLoseOrDraw()
+        }
+
+        function computerWins() {
+            var computer = getComputer()
+
+            console.log(`${computer} wins!`)
+            $("#gameResult").html(`<span class='redBig'>${computer} wins!</span>`)
+            $("#congratsOrSorry").html("<span class='red'>Sorry, you lost.</span>")
+            winLoseOrDraw()
+        }
+
+        function drawGame() {
+            console.log('Draw game!')
+            $("#gameResult").html(`<span class='redBig'>Game is a draw.</span>`)
+            $("#congratsOrSorry").html("<span>Game ended in a draw.</span>")
+            winLoseOrDraw()
+        }
+
+        function winLoseOrDraw() {
+            $("#gameResult, #congratsOrSorry").removeClass("displayNone")
+            $("#gameInfo").addClass("displayNone")
+            disableRemainingItems()
+        }
+
+        function disableRemainingItems() {
+            var notBlueOrRed = document.querySelectorAll("div.item:not(.blue):not(.red)")
+            $(notBlueOrRed).addClass("unclickable")
+            return
+        }
+
+        function playGame() {
+            
+            console.log('play game!')
+            var winner = checkForWinner()
+            console.log(winner);
+            if (!winner) {
+                console.log('no winner yet...')
+                checkWhoseTurn()
+            }
+            if (winner) {
+                stopInactivityTimer();
+                console.log('game over, winnereeeee: ' + winner);
+                if (winner == 'O') {
+                    resetO();
+                    setTimeout(function () {
+                        playAfterWinO()
+                    }, 4000);
+                } else if (winner == 'X') {
+                    stopInactivityTimer();
+                    resetX();
+                } else {
+                    reset();
+                }
+                //setTimeout(reset, 1000) //call reset after 3 seconds...
+            }
+        }
+        playGame()
+
+    </script>
+
+    <script>
+
+
+        // START GAME 
+        // const socket = io();
+        socket.on('messageNikolasStep', function (data) {
+            console.log('messageNikolasStep: ' + data);
+            if (data == 1) {
+
+                setTimeout(function () {
+                    document.querySelector('#nikolas_talking_1').load();
+
+                    document.querySelector('#nikolas_talking_1').style.opacity = "1";
+                    document.querySelector('#nikolas_talking_1').play();
+
+                    socket.emit('messageNikolasBubble', 1);
+
+
+                    document.querySelector('#nikolas_talking_1').addEventListener('ended', function (evt) {
+                        document.querySelector('#nikolas_talking_1').style.opacity = "0";
+
+                        socket.emit('messageNikolasBubble', 0);
+                        function_startGame();
+                        //  timeoutID = setTimeout(resetGame, 50000);
+
+                    });
+
+
+                }, 2000);
+            }
+
+        });
+
+        function playAfterWinO() {
+            stopInactivityTimer();
+
+            document.querySelector('#nikolas_talking_2').load();
+
+            document.querySelector('#nikolas_talking_2').play();
+            document.querySelector('#nikolas_talking_2').style.opacity = "1";
+            socket.emit('messageNikolasBubble', 2);
+            document.querySelector('#nikolas_talking_2').addEventListener('ended', function (evt) {
+                document.querySelector('#nikolas_talking_2').style.opacity = "0";
+
+                document.querySelector('#nikolas_talking_3').load();
+                document.querySelector('#nikolas_talking_3').play();
+
+                document.querySelector('#nikolas_talking_3').style.opacity = "1";
+                socket.emit('messageNikolasBubble', 3);
+            });
+
+            document.querySelector('#nikolas_talking_3').addEventListener('ended', function (evt) {
+                document.querySelector('#nikolas_talking_3').style.opacity = "0";
+
+                document.querySelector('#nikolas_talking_4').load();
+
+
+                document.querySelector('#nikolas_talking_4').style.opacity = "1";
+                document.querySelector('#nikolas_talking_4').play();
+
+
+
+                socket.emit('messageNikolasBubble', 4);
+
+            });
+
+            document.querySelector('#nikolas_talking_4').addEventListener('ended', function (evt) {
+                document.querySelector('#nikolas_talking_4').style.opacity = "0";
+
+                document.querySelector('#nikolas_talking_5').load();
+
+
+                document.querySelector('#nikolas_talking_5').style.opacity = "1";
+                document.querySelector('#nikolas_talking_5').play();
+
+                socket.emit('messageNikolasBubble', 5);
+                console.log('mbaroi nikolas talking 4')
+            });
+
+            document.querySelector('#nikolas_talking_5').addEventListener('ended', function (evt) {
+                document.querySelector('#nikolas_talking_5').style.opacity = "0";
+                console.log('mbaroi nikolas talking 5')
+                console.log('efterpi.. ');
+
+                socket.emit('messageEfterpiStep', 1);
+
+            });
+
+        }
+    </script>
+
+</body>
+
+</html>

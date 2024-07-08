@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tic-Tac-Toe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        .container{
+            height: 100vh;
+            text-align: center;
+        }
+        .max-container{
+            display: inline;
+            margin: 0 auto;
+        }
+        
+        
+        video{
+            opacity: 0;
+            width: 100%;
+        }
+        
+        .talking-bubble{
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+        .talking-bubble{
+            width: 100%;
+            position: absolute;
+            height: 100%;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="max-container">
+            <video id="nikolas_bubble_1" class="video-center talking-bubble"  muted>
+                <source id="nikolas_bubble_source_1" src="/NikolasBubbles/Nikolas_Bubble_1_gr" type="video/webm">
+            </video>
+            <video id="nikolas_bubble_2" class="video-center talking-bubble"  muted>
+                <source id="nikolas_bubble_source_2" src="/NikolasBubbles/Nikolas_Bubble_2_gr" type="video/webm">
+            </video>
+            <video id="nikolas_bubble_3" class="video-center talking-bubble"  muted>
+                <source id="nikolas_bubble_source_3" src="/NikolasBubbles/Nikolas_Bubble_3_gr" type="video/webm">
+            </video>
+            <video id="nikolas_bubble_4" class="video-center talking-bubble"  muted>
+                <source id="nikolas_bubble_source_4" src="/NikolasBubbles/Nikolas_Bubble_4_gr" type="video/webm">
+            </video>
+            <video id="nikolas_bubble_5" class="video-center talking-bubble"  muted>
+                <source id="nikolas_bubble_source_5" src="/NikolasBubbles/Nikolas_Bubble_5_gr" type="video/webm">
+            </video>
+        </div>
+    </div>
+    <script src = "/socket.io/socket.io.js"></script>
+
+    <script>
+
+        // START GAME 
+        const socket = io();
+        socket.on('messageNikolasBubble', function(data) {
+            console.log('messageNikolasBubble: ' + data);
+            if(data == 1){
+                console.log('po luhet bubble 1 ');
+                document.querySelector('#nikolas_bubble_1').play();
+                document.querySelector('#nikolas_bubble_1').style.opacity = "1";
+
+                document.querySelector('#nikolas_bubble_1').addEventListener('ended', function( evt ) {
+                    document.querySelector('#nikolas_bubble_1').style.opacity = "0";
+                });
+
+            }
+            if(data == 2){
+                console.log('po luhet bubble 2 ');
+                document.querySelector('#nikolas_bubble_2').play();
+                document.querySelector('#nikolas_bubble_2').style.opacity = "1";
+
+                document.querySelector('#nikolas_bubble_2').addEventListener('ended', function( evt ) {
+                    document.querySelector('#nikolas_bubble_2').style.opacity = "0";
+                });
+
+            }
+            if(data == 3){
+                console.log('po luhet bubble 3 ');
+                document.querySelector('#nikolas_bubble_3').play();
+                document.querySelector('#nikolas_bubble_3').style.opacity = "1";
+
+                document.querySelector('#nikolas_bubble_3').addEventListener('ended', function( evt ) {
+                    document.querySelector('#nikolas_bubble_3').style.opacity = "0";
+                });
+
+            }
+            if(data == 4){
+                console.log('po luhet bubble 4 ');
+                document.querySelector('#nikolas_bubble_4').play();
+                document.querySelector('#nikolas_bubble_4').style.opacity = "1";
+
+                document.querySelector('#nikolas_bubble_4').addEventListener('ended', function( evt ) {
+                    document.querySelector('#nikolas_bubble_4').style.opacity = "0";
+                });
+
+            }
+            if(data == 5){
+                console.log('po luhet bubble 5 ');
+                document.querySelector('#nikolas_bubble_5').play();
+                document.querySelector('#nikolas_bubble_5').style.opacity = "1";
+
+                document.querySelector('#nikolas_bubble_5').addEventListener('ended', function( evt ) {
+                    document.querySelector('#nikolas_bubble_5').style.opacity = "0";
+                });
+
+            }
+            if(data == 0){
+                console.log('po luhet bubble 2 ');
+                document.querySelector('.talking-bubble').style.opacity = "0";
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  .container
+    video#raftis_text_bubbles.video-center(muted='')
+      source#raftis_text_bubbles_source(src='https://plaka-museum.1up.al/games/l15-oe2/assets/video/characters/Raftis/Raftis_Text_Bubbles/Raftis_Text_Bubbles_1.webm' type='video/webm') 
+    video#raftis_talking.video-center(muted='')
+      source#raftis_talking_source(src='https://plaka-museum.1up.al/games/l15-oe2/assets/video/characters/Raftis/Raftis_Talking_1.webm' type='video/webm')
+
+  script(type='text/javascript').
+      document.querySelector('#raftis_talking').load();
+      document.querySelector('#raftis_talking').play();
+      document.querySelector('#raftis_text_bubbles').load();
+      document.querySelector('#raftis_text_bubbles').play();
+      document.querySelector('#raftis_talking').addEventListener('ended', function( evt ) {
+      console.log('raftis_talking_source');
+      document.getElementcleanById('raftis_talking_source').src = 'https://plaka-museum.1up.al/games/l15-oe2/assets/video/characters/Raftis/Raftis_Talking_2.webm';
+      document.querySelector('#raftis_talking').load();
+      document.querySelector('#raftis_talking').play();
+      });

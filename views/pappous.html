@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Pappous</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .papouBubble {
+            margin-left: 100px;
+        }
+
+        body {
+            /*
+            background-image: url('/images/WALL_Pappous.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            */
+            background-color: #000000;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+
+        video,
+        .video-center {
+            background-color: transparent;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        .personage-video {
+            opacity: 0;
+        }
+
+        /* Container for flexboxes */
+        section {
+            display: flex;
+        }
+
+        .choose-pappous {
+            position: absolute;
+            right: 50rem;
+            bottom: 39.5%;
+        }
+
+        button {
+            color: #fff;
+            font-family: 'PFCosmonutProRegular';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 25px;
+            background-color: #5584EE;
+            padding: 22px 3PX;
+            border: none;
+            border-radius: 10px;
+            margin: 0 6px;
+        }
+
+
+        #background_image {
+            position: absolute;
+            top: -20px;
+            bottom: 0;
+            right: 4px;
+            width: 104%;
+            height: 103%;
+        }
+
+        #Pappous_arrow {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="background_image" src="/images/WALL_Pappous.png" />
+    <img style="position: absolute; width: 100%; height: 100%;" src="/images/WALL 4_Pappous Text.png" />
+
+    <section>
+
+        <video id="Pappous_idle" class="video-center" autoplay loop muted>
+            <source id="Pappous_idle_source" src="/Pappous/Pappous_Idle_1_VP9" type="video/webm">
+        </video>
+
+        <video id="Pappous_idle_to_talk" class="video-center personage-video" muted preload="auto">
+            <source id="Pappous_talking_source_1" src="/Pappous/Pappous_Idle_To_Talking_1_VP9" type="video/webm">
+        </video>
+        <video id="Pappous_talking_1" class="video-center personage-video" muted>
+            <source id="Pappous_talking_source_2" src="/Pappous/Pappous_Talking_1_1_VP9" type="video/webm">
+        </video>
+        <video id="Pappous_arrow" class="video-center personage-video" muted loop>
+            <source id="Pappous_source_arrow" src="/Pappous/Pappous_Arrow" type="video/webm">
+        </video>
+        <video id="Pappous_talking_2" class="video-center personage-video" muted>
+            <source id="Pappous_talking_source_3" src="/Pappous/Pappous_Talking_2_1_VP9" type="video/webm">
+        </video>
+        <video id="Pappous_talking_to_idle" class="video-center personage-video" muted preload="auto">
+            <source id="Pappous_talking_source_4" src="/Pappous/Pappous_Talking_To_Idle_1_VP9" type="video/webm">
+        </video>
+        <!-- <video id="Pappous_talking_5" class="video-center personage-video" muted>
+            <source id="Pappous_talking_source_5" src="/Pappous/Pappous_Talking_5" type="video/webm">
+        </video>
+        <video id="Pappous_talking_6" class="video-center personage-video" muted>
+            <source id="Pappous_talking_source_6" src="/Pappous/Pappous_Talking_6" type="video/webm">
+        </video> -->
+
+        <video id="Pappous_talking_bubbles_1" class="video-center personage-video papouBubble" muted>
+            <source id="Pappous_talking_bubbles_source_1" src="/PappousBubbles/Pappous_Talking_Bubble_1_GR_1_VP9"
+                type="video/webm">
+        </video>
+        <video id="Pappous_talking_bubbles_2" class="video-center personage-video papouBubble" muted>
+            <source id="Pappous_talking_bubbles_source_2" src="/PappousBubbles/Pappous_Talking_Bubble_2_GR_1_VP9"
+                type="video/webm">
+        </video>
+        <!-- <video id="Pappous_talking_bubbles_3" class="video-center personage-video papouBubble" muted>
+            <source id="Pappous_talking_bubbles_source_3" src="/PappousBubbles/Pappous_Bubble_3_gr" type="video/webm">
+        </video>
+        <video id="Pappous_talking_bubbles_4" class="video-center personage-video papouBubble" muted>
+            <source id="Pappous_talking_bubbles_source_4" src="/PappousBubbles/Pappous_Bubble_4_gr" type="video/webm">
+        </video>
+        <video id="Pappous_talking_bubbles_5" class="video-center personage-video papouBubble" muted>
+            <source id="Pappous_talking_bubbles_source_5" src="/PappousBubbles/Pappous_Bubble_5_gr" type="video/webm">
+        </video>
+        <video id="Pappous_talking_bubbles_6" class="video-center personage-video papouBubble" muted>
+            <source id="Pappous_talking_bubbles_source_6" src="/PappousBubbles/Pappous_Bubble_6_gr" type="video/webm">
+        </video> -->
+
+        <!-- <div class="choose-pappous">
+            <button class="yes">
+                NAI
+            </button>
+            <button class="no">
+                OXI
+            </button>
+        </div> -->
+        <button onclick="simulateGameStart()" id="startGame" style=" position: absolute; left: 0; z-index: 9999999999999999999999999;">Start Game</button>
+
+    </section>
+
+</body>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    let startVideo;
+    document.getElementById('startGame').addEventListener('click', simulateGameStart);
+      function simulateGameStart() {
+        console.log("papu but")
+            socket.emit("scene4", 'eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw1Miw1OCwxMTIsMTA4LDk3LDEyMSwxM119'); // Simulate game start event
+            startVideo=0
+        }
+
+    var socket = io();
+    function handleVideoPlayPappou(videoElement) {
+        var playPromise = videoElement.play();
+
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                videoElement.style.display = "block";
+                videoElement.style.opacity = "1";
+            }).catch(error => {
+                console.log('Autoplay was prevented:', error);
+                // Optionally, you could prompt the user to click a button to play the video
+            });
+        }
+    }
+    function resetDocument() {
+
+        socket.emit("resetGameForGiagia", 1)
+        console.log("reset te papu")
+        // Reset any variables or flags used in your code
+        startVideo = 0;
+        scene4Started = false;
+        wheelRotated = false;
+        giagiaEnded = false;
+
+        document.querySelector('#Pappous_arrow').style.opacity = 0;
+        // Reset the opacity of elements if necessary
+        document.querySelector('#Pappous_idle').style.opacity = "1";
+        document.querySelector('#Pappous_idle_to_talk').style.opacity = "0";
+
+
+        // Other reset tasks as needed
+    }
+    socket.on("resetGamePapou", function (data) {
+        if (data == 1) {
+            console.log("a futetet ktu?")
+            resetDocument()
+        }
+    })
+    document.querySelector('#Pappous_idle').load();
+    document.querySelector('#Pappous_idle').play();
+    document.querySelector('#Pappous_idle_to_talk').load();
+
+
+    let scene4Started = false;
+    let wheelRotated = false;
+    let giagiaEnded = false;
+
+    // Play First Step V1:play
+    socket.on('giagiaEnded', function (data) {
+        if (data == 1) {
+            wheelRotated = false;
+
+            giagiaEnded = true
+            startVideo = 0
+            // document.querySelector('#Pappous_arrow').load();
+            // document.querySelector('#Pappous_arrow').style.opacity = "1";
+            // document.querySelector('#Pappous_arrow').play();
+            handleVideoPlayPappou(document.querySelector('#Pappous_arrow'))
+
+            console.log("a sfutet ktu te papu")
+            setTimeout(function () {
+                if (!wheelRotated) {
+                    console.log("a ekz kjo te papu?")
+                    resetDocument();
+                }
+            }, 50000);
+
+        }
+    })
+    socket.on('scene4', function (data) {
+        scene4Started = true;
+
+        console.log('scene4:' + data);
+        if (data == "eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw1Miw1OCwxMTIsMTA4LDk3LDEyMSwxM119" && startVideo == 0) {
+            startVideo = 1;
+            wheelRotated = true;
+            document.querySelector('#Pappous_idle_to_talk').load();
+
+            console.log(wheelRotated, 'ú rrotullu rrota')
+
+            console.log('Giagia talking 4 has ended.');
+            if (wheelRotated && scene4Started && giagiaEnded) {
+                console.log('papu filloi t flasi ')
+                scene4Started = false;
+                giagiaEnded = false;
+                document.querySelector('#Pappous_idle_to_talk').load();
+                document.querySelector('#Pappous_arrow').style.opacity = "0";
+
+                //ktu iken idle dhe luhet papou idle to talk 
+                // document.querySelector('#Pappous_idle').addEventListener('ended', function (evt) {
+                document.querySelector('#Pappous_idle').style.opacity = "0";
+                // document.querySelector('#Pappous_idle_to_talk').style.opacity = "1";
+
+                // document.querySelector('#Pappous_idle_to_talk').play();
+            handleVideoPlayPappou(document.querySelector('#Pappous_idle_to_talk'))
+
+                document.querySelector('#Pappous_talking_1').load();
+
+
+
+                // })
+
+                document.querySelector('#Pappous_idle_to_talk').addEventListener('ended', function (evt) {
+                    document.querySelector('#Pappous_idle_to_talk').style.opacity = "0";
+                    // document.querySelector('#Pappous_talking_bubbles_1').style.opacity = "0";
+                    // document.querySelector('#Pappous_talking_1').style.opacity = "1";
+                    // document.querySelector('#Pappous_talking_1').play();
+                    // document.querySelector('#Pappous_talking_bubbles_1').style.opacity = "1";
+                    // document.querySelector('#Pappous_talking_bubbles_1').play();
+                    handleVideoPlayPappou(document.querySelector('#Pappous_talking_1'))
+                    handleVideoPlayPappou(document.querySelector('#Pappous_talking_bubbles_1'))
+
+                    document.querySelector('#Pappous_talking_2').load();
+                });
+
+
+                document.querySelector('#Pappous_talking_1').addEventListener('ended', function (evt) {
+                    document.querySelector('#Pappous_talking_1').style.opacity = "0";
+                    document.querySelector('#Pappous_talking_bubbles_1').style.opacity = "0";
+
+                    // document.querySelector('#Pappous_talking_2').style.opacity = "1";
+                    // document.querySelector('#Pappous_talking_2').play();
+                    // document.querySelector('#Pappous_talking_bubbles_2').style.opacity = "1";
+                    // document.querySelector('#Pappous_talking_bubbles_2').play();
+                    handleVideoPlayPappou(document.querySelector('#Pappous_talking_2'))
+                    handleVideoPlayPappou(document.querySelector('#Pappous_talking_bubbles_2'))
+
+                    document.querySelector('#Pappous_talking_to_idle').load();
+                });
+
+                document.querySelector('#Pappous_talking_2').addEventListener('ended', function (evt) {
+                    document.querySelector('#Pappous_talking_2').style.opacity = "0";
+                    document.querySelector('#Pappous_talking_bubbles_2').style.opacity = "0";
+                    var socket = io();
+                    // document.querySelector('#Pappous_talking_to_idle').style.opacity = "1";
+                    // document.querySelector('#Pappous_talking_to_idle').play();
+                    handleVideoPlayPappou(document.querySelector('#Pappous_talking_to_idle'))
+
+                    socket.emit('pagopolisStart', 1);
+
+                });
+
+                document.querySelector('#Pappous_talking_to_idle').addEventListener('ended', function (evt) {
+                    document.querySelector('#Pappous_talking_to_idle').style.opacity = "0";
+
+                    document.querySelector('#Pappous_idle').style.zIndex = "1";
+                    document.querySelector('#Pappous_idle').style.opacity = "1";
+                });
+                socket.emit('giagiaEnded', 0);
+
+            }
+        }
+
+        // Play YES v2:play
+        //     var playedVideos = false;
+        //     if (data == 'eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw1MCw1OCwxMTIsMTA4LDk3LDEyMSwxM119' && startVideoYes == 0) {
+        //         if (!playedVideos) { 
+        //             playedVideos=true
+        //         startVideo = 0;
+        //         startVideoYes = 1;
+        //         console.log('shtypi yes')
+        //         let yesButton = document.querySelector('.yes');
+
+        //         // Change the opacity of the 'yes' button to create a fading effect
+        //         yesButton.style.transition = 'opacity 0.5s ease-out';
+        //         yesButton.style.opacity = '0.5';
+        //         setTimeout(function () {
+        //             yesButton.style.opacity = '1';
+        //         }, 4000);
+        //         document.querySelector('#Pappous_talking_4').play();
+        //         document.querySelector('#Pappous_talking_bubbles_4').play();
+        //         document.querySelector('#Pappous_talking_4').style.opacity = "1";
+        //         document.querySelector('#Pappous_talking_bubbles_4').style.opacity = "1";
+
+        //         document.querySelector('#Pappous_talking_5').load();
+        //         document.querySelector('#Pappous_idle').style.opacity = "0";
+
+        //         document.querySelector('#Pappous_talking_4').addEventListener('ended', function (evt) {
+        //             document.querySelector('#Pappous_talking_4').style.opacity = "0";
+        //             document.querySelector('#Pappous_talking_bubbles_4').style.opacity = "0";
+
+        //             document.querySelector('#Pappous_talking_5').play();
+        //             document.querySelector('#Pappous_talking_bubbles_5').play();
+        //             document.querySelector('#Pappous_talking_5').style.opacity = "1";
+        //             document.querySelector('#Pappous_talking_bubbles_5').style.opacity = "1";
+
+        //             document.querySelector('#Pappous_talking_6').load();
+        //         });
+
+        //         document.querySelector('#Pappous_talking_5').addEventListener('ended', function (evt) {
+        //             document.querySelector('#Pappous_talking_5').style.opacity = "0";
+        //             document.querySelector('#Pappous_talking_bubbles_5').style.opacity = "0";
+
+        //             document.querySelector('#Pappous_talking_6').play();
+        //             document.querySelector('#Pappous_talking_bubbles_6').play();
+        //             document.querySelector('#Pappous_talking_6').style.opacity = "1";
+        //             document.querySelector('#Pappous_talking_bubbles_6').style.opacity = "1";
+
+        //         });
+
+        //         document.querySelector('#Pappous_talking_6').addEventListener('ended', function (evt) {
+        //             document.querySelector('#Pappous_talking_6').style.opacity = "0";
+        //             document.querySelector('#Pappous_talking_bubbles_6').style.opacity = "0";
+
+        //             document.querySelector('#Pappous_idle').style.zIndex = "1";
+        //             document.querySelector('#Pappous_idle').style.opacity = "1";
+        //             var socket = io();
+        //             socket.emit('pagopolisStart', 1);
+
+        //             startVideoYes = 0;
+
+        //         });
+        //     }
+
+
+        //     }
+
+        //     if (data == 'eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw1MSw1OCwxMTIsMTA4LDk3LDEyMSwxM119') {
+        //         let noButton = document.querySelector('.no');
+
+        //         // Change the opacity of the 'no' button to create a fading effect
+        //         noButton.style.transition = 'opacity 0.5s ease-out';
+        //         noButton.style.opacity = '0.5';
+        //         setTimeout(function () {
+        //             noButton.style.opacity = '1';
+        //         }, 4000);
+
+        //         document.querySelector('#Pappous_idle').load();
+        //         document.querySelector('#Pappous_idle').play();
+        //     }
+
+    });
+</script>
+
+</html>
