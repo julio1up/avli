@@ -1,0 +1,13 @@
+body{
+    margin: 0;
+    padding: 0;
+    max-height: 100vh;
+}
+
+.home_bgr{
+    background-color: #4c6066;
+}
+
+.video-center{
+    height: 100vh;
+}
