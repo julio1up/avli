@@ -1,0 +1,7 @@
+Talking to Idle 0-22
+Idle 23-82
+Idle To Talking 83-120
+Crying Loop 121-181
+Talking 1 182-382
+Talking 2 383-783
+Talking 3 784-1034

@@ -1,0 +1,5 @@
+Idle 0-121
+Talking 1 122-442
+Talking 2 443-761
+Talking 3 762-1275
+Talking 4 1276-1415

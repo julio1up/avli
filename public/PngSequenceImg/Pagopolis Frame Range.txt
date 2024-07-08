@@ -1,0 +1,5 @@
+Idle 0- 61
+Talking 1 62-317
+Talking 2 318-602
+Talking 3 603-782
+Talking 4 783-1067

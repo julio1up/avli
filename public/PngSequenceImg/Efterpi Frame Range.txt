@@ -1,0 +1,7 @@
+Counting 10sec 0-279
+Enter 280-387
+Leave 388-438
+Talking Idle 439-498
+Talking 1 499-849 Bubbles 1 0-350
+Talking 2 850-1100 Bubbles 2 351-602
+Talking 3 1101-1376 Bubbles 3 603-877

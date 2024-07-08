@@ -1,0 +1,9 @@
+Walk In 0-43
+Walk Out 44-87
+Idle 88-112
+Talking 1 113-372
+Talking 2 373-630
+Talking 3 631-1007
+Talking 4 1008-1266
+Talking 5 1267-1458
+Talking 6 1457-1734

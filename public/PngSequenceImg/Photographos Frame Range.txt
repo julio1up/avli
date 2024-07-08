@@ -1,0 +1,4 @@
+Idle 0-70
+Talking 1 71-395
+Talking 2 396-695
+Talking 3 696-1022

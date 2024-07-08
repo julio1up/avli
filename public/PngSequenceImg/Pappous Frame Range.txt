@@ -1,0 +1,5 @@
+Idle 0-79
+Idle to Talking 80-133
+Talking to Idle 134-187
+Talking 1 188-757
+Talking 2 758-952
