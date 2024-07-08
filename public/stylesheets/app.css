@@ -1,0 +1,27 @@
+body{
+	padding: 0;
+	margin: 0;
+	background-image: url('https://plaka-museum.1up.al/games/l15-oe2/assets/img/WALL_1.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	overflow: hidden;
+}
+
+.container{
+	height: 100vh;
+}
+
+video{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+}
+
+h1 {
+	color: crimson;
+}
