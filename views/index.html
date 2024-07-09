@@ -172,129 +172,20 @@
       </div>
 
       <!-- Pagopolis VIDEOS -->
-      <video
-        id="pagopolis_talking"
-        class="video-center pagopolis_left"
-        autoplay
-        loop
-        muted
-        preload="auto"
-      >
-        <source
-          id="pagopolis_talking_source"
-          src="/pagopolis/Pagopwlis_Idle_1_VP9"
-          type="video/webm"
-        />
+      <video id="pagopolis_arrow" class="video-center pagopolis_video pagopolis_left" muted loop preload="auto">
+        <source id="pagopolis_source_arrow" src="/pagopolis/Pagopolis_Arrow" type="video/webm"/>
       </video>
-      <video
-        id="pagopolis_talking_1"
-        class="video-center pagopolis_video pagopolis_left"
-        muted
-        preload="auto"
-      >
-        <source
-          id="pagopolis_source_talking_1"
-          src="/pagopolis/Pagopwlis_Talking_1_1_VP9"
-          type="video/webm"
-        />
-      </video>
-      <video
-        id="pagopolis_talking_2"
-        class="video-center pagopolis_video pagopolis_left"
-        muted
-      >
-        <source
-          id="pagopolis_source_talking_2"
-          src="/pagopolis/Pagopwlis_Talking_2_1_VP9"
-          type="video/webm"
-        />
-      </video>
-      <video
-        id="pagopolis_talking_3"
-        class="video-center pagopolis_video pagopolis_left"
-        muted
-        preload="auto"
-      >
-        <source
-          id="pagopolis_source_talking_3"
-          src="/pagopolis/Pagopwlis_Talking_3_1_VP9"
-          type="video/webm"
-        />
-      </video>
+      <!-- containeri i te Icemanit me png sequences -->
 
-      <video
-        id="pagopolis_arrow"
-        class="video-center pagopolis_video pagopolis_left"
-        muted
-        loop
-        preload="auto"
-      >
-        <source
-          id="pagopolis_source_arrow"
-          src="/pagopolis/Pagopolis_Arrow"
-          type="video/webm"
-        />
-      </video>
-      <video
-        id="pagopolis_talking_4"
-        class="video-center pagopolis_video pagopolis_left"
-        muted
-        preload="auto"
-      >
-        <source
-          id="pagopolis_source_talking_4"
-          src="/pagopolis/Pagopwlis_Talking_4_1_VP9"
-          type="video/webm"
-        />
-      </video>
-      <video
-        id="pagopolis_bubble_1"
-        class="video-center bubblessPagopoli"
-        muted
-        preload="auto"
-      >
-        <source
-          id="pagopolis_source_bubble_1"
-          src="/pagopolisBubbles/Pagopwlis_Talking_Bubble_1_GR_1_VP9"
-          type="video/webm"
-        />
-      </video>
-      <video
-        id="pagopolis_bubble_2"
-        class="video-center bubblessPagopoli"
-        muted
-        preload="auto"
-      >
-        <source
-          id="pagopolis_source_bubble_2"
-          src="/pagopolisBubbles/Pagopwlis_Talking_Bubble_2_GR_1_VP9"
-          type="video/webm"
-        />
-      </video>
-      <video
-        id="pagopolis_bubble_3"
-        class="video-center bubblessPagopoli"
-        muted
-        preload="auto"
-      >
-        <source
-          id="pagopolis_source_bubble_3"
-          src="/pagopolisBubbles/Pagopwlis_Talking_Bubble_3_GR_1_VP9"
-          type="video/webm"
-        />
-      </video>
-      <video
-        id="pagopolis_bubble_4"
-        class="video-center bubblessPagopoli"
-        muted
-        preload="auto"
-      >
-        <source
-          id="pagopolis_source_bubble_4"
-          src="/pagopolisBubbles/Pagopwlis_Talking_Bubble_4_GR_1_VP9"
-          type="video/webm"
-        />
-      </video>
+      <div id="mainContainer">
+        <div id="sequenceContainer">
+          <!-- kjo eshte me pa pozicionin -->
+          <!-- <img src="/PngSequenceImg/Pagopolis/Pagopolis_PNG_00000.png" alt="Pagopolis" style="position: absolute; top: 10%; left: 20%;"> -->
+
+          <!-- kjo eshte per sekuencen e imazheve -->
+          <img id="sequenceImagePagopolis" src="" alt="Pagopolis" style="position: absolute; top: 10%; left: 20%;"/>
+        </div>
+      </div>
 
       <!-- Raftis VIDEOS -->
 
@@ -310,12 +201,7 @@
           <!-- <img src="/PngSequenceImg/Raftis/Raftis_PNG_00000.png" alt="RAFTIS" style="position: absolute; top: 8%; left: 40%;"> -->
 
           <!-- kjo eshte per sekuencen e imazheve -->
-          <img
-            id="sequenceImageRaftis"
-            src=""
-            alt="RAFTIS"
-            style="position: absolute; top: 8%; left: 45%;"
-          />
+          <img id="sequenceImageRaftis" src="" alt="RAFTIS" style="position: absolute; top: 8%; left: 45%;"/>
         </div>
       </div>
     </section>
@@ -324,11 +210,6 @@
   <script src="/socket.io/socket.io.js"></script>
 
   <script>
-
-    // Pagopolis Play Video
-    document.querySelector('#pagopolis_talking').load();
-    document.querySelector('#pagopolis_talking').play();
-
 
     /* variablat per PNG Seqeunce Raftis */
     const sequenceImageRaftis = document.getElementById('sequenceImageRaftis');
@@ -362,21 +243,38 @@
     let idleStartFwtografos = 0;
     let idleEndFwtografos = 70;
 
+    /* variablat per PNG Seqeunce Pagopolis */
+    const sequenceImagePagopolis = document.getElementById('sequenceImagePagopolis');
+    const folderPathPagopolis = '/PngSequenceImg/Pagopolis/';
+
+    let currentFramePagopolis = 1;
+    let intervalIdPagopolis = null;
+
+    let statePlayingPagopolis = false;
+
+    let stateStartFramePagopolis = 0;
+    let stateEndFramePagopolis = 0;
+
+    let idleStartPagopolis = 0;
+    let idleEndPagopolis = 61;
+
+
+
 
     const socket = io();
 
     function handleVideoPlay(videoElement) {
-        var playPromise = videoElement.play();
+      var playPromise = videoElement.play();
 
-        if (playPromise !== undefined) {
-            playPromise.then(_ => {
-                videoElement.style.display = "block";
-                videoElement.style.opacity = "1";
-            }).catch(error => {
-                console.log('Autoplay was prevented:', error);
-                // Optionally, you could prompt the user to click a button to play the video
-            });
-        }
+      if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            videoElement.style.display = "block";
+            videoElement.style.opacity = "1";
+        }).catch(error => {
+            console.log('Autoplay was prevented:', error);
+            // Optionally, you could prompt the user to click a button to play the video
+        });
+      }
     }
     socket.on('pagopolisStart', function (data) {
         console.log('pagopolisStart:' + data);
@@ -384,65 +282,7 @@
         if (data == 1) {
             // Play video after 2 seconds
             setTimeout(function () {
-
-                document.querySelector('#pagopolis_talking').style.opacity = "0";
-
-                // document.querySelector('#pagopolis_talking_1').style.opacity = "1";
-                // document.querySelector('#pagopolis_talking_1').play();
-                // document.querySelector('#pagopolis_bubble_1').style.opacity = "1";
-                // document.querySelector('#pagopolis_bubble_1').play();
-                handleVideoPlay(document.querySelector('#pagopolis_talking_1'))
-                handleVideoPlay(document.querySelector('#pagopolis_bubble_1'))
-
-
-
-                document.querySelector('#pagopolis_talking_1').addEventListener('ended', function (evt) {
-                    document.querySelector('#pagopolis_talking_1').style.opacity = "0";
-                    document.querySelector('#pagopolis_bubble_1').style.opacity = "0";
-
-                    // document.querySelector('#pagopolis_talking_2').style.opacity = "1";
-                    // document.querySelector('#pagopolis_talking_2').play();
-                    // document.querySelector('#pagopolis_bubble_2').style.opacity = "1";
-                    // document.querySelector('#pagopolis_bubble_2').play();
-                    handleVideoPlay(document.querySelector('#pagopolis_talking_2'))
-                    handleVideoPlay(document.querySelector('#pagopolis_bubble_2'))
-
-                });
-
-                document.querySelector('#pagopolis_talking_2').addEventListener('ended', function (evt) {
-                    document.querySelector('#pagopolis_talking_2').style.opacity = "0";
-                    document.querySelector('#pagopolis_bubble_2').style.opacity = "0";
-
-                    // document.querySelector('#pagopolis_talking_3').style.opacity = "1";
-                    // document.querySelector('#pagopolis_talking_3').play();
-
-                    // document.querySelector('#pagopolis_arrow').style.opacity = "1";
-                    // document.querySelector('#pagopolis_arrow').play();
-
-
-                    // document.querySelector('#pagopolis_bubble_3').style.opacity = "1";
-                    // document.querySelector('#pagopolis_bubble_3').play();
-                    handleVideoPlay(document.querySelector('#pagopolis_talking_3'))
-                    handleVideoPlay(document.querySelector('#pagopolis_arrow'))
-                    handleVideoPlay(document.querySelector('#pagopolis_bubble_3'))
-
-                    socket.emit('playIceGame', 1);
-                    socket.emit('playMinigamePagopoli', 1);
-
-                });
-
-
-                document.querySelector('#pagopolis_talking_3').addEventListener('ended', function (evt) {
-                    document.querySelector('#pagopolis_talking_3').style.opacity = "0";
-
-                    document.querySelector('#pagopolis_bubble_3').style.opacity = "0";
-
-                    // document.querySelector('#pagopolis_talking').style.opacity = "1";
-                    handleVideoPlay(document.querySelector('#pagopolis_talking'))
-
-                });
-
-
+                playStatePagopolis(62,782)
             }, 2000);
 
 
@@ -458,55 +298,19 @@
 
     })
     socket.on("itemClickedPago", function (data) {
+      
         document.querySelector('#pagopolis_arrow').style.opacity = "0";
 
     })
-    function pauseVideosAndBubblesPago() {
-        document.querySelector('#pagopolis_talking').style.opacity = "0";
-        document.querySelector("#pagopolis_talking").pause();
-        document.querySelector("#pagopolis_talking_3").pause();
-        document.querySelector("#pagopolis_arrow").pause();
-        document.querySelector("#pagopolis_bubble_3").pause();
-
-
-        document.querySelector('#pagopolis_talking_3').style.opacity = "0";
-        document.querySelector('#pagopolis_arrow').style.opacity = "0";
-
-        document.querySelector('#pagopolis_bubble_3').style.opacity = "0";
-    }
+    
     socket.on('messageIceSeller', function (data) {
         console.log('messageIceSeller: ' + data);
-        pauseVideosAndBubblesPago()
-        document.querySelector('#pagopolis_talking').style.opacity = "0";
-        // setTimeout(function () {
-        document.querySelector('#pagopolis_talking_3').style.opacity = "0";
+        // pauseVideosAndBubblesPago()
+        document.querySelector("#pagopolis_arrow").pause();
         document.querySelector('#pagopolis_arrow').style.opacity = "0";
 
-        document.querySelector('#pagopolis_bubble_3').style.opacity = "0";
-        document.querySelector('#pagopolis_talking').style.opacity = "0";
+        playStatePagopolis(783,1067)
 
-        // document.querySelector('#pagopolis_talking_4').style.opacity = "1";
-        // document.querySelector('#pagopolis_talking_4').play();
-        // document.querySelector('#pagopolis_bubble_4').style.opacity = "1";
-        // document.querySelector('#pagopolis_bubble_4').play();
-        handleVideoPlay(document.querySelector('#pagopolis_talking_4'))
-        handleVideoPlay(document.querySelector('#pagopolis_bubble_4'))
-
-
-        document.querySelector('#pagopolis_talking_4').addEventListener('ended', function (evt) {
-            document.querySelector('#pagopolis_talking_4').style.opacity = "0";
-            document.querySelector('#pagopolis_bubble_4').style.opacity = "0";
-
-            //             document.querySelector('#pagopolis_talking').style.opacity = "1";
-            // document.querySelector("#pagopolis_talking").play();
-            handleVideoPlay(document.querySelector('#pagopolis_talking'))
-
-
-            var socket = io();
-            socket.emit('messageGiagia_Talking_5', 1);
-
-        });
-        // }, 2000);
 
     });
 
@@ -565,7 +369,7 @@
         }
     });
 
-    // fuksionet sekuenciale
+    // fuksionet sekuenciale Raftis
     function updateFrameRaftis(frame) {
           const paddedFrame = String(frame).padStart(5, '0');
           if(paddedFrame.toString() == "00441"){
@@ -623,10 +427,9 @@
 
 
 
-
-      function updateFrameFwtografos(frame) {
+    // funksionet sekuenciale Fwtografos
+    function updateFrameFwtografos(frame) {
           const paddedFrame = String(frame).padStart(5, '0');
-          
           if(paddedFrame.toString() == "00150"){
             handleVideoPlay(document.querySelector('#fwtografos_arrow_1'))
             socket.emit("playFotografoGame", 1)
@@ -651,25 +454,8 @@
             socket.emit('messageFwtografos_End', 1);
             socket.emit('resetGamePhoto', 1);
           }
-
-          // if(paddedFrame.toString() == "00760"){
-          //   console.log("HYRI TEK IF ME 760")
-          //   var socket = io();
-          //   socket.emit('playMinigameRaftis', 1);
-          // }
-          // if(paddedFrame.toString() == "01274"){
-          //   var socket = io();
-          //   socket.emit('messageRaftis_3_talkings', 1);
-
-          // }
-          // if(paddedFrame.toString() == "01415"){
-          //   var socket = io();
-          //   socket.emit('messageRaftis_End', 1);
-          // }
-        //   console.log(paddedFrame.toString())
           sequenceImageFwtografos.src = `${folderPathFwtografos}Fwtografos_PNG_${paddedFrame}.png`;
       }
-
     function nextFrameFwtografos() {
           if (statePlayingFwtografos) {
               if (currentFrameFwtografos < stateEndFrameFwtografos) {
@@ -701,17 +487,66 @@
           playFwtografos();
       }
 
-      function pause() {
-        if (intervalIdFwtografos) {
-          clearInterval(intervalIdFwtografos);
-          intervalIdFwtografos = null;
-        }
+
+
+      // funksionet sekuenciale Pagopolis
+      function updateFramePagopolis(frame) {
+          const paddedFrame = String(frame).padStart(5, '0');
+          
+          if(paddedFrame.toString() == "00600"){
+            console.log("Me lujt LOJEN")
+            handleVideoPlay(document.querySelector('#pagopolis_arrow'))
+            var socket = io();
+            socket.emit('playIceGame', 1);
+            socket.emit('playMinigamePagopoli', 1);
+          }
+          if(paddedFrame.toString() == "01066"){
+            var socket = io();
+            socket.emit('messageGiagia_Talking_5', 1);
+          }
+
+          sequenceImagePagopolis.src = `${folderPathPagopolis}Pagopolis_PNG_${paddedFrame}.png`;
       }
+    function nextFramePagopolis() {
+          if (statePlayingPagopolis) {
+              if (currentFramePagopolis < stateEndFramePagopolis) {
+                currentFramePagopolis++;
+              } else {
+                statePlayingPagopolis = false;
+                currentFramePagopolis = idleStart;
+              }
+          } else {
+            currentFramePagopolis = currentFramePagopolis % frameCount + 1;
+              if (currentFramePagopolis >= idleEndPagopolis) {
+                currentFramePagopolis = idleStartPagopolis;
+              }
+          }
+          updateFramePagopolis(currentFramePagopolis);
+      }
+    function playPagopolis() {
+          if (!intervalIdPagopolis) {
+            intervalIdPagopolis = setInterval(nextFramePagopolis, 1000 / frameRate);
+          }
+      }
+    function playStatePagopolis(startFrame, endFrame) {
+          statePlayingPagopolis = true;
+          stateStartFramePagopolis = startFrame;
+          stateEndFramePagopolis = endFrame;
+          currentFramePagopolis = stateStartFramePagopolis;
+
+          updateFramePagopolis(currentFramePagopolis);
+          playPagopolis();
+      }
+
+
 
       updateFrameRaftis(currentFrame);
       playRaftis();
 
       updateFrameFwtografos(currentFrameFwtografos);
       playFwtografos();
+
+      updateFramePagopolis(currentFramePagopolis);
+      playPagopolis();
   </script>
 </html>
