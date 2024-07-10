@@ -1,121 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Giagia</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        * {
-            box-sizing: border-box;
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        html {
-            height: 100%;
-        }
+      html {
+        height: 100%;
+      }
 
-        .giagiaBubble {
-            margin-left: 80px !important;
-        }
+      .giagiaBubble {
+        margin-left: 80px !important;
+      }
 
-        body {
-            background-image: url('/images/WALL_Giagia.png');
-            background-position: left 7px center;
+      body {
+        background-image: url("/images/WALL_Giagia.png");
+        background-position: left 7px center;
 
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            /* background-color: #000000; */
-            overflow: hidden;
-        }
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /* background-color: #000000; */
+        overflow: hidden;
+      }
 
-        video,
-        .video-center {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            left: -65px;
-            right: 0;
-            bottom: 0;
-            overflow: hidden;
-            background-color: transparent;
+      video,
+      .video-center {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: -65px;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        background-color: transparent;
+      }
 
-        }
+      /* Container for flexboxes */
+      section {
+        display: -webkit-flex;
+        display: flex;
+      }
 
-        /* Container for flexboxes */
-        section {
-            display: -webkit-flex;
-            display: flex;
-        }
+      #giagia_idle,
+      #giagia_enter {
+        opacity: 1;
+      }
 
-        #giagia_idle,
-        #giagia_enter {
-            opacity: 1;
-        }
+      #giagia_bubble_1,
+      #giagia_talking_1 {
+        z-index: 2;
+        opacity: 0;
+      }
 
-        #giagia_bubble_1,
-        #giagia_talking_1 {
-            z-index: 2;
-            opacity: 0;
-        }
+      #giagia_bubble_2,
+      #giagia_talking_2 {
+        z-index: 3;
+        opacity: 0;
+      }
 
-        #giagia_bubble_2,
-        #giagia_talking_2 {
-            z-index: 3;
-            opacity: 0;
-        }
+      #giagia_bubble_3,
+      #giagia_talking_3 {
+        z-index: 4;
+        opacity: 0;
+      }
 
-        #giagia_bubble_3,
-        #giagia_talking_3 {
-            z-index: 4;
-            opacity: 0;
-        }
+      #giagia_bubble_4,
+      #giagia_talking_4 {
+        z-index: 5;
+        opacity: 0;
+      }
 
-        #giagia_bubble_4,
-        #giagia_talking_4 {
-            z-index: 5;
-            opacity: 0;
-        }
+      #giagia_bubble_5,
+      #giagia_talking_5 {
+        z-index: 6;
+        opacity: 0;
+      }
 
-        #giagia_bubble_5,
-        #giagia_talking_5 {
-            z-index: 6;
-            opacity: 0;
-        }
+      #giagia_bubble_6,
+      #giagia_talking_6 {
+        z-index: 7;
+        opacity: 0;
+      }
 
-        #giagia_bubble_6,
-        #giagia_talking_6 {
-            z-index: 7;
-            opacity: 0;
-        }
+      #giagia_leave {
+        z-index: 8;
+        opacity: 0;
+      }
 
+      #giagia_arrow {
+        opacity: 0;
+      }
 
-
-        #giagia_leave {
-            z-index: 8;
-            opacity: 0;
-        }
-
-        #giagia_arrow {
-            opacity: 0;
-        }
-
-        #knock_here {
-            transition: opacity 0.5s ease-in-out;
-            opacity: 0;
-        }
+      #knock_here {
+        transition: opacity 0.5s ease-in-out;
+        opacity: 0;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <img style="position: absolute; width: 100%; height: 100%;" src="/images/WALL_2_Giagia_Text.png" />
-    <img id="knock_here" style="position: absolute; width: 100%; height: 100%; right: 6%; bottom: 35px;"
-        src="/images/WALL_2_Giagia_knock_Here.png" />
-
+  <body>
+    <img
+      style="position: absolute; width: 100%; height: 100%"
+      src="/images/WALL_2_Giagia_Text.png"
+    />
+    <img
+      id="knock_here"
+      style="
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        right: 6%;
+        bottom: 35px;
+      "
+      src="/images/WALL_2_Giagia_knock_Here.png"
+    />
 
     <section>
-
-
-        <!-- <video id="giagia_idle" class="video-center" autoplay loop muted preload="auto">
+      <!-- <video id="giagia_idle" class="video-center" autoplay loop muted preload="auto">
             <source id="giagia_idle_source" src="/Giagia/Giagia_Idle" type="video/webm">
         </video>
 
@@ -140,28 +145,36 @@
         <video id="giagia_talking_4" class="video-center" muted preload="auto">
             <source id="giagia_source_talking_4" src="/Giagia/Giagia_Talking_4" type="video/webm">
         </video> -->
-        <video id="giagia_arrow" class="video-center" muted loop preload="auto">
-            <source id="giagia_source_arrow" src="/Giagia/Giagia_Arrow" type="video/webm">
-        </video>
+      <video id="giagia_arrow" class="video-center" muted loop preload="auto">
+        <source
+          id="giagia_source_arrow"
+          src="/Giagia/Giagia_Arrow"
+          type="video/webm"
+        />
+      </video>
 
-        <div id="mainContainer">
-            <div id="sequenceContainer">
-              <!-- kjo eshte me pa pozicionin -->
-              <!-- <img src="/PngSequenceImg/Giagia/Giagia_PNG_00044.png" alt="Giagia" style="position: absolute; top: 20%; left: 20.5%;"> -->
-    
-              <!-- kjo eshte per sekuencen e imazheve -->
-              <img id="sequenceImageGiagia" src="" alt="Giagia" style="position: absolute; top: 20%; left: 20.5%;"/>
-            </div>
-          </div>
-        <!-- <video id="giagia_talking_5" class="video-center" muted preload="auto">
+      <div id="mainContainer">
+        <div id="sequenceContainer">
+          <!-- kjo eshte me pa pozicionin -->
+          <!-- <img src="/PngSequenceImg/Giagia/Giagia_PNG_00044.png" alt="Giagia" style="position: absolute; top: 20%; left: 20.5%;"> -->
+
+          <!-- kjo eshte per sekuencen e imazheve -->
+          <img
+            id="sequenceImageGiagia"
+            src=""
+            alt="Giagia"
+            style="position: absolute; top: 20%; left: 20.5%"
+          />
+        </div>
+      </div>
+      <!-- <video id="giagia_talking_5" class="video-center" muted preload="auto">
             <source id="giagia_source_talking_5" src="/Giagia/Giagia_Talking_5" type="video/webm">
         </video>
         <video id="giagia_talking_6" class="video-center" muted preload="auto">
             <source id="giagia_source_talking_6" src="/Giagia/Giagia_Talking_6" type="video/webm">
         </video> -->
 
-
-        <!-- <video id="giagia_bubble_1" class="video-center giagiaBubble" muted preload="auto">
+      <!-- <video id="giagia_bubble_1" class="video-center giagiaBubble" muted preload="auto">
             <source id="giagia_bubble_source_1" src="/GiagiaBubbles/Giagia_Bubble_1_gr" type="video/webm">
         </video>
         <video id="giagia_bubble_2" class="video-center giagiaBubble" muted preload="auto">
@@ -179,63 +192,60 @@
         <video id="giagia_bubble_6" class="video-center giagiaBubble" muted preload="auto">
             <source id="giagia_bubble_source_6" src="/GiagiaBubbles/Giagia_Bubble_6_gr" type="video/webm">
         </video> -->
-
-
-
     </section>
     <!-- <button id="startfunction"
         onclick="handleScene4('eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw0OSw1OCwxMTIsMTA4LDk3LDEyMSwxM119')"
         style="background-color: red; position: absolute; z-index: 99999999999;">START HERE----------------------------------</button> -->
-    <button style="background-color: red; position: absolute; z-index: 99999999999; height: 80px" id="handleScene4Button"
-        onclick="handleSceneKnock()" height="150px" >Handle Scene
-        4111111111111111111111111111111111111111111</button>
+    <button
+      style="
+        background-color: red;
+        position: absolute;
+        z-index: 99999999999;
+        height: 80px;
+      "
+      id="handleScene4Button"
+      onclick="handleSceneKnock()"
+      height="150px"
+    >
+      Handle Scene 4111111111111111111111111111111111111111111
+    </button>
+  </body>
 
-</body>
-
-<script src="/socket.io/socket.io.js"></script>
-<script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
     let timeoutID;
     let knockTimeout;
-    let isknocked = false
-
+    let isknocked = false;
 
     function stopGameTimer() {
-        clearTimeout(timeoutID);
+      clearTimeout(timeoutID);
     }
 
     function startKnockTimer() {
-        console.log("startKnockTimer", "ktu mbas papu1111")
-        if (isknocked == false) {
-            knockTimeout = setTimeout(function () {
-                isknocked = false
-                resetGame();
-                console.log('Game reset after 50 seconds without knocking.');
-            }, 50000);
-
-        }
+      console.log("startKnockTimer", "ktu mbas papu1111");
+      if (isknocked == false) {
+        knockTimeout = setTimeout(function () {
+          isknocked = false;
+          resetGame();
+          console.log("Game reset after 50 seconds without knocking.");
+        }, 50000);
+      }
     }
-    console.log(knockTimeout, "knock timeout")
+    console.log(knockTimeout, "knock timeout");
     function stopKnockTimer() {
-        console.log("a behet clear ky knock timer ")
-        document.querySelector('#knock_here').style.opacity = "0";
+      console.log("a behet clear ky knock timer ");
+      document.querySelector("#knock_here").style.opacity = "0";
 
-        clearTimeout(knockTimeout);
+      clearTimeout(knockTimeout);
     }
-
-
-
-
-
-
-
-</script>
-<script>
+  </script>
+  <script>
     const socket = io();
     let startgame1 = 0;
 
     /* variablat per PNG Seqeunce Giagia */
-    const sequenceImageGiagia = document.getElementById('sequenceImageGiagia');
-    const folderPathGiagia = '/PngSequenceImg/Giagia/';
+    const sequenceImageGiagia = document.getElementById("sequenceImageGiagia");
+    const folderPathGiagia = "/PngSequenceImg/Giagia/";
     const frameCount = 1415;
     const frameRate = 30;
 
@@ -249,14 +259,12 @@
     let idleStartGiagia = 88;
     let idleEndGiagia = 112;
 
-
-
     // function handleSceneKnock() {
     //     console.log("a futet te butoni")
     //     socket.emit('scene4', "eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw0OSw1OCwxMTIsMTA4LDk3LDEyMSwxM119");
 
     // }
-    let gameState = 'waitingForKnock';
+    let gameState = "waitingForKnock";
 
     function handleSceneKnock() {
       document.querySelector("#knock_here").style.opacity = "0";
@@ -281,329 +289,324 @@
     //     }
     // }
     function resetGame() {
-        console.log("a thrritet prap ky?");
+      console.log("a thrritet prap ky?");
 
-        socket.emit("resetGameMonitor", 1)
+      socket.emit("resetGameMonitor", 1);
 
-        // const videoIds = ['#giagia_idle', '#giagia_enter', '#giagia_leave', '#giagia_talking_1', '#giagia_talking_2', '#giagia_talking_3', '#giagia_talking_4', '#giagia_talking_5', '#giagia_talking_6', '#giagia_bubble_1', '#giagia_bubble_2', '#giagia_bubble_3', '#giagia_bubble_4', '#giagia_bubble_5', '#giagia_bubble_6'];
-        document.querySelector('#knock_here').style.opacity = "0";
-        // document.querySelector('#knock_here').style.opacity = "0";
+      // const videoIds = ['#giagia_idle', '#giagia_enter', '#giagia_leave', '#giagia_talking_1', '#giagia_talking_2', '#giagia_talking_3', '#giagia_talking_4', '#giagia_talking_5', '#giagia_talking_6', '#giagia_bubble_1', '#giagia_bubble_2', '#giagia_bubble_3', '#giagia_bubble_4', '#giagia_bubble_5', '#giagia_bubble_6'];
+      document.querySelector("#knock_here").style.opacity = "0";
+      // document.querySelector('#knock_here').style.opacity = "0";
 
-        document.querySelector('#giagia_arrow').style.opacity = "0";
+      document.querySelector("#giagia_arrow").style.opacity = "0";
 
-        // Stop all videos and reset opacity for all elements
-        // videoIds.forEach(id => {
-        //     const element = document.querySelector(id);
-        //     console.log(element)
-        //     element.pause();
-        //     element.style.opacity = "0";
-        //     if (id === '#giagia_idle') {
+      // Stop all videos and reset opacity for all elements
+      // videoIds.forEach(id => {
+      //     const element = document.querySelector(id);
+      //     console.log(element)
+      //     element.pause();
+      //     element.style.opacity = "0";
+      //     if (id === '#giagia_idle') {
 
-        //         document.querySelector('#giagia_idle').load();
-        //         document.querySelector('#giagia_idle').play();
-        //         document.querySelector('#giagia_idle').style.display = "block";
-        //         document.querySelector('#giagia_idle').style.opacity = "1";
+      //         document.querySelector('#giagia_idle').load();
+      //         document.querySelector('#giagia_idle').play();
+      //         document.querySelector('#giagia_idle').style.display = "block";
+      //         document.querySelector('#giagia_idle').style.opacity = "1";
 
-
-        //     }
-        // });
-        gameState = 'waitingForKnock';
-
+      //     }
+      // });
+      gameState = "waitingForKnock";
     }
 
     // document.querySelector('#giagia_idle').load();
     // document.querySelector('#giagia_idle').play();
     let gameStartTime;
-    let pagopoliMessage = false
+    let pagopoliMessage = false;
     function preloadImage(url, callback) {
-        const img = new Image();
-        img.src = url;
-        img.onload = callback;
+      const img = new Image();
+      img.src = url;
+      img.onload = callback;
     }
 
     socket.on("messageGiagia_Talking_5", function (data) {
-        pagopoliMessage = true;
-        gameState = 'waitingForKnock_Talking_5';
-        isknocked = false;
-        startKnockTimer();
-        startgame1 = 0;
+      pagopoliMessage = true;
+      gameState = "waitingForKnock_Talking_5";
+      isknocked = false;
+      startKnockTimer();
+      startgame1 = 0;
 
-        // Preload the image before displaying it
-        const imageElement = document.querySelector('#knock_here');
-        preloadImage(imageElement.src, () => {
-            // imageElement.style.display = "block";
-            imageElement.style.opacity = 1;  // Fade in the image
-        });
+      // Preload the image before displaying it
+      const imageElement = document.querySelector("#knock_here");
+      preloadImage(imageElement.src, () => {
+        // imageElement.style.display = "block";
+        imageElement.style.opacity = 1; // Fade in the image
+      });
     });
-
 
     socket.on("resetGameForGiagia", function (data) {
-        if (data == 1) {
-            console.log("a futetet ktu?")
-            resetGame()
-        }
-    })
-    //ka bere start 
-    socket.on('messagegame1', function (data) {
-        gameStartTime = new Date();
-        if (data == 1) {
+      if (data == 1) {
+        console.log("a futetet ktu?");
+        resetGame();
+      }
+    });
+    //ka bere start
+    socket.on("messagegame1", function (data) {
+      gameStartTime = new Date();
+      if (data == 1) {
+        socket.emit("gameHasStarted", 1);
+        document.querySelector("#knock_here").style.opacity = "1";
+        document.querySelector("#knock_here").style.display = "block";
 
-            socket.emit('gameHasStarted', 1);
-            document.querySelector('#knock_here').style.opacity = "1"
+        console.log("loja ka filluar te giagia");
+        document.querySelector("#mainContainer").style.opacity = "0";
 
-            console.log('loja ka filluar te giagia')
-            document.querySelector('#mainContainer').style.opacity = "0";
+        // document.querySelector('#giagia_talking_1').style.opacity = "1";
+        // document.querySelector('#giagia_talking_1').play();
+        // document.querySelector('#giagia_bubble_1').style.opacity = "1";
+        // document.querySelector('#giagia_bubble_1').play();
+        // document.querySelector('#giagia_talking_1').addEventListener('ended', function (evt) {
+        //     document.querySelector('#giagia_talking_1').style.opacity = "0";
+        //     document.querySelector('#giagia_bubble_1').style.opacity = "0";
+        startKnockTimer();
 
-            // document.querySelector('#giagia_talking_1').style.opacity = "1";
-            // document.querySelector('#giagia_talking_1').play();
-            // document.querySelector('#giagia_bubble_1').style.opacity = "1";
-            // document.querySelector('#giagia_bubble_1').play();
-            // document.querySelector('#giagia_talking_1').addEventListener('ended', function (evt) {
-            //     document.querySelector('#giagia_talking_1').style.opacity = "0";
-            //     document.querySelector('#giagia_bubble_1').style.opacity = "0";
-            startKnockTimer();
+        // })
+        //mesazhi trokitjes
+        socket.on("scene4", function (data) {
+          console.log("a futet te scene4 ");
+          if (
+            data ==
+              "eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw0OSw1OCwxMTIsMTA4LDk3LDEyMSwxM119" &&
+            startgame1 == 0
+          ) {
+            console.log("a hyn dy here ktu kur vjen mesazhi?");
+            if (gameState === "waitingForKnock") {
+              startgame1 = 1;
+              isknocked = true;
 
-            // })
-            //mesazhi trokitjes
-            socket.on('scene4', function (data) {
-                console.log("a futet te scene4 ")
-                if (data == 'eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw0OSw1OCwxMTIsMTA4LDk3LDEyMSwxM119' && startgame1 == 0) {
-                    console.log("a hyn dy here ktu kur vjen mesazhi?")
-                    if (gameState === 'waitingForKnock') {
-                        startgame1 = 1;
-                        isknocked = true
+              stopKnockTimer();
 
-                        stopKnockTimer();
+              console.log(data, "inside knock");
+              console.log("Started talking");
 
-                        console.log(data, 'inside knock');
-                        console.log('Started talking');
+              document.querySelector("#knock_here").style.opacity = "0";
+              // document.querySelector('#giagia_talking_1').style.opacity = "0";
+              // document.querySelector('#giagia_bubble_1').style.opacity = "0";
 
-                        document.querySelector('#knock_here').style.opacity = "0";
-                        // document.querySelector('#giagia_talking_1').style.opacity = "0";
-                        // document.querySelector('#giagia_bubble_1').style.opacity = "0";
+              setTimeout(() => {
+                document.querySelector("#mainContainer").style.opacity = "1";
+                playStateGiagia(113, 1007);
+                // handleVideoPlayGiagia(document.querySelector('#giagia_enter'))
 
-                        setTimeout(() => {
-                            document.querySelector('#mainContainer').style.opacity = "1";
-                            playStateGiagia(113,1007)
-                            // handleVideoPlayGiagia(document.querySelector('#giagia_enter'))
+                // document.querySelector('#giagia_enter').style.opacity = "1";
+                // document.querySelector('#giagia_enter').play();
+                // document.querySelector('#giagia_idle').style.opacity = "0";
+              }, 2000);
 
-                            // document.querySelector('#giagia_enter').style.opacity = "1";
-                            // document.querySelector('#giagia_enter').play();
-                            // document.querySelector('#giagia_idle').style.opacity = "0";
-                        }, 2000);
+              // document.querySelector('#giagia_enter').addEventListener('ended', function (evt) {
+              // document.querySelector('#giagia_enter').style.opacity = "0";
+              // document.querySelector('#giagia_talking_2').style.opacity = "1";
+              // document.querySelector('#giagia_talking_2').play();
+              // document.querySelector('#giagia_bubble_2').style.opacity = "1";
+              // document.querySelector('#giagia_bubble_2').play();
+              //     handleVideoPlayGiagia(document.querySelector('#giagia_talking_2'))
+              //     handleVideoPlayGiagia(document.querySelector('#giagia_bubble_2'))
 
-                        // document.querySelector('#giagia_enter').addEventListener('ended', function (evt) {
-                            // document.querySelector('#giagia_enter').style.opacity = "0";
-                            // document.querySelector('#giagia_talking_2').style.opacity = "1";
-                            // document.querySelector('#giagia_talking_2').play();
-                            // document.querySelector('#giagia_bubble_2').style.opacity = "1";
-                            // document.querySelector('#giagia_bubble_2').play();
-                        //     handleVideoPlayGiagia(document.querySelector('#giagia_talking_2'))
-                        //     handleVideoPlayGiagia(document.querySelector('#giagia_bubble_2'))
+              // });
 
+              // document.querySelector('#giagia_talking_2').addEventListener('ended', function (evt) {
+              // document.querySelector('#giagia_talking_2').style.opacity = "0";
+              // document.querySelector('#giagia_bubble_2').style.opacity = "0";
+              // document.querySelector('#giagia_talking_3').style.opacity = "1";
+              // document.querySelector('#giagia_talking_3').play();
+              // document.querySelector('#giagia_bubble_3').style.opacity = "1";
+              // document.querySelector('#giagia_bubble_3').play();
+              // handleVideoPlayGiagia(document.querySelector('#giagia_talking_3'))
+              // handleVideoPlayGiagia(document.querySelector('#giagia_bubble_3'))
 
-                        // });
+              // socket.emit('giagiaEnded', 1);
+              // console.log('socket at Giagia');
+              // });
 
-                        // document.querySelector('#giagia_talking_2').addEventListener('ended', function (evt) {
-                            // document.querySelector('#giagia_talking_2').style.opacity = "0";
-                            // document.querySelector('#giagia_bubble_2').style.opacity = "0";
-                            // document.querySelector('#giagia_talking_3').style.opacity = "1";
-                            // document.querySelector('#giagia_talking_3').play();
-                            // document.querySelector('#giagia_bubble_3').style.opacity = "1";
-                            // document.querySelector('#giagia_bubble_3').play();
-                            // handleVideoPlayGiagia(document.querySelector('#giagia_talking_3'))
-                            // handleVideoPlayGiagia(document.querySelector('#giagia_bubble_3'))
+              // document.querySelector('#giagia_talking_3').addEventListener('ended', function (evt) {
+              // document.querySelector('#giagia_talking_3').style.opacity = "0";
+              // document.querySelector('#giagia_bubble_3').style.opacity = "0";
+              // document.querySelector('#giagia_idle').style.zIndex = "1";
+              // document.querySelector('#giagia_idle').style.opacity = "1";
+              // document.querySelector('#giagia_idle').play();
+              // handleVideoPlayGiagia(document.querySelector('#giagia_idle'))
 
-                            // socket.emit('giagiaEnded', 1);
-                            // console.log('socket at Giagia');
-                        // });
+              // socket.emit('messagegame1', 0);
+              // gameState = 'waitingForKnock_Talking_5';
+              // startgame1 = 0;
 
-                        // document.querySelector('#giagia_talking_3').addEventListener('ended', function (evt) {
-                            // document.querySelector('#giagia_talking_3').style.opacity = "0";
-                            // document.querySelector('#giagia_bubble_3').style.opacity = "0";
-                            // document.querySelector('#giagia_idle').style.zIndex = "1";
-                            // document.querySelector('#giagia_idle').style.opacity = "1";
-                            // document.querySelector('#giagia_idle').play();
-                            // handleVideoPlayGiagia(document.querySelector('#giagia_idle'))
+              // isknocked - false
+              // });
+            }
 
-                            // socket.emit('messagegame1', 0);
-                            // gameState = 'waitingForKnock_Talking_5';
-                            // startgame1 = 0;
+            if (gameState === "waitingForKnock_Talking_5") {
+              pagopoliMessage = false;
+              isknocked = true;
+              console.log(pagopoliMessage, "pagopoli messsage");
+              console.log(isknocked, "isknocked");
 
-                            // isknocked - false
-                        // });
-                    }
+              stopKnockTimer();
+              gameState = "playing_Talking_5";
+              console.log(data, "inside knock for Giagia_Talking_5");
 
-                    if (gameState === 'waitingForKnock_Talking_5') {
-                        pagopoliMessage = false;
-                        isknocked = true;
-                        console.log(pagopoliMessage, "pagopoli messsage")
-                        console.log(isknocked, "isknocked")
+              // Cache DOM elements
+              const knockHere = document.querySelector("#knock_here");
+              // const giagiaIdle = document.querySelector('#giagia_idle');
+              // const giagiaTalking4 = document.querySelector('#giagia_talking_4');
+              // const giagiaBubble4 = document.querySelector('#giagia_bubble_4');
+              // const giagiaTalking5 = document.querySelector('#giagia_talking_5');
+              // const giagiaBubble5 = document.querySelector('#giagia_bubble_5');
+              const giagiaArrow = document.querySelector("#giagia_arrow");
+              // const giagiaTalking6 = document.querySelector('#giagia_talking_6');
+              // const giagiaBubble6 = document.querySelector('#giagia_bubble_6');
 
+              // Update elements
+              knockHere.style.opacity = "0";
+              knockHere.style.display = "none";
+              // giagiaIdle.style.opacity = "0";
+              // giagiaTalking4.style.opacity = "1";
+              // giagiaTalking4.play();
+              // giagiaBubble4.style.opacity = "1";
+              // giagiaBubble4.play();
 
-                        stopKnockTimer();
-                        gameState = 'playing_Talking_5';
-                        console.log(data, 'inside knock for Giagia_Talking_5');
+              playStateGiagia(1008, 1458);
+              // handleVideoPlayGiagia(document.querySelector('#giagia_talking_4'))
+              // handleVideoPlayGiagia(document.querySelector('#giagia_bubble_4'))
 
-                        // Cache DOM elements
-                        const knockHere = document.querySelector('#knock_here');
-                        // const giagiaIdle = document.querySelector('#giagia_idle');
-                        // const giagiaTalking4 = document.querySelector('#giagia_talking_4');
-                        // const giagiaBubble4 = document.querySelector('#giagia_bubble_4');
-                        // const giagiaTalking5 = document.querySelector('#giagia_talking_5');
-                        // const giagiaBubble5 = document.querySelector('#giagia_bubble_5');
-                        const giagiaArrow = document.querySelector('#giagia_arrow');
-                        // const giagiaTalking6 = document.querySelector('#giagia_talking_6');
-                        // const giagiaBubble6 = document.querySelector('#giagia_bubble_6');
+              // giagiaTalking4.addEventListener('ended', function (evt) {
+              // giagiaBubble4.style.opacity = "0";
+              // giagiaTalking4.style.opacity = "0";
 
-                        // Update elements
-                        knockHere.style.opacity = "0";
-                        knockHere.style.opacity = "0";
-                        // giagiaIdle.style.opacity = "0";
-                        // giagiaTalking4.style.opacity = "1";
-                        // giagiaTalking4.play();
-                        // giagiaBubble4.style.opacity = "1";
-                        // giagiaBubble4.play();
+              // giagiaTalking5.style.opacity = "1";
+              // giagiaTalking5.play();
+              // giagiaBubble5.style.opacity = "1";
+              // giagiaBubble5.play();
+              // giagiaArrow.style.opacity = "1";
+              // giagiaArrow.play();
+              // handleVideoPlayGiagia(document.querySelector('#giagia_talking_5'))
+              // handleVideoPlayGiagia(document.querySelector('#giagia_bubble_5'))
+              // handleVideoPlayGiagia(document.querySelector('#giagia_arrow'))
 
-                        playStateGiagia(1008,1458)
-                        // handleVideoPlayGiagia(document.querySelector('#giagia_talking_4'))
-                        // handleVideoPlayGiagia(document.querySelector('#giagia_bubble_4'))
+              // socket.emit('playMinigame', 1);
+              // });
 
+              // giagiaTalking5.addEventListener('ended', function (evt) {
+              //     giagiaTalking5.style.opacity = "0";
+              //     giagiaBubble5.style.opacity = "0";
+              //     giagiaIdle.style.opacity = "1";
+              //     gameState = 'idle';
+              // });
 
-                        // giagiaTalking4.addEventListener('ended', function (evt) {
-                            // giagiaBubble4.style.opacity = "0";
-                            // giagiaTalking4.style.opacity = "0";
-
-                            // giagiaTalking5.style.opacity = "1";
-                            // giagiaTalking5.play();
-                            // giagiaBubble5.style.opacity = "1";
-                            // giagiaBubble5.play();
-                            // giagiaArrow.style.opacity = "1";
-                            // giagiaArrow.play();
-                            // handleVideoPlayGiagia(document.querySelector('#giagia_talking_5'))
-                            // handleVideoPlayGiagia(document.querySelector('#giagia_bubble_5'))
-                            // handleVideoPlayGiagia(document.querySelector('#giagia_arrow'))
-
-                            // socket.emit('playMinigame', 1);
-                        // });
-
-                        // giagiaTalking5.addEventListener('ended', function (evt) {
-                        //     giagiaTalking5.style.opacity = "0";
-                        //     giagiaBubble5.style.opacity = "0";
-                        //     giagiaIdle.style.opacity = "1";
-                        //     gameState = 'idle';
-                        // });
-
-                        socket.emit('messageGiagia_Talking_5', 0);
-                        // function pauseVideosAndBubblesGiagia() {
-                        //     giagiaIdle.pause();
-                        //     giagiaTalking5.pause();
-                        //     giagiaBubble5.pause();
-                        //     giagiaArrow.pause();
-                        //     giagiaIdle.style.opacity = "0";
-                        //     giagiaTalking5.style.opacity = "0";
-                        //     giagiaBubble5.style.opacity = "0";
-                        //     giagiaArrow.style.opacity = "0";
-                        // }
-                        socket.on('messageMrsBaglio', function (data) {
-                            console.log(data);
-                            if (data == 1) {
-                                // giagiaIdle.style.opacity = "0";
-                                // giagiaTalking5.style.opacity = "0";
-                                // giagiaBubble5.style.opacity = "0";
-                                giagiaArrow.pause();
-                                giagiaArrow.style.opacity = "0";
-                                // pauseVideosAndBubblesGiagia()
-                                // giagiaTalking6.style.opacity = "1";
-                                // giagiaTalking6.play();
-                                // giagiaBubble6.style.opacity = "1";
-                                // giagiaBubble6.play();
-                                playStateGiagia(1459,1734)
-                                // handleVideoPlayGiagia(document.querySelector('#giagia_talking_6'))
-                                // handleVideoPlayGiagia(document.querySelector('#giagia_bubble_6'))
-
-                            }
-                        });
-
-                        // giagiaTalking6.addEventListener('ended', function (evt) {
-                            // giagiaTalking6.style.opacity = "0";
-                            // giagiaBubble6.style.opacity = "0";
-                            // giagiaIdle.style.opacity = "1";
-                            // socket.emit('messagegame1', 0);
-                            // isknocked = false;
-                        // });
-                    }
-
+              socket.emit("messageGiagia_Talking_5", 0);
+              // function pauseVideosAndBubblesGiagia() {
+              //     giagiaIdle.pause();
+              //     giagiaTalking5.pause();
+              //     giagiaBubble5.pause();
+              //     giagiaArrow.pause();
+              //     giagiaIdle.style.opacity = "0";
+              //     giagiaTalking5.style.opacity = "0";
+              //     giagiaBubble5.style.opacity = "0";
+              //     giagiaArrow.style.opacity = "0";
+              // }
+              socket.on("messageMrsBaglio", function (data) {
+                console.log(data);
+                if (data == 1) {
+                  // giagiaIdle.style.opacity = "0";
+                  // giagiaTalking5.style.opacity = "0";
+                  // giagiaBubble5.style.opacity = "0";
+                  giagiaArrow.pause();
+                  giagiaArrow.style.opacity = "0";
+                  // pauseVideosAndBubblesGiagia()
+                  // giagiaTalking6.style.opacity = "1";
+                  // giagiaTalking6.play();
+                  // giagiaBubble6.style.opacity = "1";
+                  // giagiaBubble6.play();
+                  playStateGiagia(1459, 1734);
+                  // handleVideoPlayGiagia(document.querySelector('#giagia_talking_6'))
+                  // handleVideoPlayGiagia(document.querySelector('#giagia_bubble_6'))
                 }
-            });
+              });
 
-        }
+              // giagiaTalking6.addEventListener('ended', function (evt) {
+              // giagiaTalking6.style.opacity = "0";
+              // giagiaBubble6.style.opacity = "0";
+              // giagiaIdle.style.opacity = "1";
+              // socket.emit('messagegame1', 0);
+              // isknocked = false;
+              // });
+            }
+          }
+        });
+      }
     });
 
-        // funksionet sekuenciale Giagia
-        function updateFrameGiagia(frame) {
-            const paddedFrame = String(frame).padStart(5, '0');
-            if(paddedFrame.toString() == "00629"){
-                console.log("frejm 629")
-                var socket = io();
-                socket.emit('giagiaEnded', 1);
-            }
-            if(paddedFrame.toString() == "01006"){
-                var socket = io();
-                socket.emit('messagegame1', 0);
-                gameState = 'waitingForKnock_Talking_5';
-                startgame1 = 0;
-                isknocked - false
-            }
-            if(paddedFrame.toString() == "01265"){
-                var socket = io();
-                socket.emit('playMinigame', 1);
-            }
-            if(paddedFrame.toString() == "01457"){
-                gameState = 'idle';
-            }
-            if(paddedFrame.toString() == "01733"){
-                var socket = io();
-                socket.emit('messagegame1', 0);
-                isknocked = false;
-            }        
-            sequenceImageGiagia.src = `${folderPathGiagia}Giagia_PNG_${paddedFrame}.png`;
-        }
-    function nextFrameGiagia() {
-          if (statePlayingGiagia) {
-              if (currentFrameGiagia < stateEndFrameGiagia) {
-                currentFrameGiagia++;
-              } else {
-                statePlayingGiagia = false;
-                currentFrameGiagia = idleStartGiagia;
-              }
-          } else {
-            currentFrameGiagia = currentFrameGiagia % frameCount + 1;
-              if (currentFrameGiagia >= idleEndGiagia) {
-                currentFrameGiagia = idleStartGiagia;
-              }
-          }
-          updateFrameGiagia(currentFrameGiagia);
+    // funksionet sekuenciale Giagia
+    function updateFrameGiagia(frame) {
+      const paddedFrame = String(frame).padStart(5, "0");
+      if (paddedFrame.toString() == "00629") {
+        console.log("frejm 629");
+        var socket = io();
+        socket.emit("giagiaEnded", 1);
       }
-    function playGiagia() {
-          if (!intervalIdGiagia) {
-            intervalIdGiagia = setInterval(nextFrameGiagia, 1000 / frameRate);
-          }
+      if (paddedFrame.toString() == "01006") {
+        var socket = io();
+        socket.emit("messagegame1", 0);
+        gameState = "waitingForKnock_Talking_5";
+        startgame1 = 0;
+        isknocked - false;
       }
-    function playStateGiagia(startFrame, endFrame) {
-        statePlayingGiagia = true;
-        stateStartFrameGiagia = startFrame;
-        stateEndFrameGiagia = endFrame;
-        currentFrameGiagia = stateStartFrameGiagia;
-
-        updateFrameGiagia(currentFrameGiagia);
-        playGiagia();
+      if (paddedFrame.toString() == "01265") {
+        var socket = io();
+        const giagiaArrow = document.getElementById("giagia_arrow");
+        giagiaArrow.style.opacity = "1";
+        giagiaArrow.play();
+        socket.emit("playMinigame", 1);
+      }
+      if (paddedFrame.toString() == "01457") {
+        gameState = "idle";
+      }
+      if (paddedFrame.toString() == "01733") {
+        var socket = io();
+        socket.emit("messagegame1", 0);
+        isknocked = false;
+      }
+      sequenceImageGiagia.src = `${folderPathGiagia}Giagia_PNG_${paddedFrame}.png`;
     }
-    
+    function nextFrameGiagia() {
+      if (statePlayingGiagia) {
+        if (currentFrameGiagia < stateEndFrameGiagia) {
+          currentFrameGiagia++;
+        } else {
+          statePlayingGiagia = false;
+          currentFrameGiagia = idleStartGiagia;
+        }
+      } else {
+        currentFrameGiagia = (currentFrameGiagia % frameCount) + 1;
+        if (currentFrameGiagia >= idleEndGiagia) {
+          currentFrameGiagia = idleStartGiagia;
+        }
+      }
+      updateFrameGiagia(currentFrameGiagia);
+    }
+    function playGiagia() {
+      if (!intervalIdGiagia) {
+        intervalIdGiagia = setInterval(nextFrameGiagia, 1000 / frameRate);
+      }
+    }
+    function playStateGiagia(startFrame, endFrame) {
+      statePlayingGiagia = true;
+      stateStartFrameGiagia = startFrame;
+      stateEndFrameGiagia = endFrame;
+      currentFrameGiagia = stateStartFrameGiagia;
+
+      updateFrameGiagia(currentFrameGiagia);
+      playGiagia();
+    }
+
     updateFrameGiagia(currentFrameGiagia);
     playGiagia();
-
-</script>
-
-
+  </script>
 </html>
