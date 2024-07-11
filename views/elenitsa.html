@@ -90,13 +90,21 @@
   <section>
     <audio controls="controls" id="elenitsaCryingAudio" preload="auto">
       <source src="/videos/Elenitsa/H_mikrh_Eleni.wav" type="audio/wav">
-
     </audio>
-    <video id="elenitsa_idle" class="video-center" autoplay loop muted preload="auto">
-      <source id="elenitsa_idle_source" src="/Elenitsa/Elenitsa_Idle" type="video/webm" />
-    </video>
+    <div id="mainContainer">
+      <div id="sequenceContainer">
+        <!-- kjo eshte me pa pozicionin -->
+        <!-- <img src="/PngSequenceImg/Elenitsa/Elenitsa_PNG_00503.png" alt="Elenitsa" style="position: absolute; top: 29%; left: 48%;"> -->
 
-    <video id="elenitsa_idle_start" class="video-center" muted preload="auto">
+        <!-- kjo eshte per sekuencen e imazheve -->
+        <img id="sequenceImageElenitsa" src="" alt="Elenitsa" style="position: absolute; top: 29%; left: 48%;"/>
+      </div>
+    </div>
+    <!-- <video id="elenitsa_idle" class="video-center" autoplay loop muted preload="auto">
+      <source id="elenitsa_idle_source" src="/Elenitsa/Elenitsa_Idle" type="video/webm" />
+    </video> -->
+
+    <!-- <video id="elenitsa_idle_start" class="video-center" muted preload="auto">
       <source id="elenitsa_idle_start_source" src="/Elenitsa/Elenitsa_Idle_Start" type="video/webm" />
     </video>
     <video id="elenitsa_idle_crying" class="video-center" muted preload="auto">
@@ -109,20 +117,20 @@
     <video id="elenitsa_talking_1" class="video-center" muted preload="auto">
       <source id="elenitsa_source_talking_1" src="/Elenitsa/Elenitsa_Talking_1" type="video/webm" />
     </video>
-    <video id="elenitsa_arrow_1" class="video-center" muted loop preload="auto">
-      <source id="elenitsa_arrow_1" src="/Elenitsa/Elenitsa_Arrow" type="video/webm" />
-    </video>
     <video id="elenitsa_talking_2" class="video-center" muted preload="auto">
       <source id="elenitsa_source_talking_2" src="/Elenitsa/Elenitsa_Talking_2" type="video/webm" />
     </video>
     <video id="elenitsa_talking_3" class="video-center" muted preload="auto">
       <source id="elenitsa_source_talking_3" src="/Elenitsa/Elenitsa_Talking_3" type="video/webm" />
+    </video> -->
+    <video id="elenitsa_arrow_1" class="video-center" muted loop preload="auto">
+      <source id="elenitsa_arrow_1" src="/Elenitsa/Elenitsa_Arrow" type="video/webm" />
     </video>
-
+    
     <video id="elenitsa_arrow_nikolas" class="video-center" muted preload="auto">
       <source id="elenitsa_source_arrow_nikolas" src="/Elenitsa/Elenitsa_Arrow_to_Nikolas" type="video/webm" />
     </video>
-    <video id="elenitsa_bubble_1" class="video-center" muted preload="auto">
+    <!-- <video id="elenitsa_bubble_1" class="video-center" muted preload="auto">
       <source id="elenitsa_bubble_source_1" src="/ElenitsaBubbles/Elenitsa_Bubble_1_gr" type="video/webm" />
     </video>
     <video id="elenitsa_bubble_2" class="video-center" muted preload="auto">
@@ -130,7 +138,7 @@
     </video>
     <video id="elenitsa_bubble_3" class="video-center" muted preload="auto">
       <source id="elenitsa_bubble_source_3" src="/ElenitsaBubbles/Elenitsa_Bubble_3_gr" type="video/webm" />
-    </video>
+    </video> -->
 
     <!--Nikolas Videos-->
     <video id="nikolas_bubble_1" class="video-center talking-bubble" muted preload="auto">
@@ -168,8 +176,8 @@
     onclick="playGame(1,'eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw1Myw1OCwxMTIsMTA4LDk3LDEyMSwxM119',1)"
     style="position: absolute; z-index: 99999999999;">START HERE----------------------------------</button> -->
   <!-- <button onclick="simulateGameStart()"  style=" position: absolute; left: 0; z-index: 9999999999999999999999999;">Start Game</button> -->
-  <!-- <button onclick="simulatePlayGame()"
-    style="position: absolute;right: 5%; z-index: 99999999999999999999999999999999999999999;">Play Game</button> -->
+  <button onclick="simulatePlayGame()"
+    style="position: absolute;right: 5%; z-index: 99999999999999999999999999999999999999999;">Play Game</button>
 </body>
 
 <script src="/socket.io/socket.io.js"></script>
@@ -180,23 +188,42 @@
 
   var socket = io();
 
-  // function simulatePlayGame() {
-  //   console.log("filloj pjesa e dyte e Elenitsa");
-  //   console.log("------------------------------------------------------------------------------------------------------------"
-  //   );
-  //   let dataElenitsa = 1
-  //   let counter = 0
-  //   let data = 1
+  function simulatePlayGame() {
+    console.log("filloj pjesa e dyte e Elenitsa");
+    console.log("------------------------------------------------------------------------------------------------------------"
+    );
+    let dataElenitsa = 1
+    let counter = 0
+    let data = 1
 
-  //   console.log(timeoutID, "2")
-  //   playGame(data, dataElenitsa, counter);
-  //   document.querySelector("#elenitsa_idle").style.opacity = "0";
+    console.log(timeoutID, "2")
+    playGame(data, dataElenitsa, counter);
+    // document.querySelector("#elenitsa_idle").style.opacity = "0";
 
 
-  //   socket.emit("elenitsaStart", 0);
-  // }
+    socket.emit("elenitsaStart", 0);
+  }
   document.getElementById('elenitsaCryingAudio').controls = false;
   let gameStarted = false
+
+    /* variablat per PNG Seqeunce Elenitsa */
+    const sequenceImageElenitsa = document.getElementById('sequenceImageElenitsa');
+    const folderPathElenitsa = '/PngSequenceImg/Elenitsa/';
+    const frameCount = 1537;
+    const frameRate = 30;
+
+    let currentFrameElenitsa = 503;
+    let isPlayingElenitsa = true;
+    let intervalIdElenitsa = null;
+
+    let statePlayingElenitsa = false;
+    let stateStartFrameElenitsa = 0;
+    let stateEndFrameElenitsa = 0;
+
+    let idleStartElenitsa = 526;
+    let idleEndElenitsa = 585;
+
+
   function resetGame() {
     const videoElements = document.querySelectorAll("video");
     videoElements.forEach((video) => {
@@ -251,60 +278,57 @@
       document.querySelector("#elenitsaCryingAudio").play();
 
 
-      document.querySelector("#elenitsa_idle_start").load();
-      document.querySelector("#elenitsa_idle_crying").load();
+      // document.querySelector("#elenitsa_idle_start").load();
+      // document.querySelector("#elenitsa_idle_crying").load();
 
       // Play video
-      document.querySelector("#elenitsa_idle").style.opacity = "0";
+      // document.querySelector("#elenitsa_idle").style.opacity = "0";
 
-      document.querySelector("#elenitsa_idle_crying").play();
-      document.querySelector("#elenitsa_idle_crying").style.opacity = "1";
+      // document.querySelector("#elenitsa_idle_crying").play();
+      // document.querySelector("#elenitsa_idle_crying").style.opacity = "1";
+      playStateElenitsa(624,684)
+      // document
+        // .querySelector("#elenitsa_idle_crying")
+        // .addEventListener("ended", function (evt) {
+          // console.log("filloj qaj E");
+          // document.querySelector("#elenitsa_idle_crying").style.opacity = "0";
+          // document.querySelector("#elenitsa_idle_start").play();
+          // document.querySelector("#elenitsa_idle_start").style.opacity = "1";
+          // document.querySelector("#elenitsa_talking_1").load();
+          // document.querySelector("#elenitsa_arrow_1").load();
+          // document.querySelector("#elenitsa_bubble_1").load();
 
-      document
-        .querySelector("#elenitsa_idle_crying")
-        .addEventListener("ended", function (evt) {
-          console.log("filloj qaj E");
-          document.querySelector("#elenitsa_idle_crying").style.opacity = "0";
-          document.querySelector("#elenitsa_idle_start").play();
-          document.querySelector("#elenitsa_idle_start").style.opacity = "1";
-          document.querySelector("#elenitsa_talking_1").load();
-          document.querySelector("#elenitsa_arrow_1").load();
-          document.querySelector("#elenitsa_bubble_1").load();
 
+        // });
 
-        });
+      // document.querySelector("#elenitsa_idle_start").addEventListener("ended", function (evt) {
+          // document.querySelector("#elenitsa_idle_start").style.opacity = "0";
 
-      document
-        .querySelector("#elenitsa_idle_start")
-        .addEventListener("ended", function (evt) {
-          document.querySelector("#elenitsa_idle_start").style.opacity = "0";
+          // document.querySelector("#elenitsa_talking_1").style.opacity = "1";
+          // document.querySelector("#elenitsa_talking_1").play();
 
-          document.querySelector("#elenitsa_talking_1").style.opacity = "1";
-          document.querySelector("#elenitsa_talking_1").play();
+          // document.querySelector("#elenitsa_arrow_1").style.opacity = "1";
+          // document.querySelector("#elenitsa_arrow_1").play();
 
-          document.querySelector("#elenitsa_arrow_1").style.opacity = "1";
-          document.querySelector("#elenitsa_arrow_1").play();
-
-          document.querySelector("#elenitsa_bubble_1").style.opacity = "1";
-          document.querySelector("#elenitsa_bubble_1").play();
-        });
+          // document.querySelector("#elenitsa_bubble_1").style.opacity = "1";
+          // document.querySelector("#elenitsa_bubble_1").play();
+        // });
       // let eleniTalking1 = 0
-      document
-        .querySelector("#elenitsa_talking_1")
-        .addEventListener("ended", function (evt) {
-          document.querySelector("#elenitsa_talking_1").style.opacity = "0";
-          document.querySelector("#elenitsa_bubble_1").style.opacity = "0";
+      // document
+        // .querySelector("#elenitsa_talking_1")
+        // .addEventListener("ended", function (evt) {
+          // document.querySelector("#elenitsa_talking_1").style.opacity = "0";
+          // document.querySelector("#elenitsa_bubble_1").style.opacity = "0";
 
-          document.querySelector("#elenitsa_idle").style.opacity = "1";
-          console.log("u mbyll pjesa e pare e Elenitsa");
-          socket.emit('startElenitsa', 1)
-          startResetLoop();
-        });
+          // document.querySelector("#elenitsa_idle").style.opacity = "1";
+          // console.log("u mbyll pjesa e pare e Elenitsa");
+          // socket.emit('startElenitsa', 1)
+          // startResetLoop();
+        // });
+
       socket.on("elenitsaStart", function (dataElenitsa) {
         eleniSit = true
         console.log(timeoutID, "2")
-
-        document.querySelector("#elenitsa_arrow_1").style.opacity = "0";
 
         console.log("dataElenitsa:", dataElenitsa);
         console.log("counter:", counter);
@@ -316,7 +340,7 @@
             );
             counter = 1;
             console.log("a hyn ktu vetem mbasi ka mbaruar video?")
-            pauseVideosAndBubbles()
+            // pauseVideosAndBubbles()
 
             playGame(data, dataElenitsa, counter);
 
@@ -348,70 +372,65 @@
   }
 
   function playGame(data, dataElenitsa, counter) {
-    console.log(
-      "111 kaloj kushtin data: " +
-      data +
-      " dataElenitsa: " +
-      dataElenitsa +
-      " counter: " +
-      counter
-    );
+
+    console.log("111 kaloj kushtin data: " + data + " dataElenitsa: " + dataElenitsa + " counter: " + counter);
     eleniSit = true
     stopResetLoop()
 
     const elenitsaIdle = document.querySelector("#elenitsa_idle");
-    if (elenitsaIdle.style.opacity === "1") {
-      elenitsaIdle.style.opacity = "0";
-    } else {
-      console.log("elenitsa_idle opacity is already 0");
-    }
+    // if (elenitsaIdle.style.opacity === "1") {
+    //   elenitsaIdle.style.opacity = "0";
+    // } else {
+    //   console.log("elenitsa_idle opacity is already 0");
+    // }
 
-    document.querySelector("#elenitsa_talking_2").style.opacity = "1";
-    document.querySelector("#elenitsa_talking_2").play();
+    // document.querySelector("#elenitsa_talking_2").style.opacity = "1";
+    // document.querySelector("#elenitsa_talking_2").play();
+    playStateElenitsa(886,1537)
 
-    document.querySelector("#elenitsa_bubble_2").style.opacity = "1";
-    document.querySelector("#elenitsa_bubble_2").play();
+    // document.querySelector("#elenitsa_bubble_2").style.opacity = "1";
+    // document.querySelector("#elenitsa_bubble_2").play();
 
-    document
-      .querySelector("#elenitsa_talking_2")
-      .addEventListener("ended", function (evt) {
-        document.querySelector("#elenitsa_talking_2").style.opacity = "0";
-        document.querySelector("#elenitsa_bubble_2").style.opacity = "0";
-        document.querySelector("#elenitsa_talking_3").style.opacity = "1";
+    // document
+    //   .querySelector("#elenitsa_talking_2")
+    //   .addEventListener("ended", function (evt) {
+        // document.querySelector("#elenitsa_talking_2").style.opacity = "0";
+        // document.querySelector("#elenitsa_bubble_2").style.opacity = "0";
+        // document.querySelector("#elenitsa_talking_3").style.opacity = "1";
 
-        document.querySelector("#elenitsa_talking_3").play();
+        // document.querySelector("#elenitsa_talking_3").play();
 
-        document.querySelector("#elenitsa_arrow_nikolas").style.opacity = "1";
-        document.querySelector("#elenitsa_arrow_nikolas").play();
+        // document.querySelector("#elenitsa_arrow_nikolas").style.opacity = "1";
+        // document.querySelector("#elenitsa_arrow_nikolas").play();
 
-        document.querySelector("#elenitsa_bubble_3").style.opacity = "1";
-        document.querySelector("#elenitsa_bubble_3").play();
-      });
+        // document.querySelector("#elenitsa_bubble_3").style.opacity = "1";
+        // document.querySelector("#elenitsa_bubble_3").play();
+      // });
 
-    document
-      .querySelector("#elenitsa_talking_3")
-      .addEventListener("ended", function (evt) {
-        document.querySelector("#elenitsa_talking_3").style.opacity = "0";
-        document.querySelector("#elenitsa_arrow_nikolas").style.opacity = "0";
+    // document
+      // .querySelector("#elenitsa_talking_3")
+      // .addEventListener("ended", function (evt) {
+        // document.querySelector("#elenitsa_talking_3").style.opacity = "0";
+        // document.querySelector("#elenitsa_arrow_nikolas").style.opacity = "0";
 
-        document.querySelector("#elenitsa_bubble_3").style.opacity = "0";
+        // document.querySelector("#elenitsa_bubble_3").style.opacity = "0";
 
-        document.querySelector("#elenitsa_idle_end").style.opacity = "1";
-        document.querySelector("#elenitsa_idle_end").play();
-      });
+        // document.querySelector("#elenitsa_idle_end").style.opacity = "1";
+        // document.querySelector("#elenitsa_idle_end").play();
+      // });
 
-    document
-      .querySelector("#elenitsa_idle_end")
-      .addEventListener("ended", function (evt) {
-        document.querySelector("#elenitsa_idle_end").style.opacity = "0";
-        document.querySelector("#elenitsa_idle").style.opacity = "1";
+    // document
+    //   .querySelector("#elenitsa_idle_end")
+    //   .addEventListener("ended", function (evt) {
+    //     document.querySelector("#elenitsa_idle_end").style.opacity = "0";
+    //     document.querySelector("#elenitsa_idle").style.opacity = "1";
 
-        console.log("u mbyll totalisht");
-        var socket = io();
-        socket.emit("messageNikolasStep", 1);
+    //     console.log("u mbyll totalisht");
+    //     var socket = io();
+    //     socket.emit("messageNikolasStep", 1);
 
         // socket.emit("messagegame2", 0);
-      });
+      // });
   }
 
   socket.on("messageNikolasBubble", function (data) {
@@ -540,6 +559,82 @@
     }
   })
   // Start the initial check after receiving the 'messagegame1' event
+
+  // funksionet sekuenciale Elenitsa
+  function updateFrameElenitsa(frame) {
+    const paddedFrame = String(frame).padStart(5, '0');
+    
+    if(paddedFrame.toString() == "00684"){
+      playStateElenitsa(586,623)
+    }
+    if(paddedFrame.toString() == "00623"){
+      document.querySelector("#elenitsa_arrow_1").style.opacity = "1";
+      document.querySelector("#elenitsa_arrow_1").play();
+      playStateElenitsa(685,885)
+    }
+    if(paddedFrame.toString() == "00884"){
+      var socket = io();
+      socket.emit('startElenitsa', 1)
+      startResetLoop();
+    }
+    if(paddedFrame.toString() == "00886"){
+      document.querySelector("#elenitsa_arrow_1").style.opacity = "0";
+    }
+
+    if(paddedFrame.toString() == "01285"){
+      document.querySelector("#elenitsa_arrow_nikolas").style.opacity = "1";
+        document.querySelector("#elenitsa_arrow_nikolas").play();
+    }
+    if(paddedFrame.toString() == "01536"){
+      document.querySelector("#elenitsa_arrow_nikolas").style.opacity = "0";
+      var socket = io();
+      socket.emit("messageNikolasStep", 1);
+    }
+
+
+    // if(paddedFrame.toString() == "00600"){
+    //   console.log("Me lujt LOJEN")
+    //   handleVideoPlay(document.querySelector('#pagopolis_arrow'))
+    //   var socket = io();
+    //   socket.emit('playIceGame', 1);
+    //   socket.emit('playMinigamePagopoli', 1);
+    // }
+    sequenceImageElenitsa.src = `${folderPathElenitsa}Elenitsa_PNG_${paddedFrame}.png`;
+  }
+
+  function nextFrameElenitsa() {
+    if (statePlayingElenitsa) {
+      if (currentFrameElenitsa < stateEndFrameElenitsa) {
+        currentFrameElenitsa++;
+      } else {
+        statePlayingElenitsa = false;
+        currentFrameElenitsa = idleStartElenitsa;
+      }
+    } else {
+      currentFrameElenitsa = currentFrameElenitsa % frameCount + 1;
+      if (currentFrameElenitsa >= idleEndElenitsa) {
+        currentFrameElenitsa = idleStartElenitsa;
+      }
+    }
+    updateFrameElenitsa(currentFrameElenitsa);
+  }
+    function playElenitsa() {
+      if (!intervalIdElenitsa) {
+        intervalIdElenitsa = setInterval(nextFrameElenitsa, 1000 / frameRate);
+      }
+    }
+    function playStateElenitsa(startFrame, endFrame) {
+      statePlayingElenitsa = true;
+      stateStartFrameElenitsa = startFrame;
+      stateEndFrameElenitsa = endFrame;
+      currentFrameElenitsa = stateStartFrameElenitsa;
+      updateFrameElenitsa(currentFrameElenitsa);
+        playElenitsa();
+      }
+
+      updateFrameElenitsa(currentFrameElenitsa);
+      playElenitsa();
+
 </script>
 
 </html>
