@@ -167,7 +167,7 @@
           <!-- <img src="/PngSequenceImg/Fwtografos/Fwtografos_PNG_00000.png" alt="Fwtografos" style="position: absolute; top: 18%; left: 70%;"> -->
 
           <!-- kjo eshte per sekuencen e imazheve -->
-          <img id="sequenceImageFwtografos" src="" alt="Fwtografos" style="position: absolute; top: 18%; left: 70%;"/>
+          <img id="sequenceImageFwtografos" src="" alt="Fwtografos" style="position: absolute; top: 12%; left: 70%;"/>
         </div>
       </div>
 
@@ -392,7 +392,7 @@
             socket.emit('messageRaftis_End', 1);
           }
         //   console.log(paddedFrame.toString())
-          sequenceImageRaftis.src = `${folderPath}Raftis_PNG_${paddedFrame}.png`;
+          sequenceImageRaftis.src = `${folderPath}Raftis_PNG_GR_${paddedFrame}.png`;
       }
     function nextFrameRaftis() {
           if (statePlaying) {
@@ -454,7 +454,7 @@
             socket.emit('messageFwtografos_End', 1);
             socket.emit('resetGamePhoto', 1);
           }
-          sequenceImageFwtografos.src = `${folderPathFwtografos}Fwtografos_PNG_${paddedFrame}.png`;
+          sequenceImageFwtografos.src = `${folderPathFwtografos}Fwtografos_PNG_GR_${paddedFrame}.png`;
       }
     function nextFrameFwtografos() {
           if (statePlayingFwtografos) {
@@ -505,7 +505,7 @@
             socket.emit('messageGiagia_Talking_5', 1);
           }
 
-          sequenceImagePagopolis.src = `${folderPathPagopolis}Pagopolis_PNG_${paddedFrame}.png`;
+          sequenceImagePagopolis.src = `${folderPathPagopolis}Pagopolis_PNG_GR_${paddedFrame}.png`;
       }
     function nextFramePagopolis() {
           if (statePlayingPagopolis) {

@@ -194,7 +194,7 @@
         </video> -->
     </section>
     <!-- <button id="startfunction"
-        onclick="handleScene4('eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw0OSw1OCwxMTIsMTA4LDk3LDEyMSwxM119')"
+        onclick="handleSceneKnock('eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw0OSw1OCwxMTIsMTA4LDk3LDEyMSwxM119')"
         style="background-color: red; position: absolute; z-index: 99999999999;">START HERE----------------------------------</button> -->
 
   <script src="/socket.io/socket.io.js"></script>
@@ -235,15 +235,15 @@
     const frameCount = 1415;
     const frameRate = 30;
 
-    let currentFrameGiagia = 88;
+    let currentFrameGiagia = 0;
     let intervalIdGiagia = null;
 
     let statePlayingGiagia = false;
     let stateStartFrameGiagia = 0;
     let stateEndFrameGiagia = 0;
 
-    let idleStartGiagia = 88;
-    let idleEndGiagia = 112;
+    let idleStartGiagia = 0;
+    let idleEndGiagia = 24;
 
     // function handleSceneKnock() {
     //     console.log("a futet te butoni")
@@ -379,7 +379,7 @@
 
               setTimeout(() => {
                 document.querySelector("#mainContainer").style.opacity = "1";
-                playStateGiagia(113, 1007);
+                playStateGiagia(25, 963);
                 // handleVideoPlayGiagia(document.querySelector('#giagia_enter'))
 
                 // document.querySelector('#giagia_enter').style.opacity = "1";
@@ -458,7 +458,7 @@
               // giagiaBubble4.style.opacity = "1";
               // giagiaBubble4.play();
 
-              playStateGiagia(1008, 1458);
+              playStateGiagia(964, 1414);
               // handleVideoPlayGiagia(document.querySelector('#giagia_talking_4'))
               // handleVideoPlayGiagia(document.querySelector('#giagia_bubble_4'))
 
@@ -510,7 +510,7 @@
                   // giagiaTalking6.play();
                   // giagiaBubble6.style.opacity = "1";
                   // giagiaBubble6.play();
-                  playStateGiagia(1459, 1734);
+                  playStateGiagia(1417, 1690);
                   // handleVideoPlayGiagia(document.querySelector('#giagia_talking_6'))
                   // handleVideoPlayGiagia(document.querySelector('#giagia_bubble_6'))
                 }
@@ -532,34 +532,34 @@
     // funksionet sekuenciale Giagia
     function updateFrameGiagia(frame) {
       const paddedFrame = String(frame).padStart(5, "0");
-      if (paddedFrame.toString() == "00629") {
-        console.log("frejm 629");
+      if (paddedFrame.toString() == "00587") {
+        console.log("frejm 587");
         var socket = io();
         socket.emit("giagiaEnded", 1);
       }
-      if (paddedFrame.toString() == "01006") {
+      if (paddedFrame.toString() == "00962") {
         var socket = io();
         socket.emit("messagegame1", 0);
         gameState = "waitingForKnock_Talking_5";
         startgame1 = 0;
         isknocked - false;
       }
-      if (paddedFrame.toString() == "01265") {
+      if (paddedFrame.toString() == "01221") {
         var socket = io();
         const giagiaArrow = document.getElementById("giagia_arrow");
         giagiaArrow.style.opacity = "1";
         giagiaArrow.play();
         socket.emit("playMinigame", 1);
       }
-      if (paddedFrame.toString() == "01457") {
+      if (paddedFrame.toString() == "01413") {
         gameState = "idle";
       }
-      if (paddedFrame.toString() == "01733") {
+      if (paddedFrame.toString() == "01689") {
         var socket = io();
         socket.emit("messagegame1", 0);
         isknocked = false;
       }
-      sequenceImageGiagia.src = `${folderPathGiagia}Giagia_PNG_${paddedFrame}.png`;
+      sequenceImageGiagia.src = `${folderPathGiagia}Giagia_PNG_GR_${paddedFrame}.png`;
     }
     function nextFrameGiagia() {
       if (statePlayingGiagia) {

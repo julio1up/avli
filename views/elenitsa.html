@@ -176,8 +176,8 @@
     onclick="playGame(1,'eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw1Myw1OCwxMTIsMTA4LDk3LDEyMSwxM119',1)"
     style="position: absolute; z-index: 99999999999;">START HERE----------------------------------</button> -->
   <!-- <button onclick="simulateGameStart()"  style=" position: absolute; left: 0; z-index: 9999999999999999999999999;">Start Game</button> -->
-  <button onclick="simulatePlayGame()"
-    style="position: absolute;right: 5%; z-index: 99999999999999999999999999999999999999999;">Play Game</button>
+  <!-- <button onclick="simulatePlayGame()"
+    style="position: absolute;right: 5%; z-index: 99999999999999999999999999999999999999999;">Play Game</button> -->
 </body>
 
 <script src="/socket.io/socket.io.js"></script>
@@ -188,21 +188,21 @@
 
   var socket = io();
 
-  function simulatePlayGame() {
-    console.log("filloj pjesa e dyte e Elenitsa");
-    console.log("------------------------------------------------------------------------------------------------------------"
-    );
-    let dataElenitsa = 1
-    let counter = 0
-    let data = 1
+  // function simulatePlayGame() {
+  //   console.log("filloj pjesa e dyte e Elenitsa");
+  //   console.log("------------------------------------------------------------------------------------------------------------"
+  //   );
+  //   let dataElenitsa = 1
+  //   let counter = 0
+  //   let data = 1
 
-    console.log(timeoutID, "2")
-    playGame(data, dataElenitsa, counter);
-    // document.querySelector("#elenitsa_idle").style.opacity = "0";
+  //   console.log(timeoutID, "2")
+  //   playGame(data, dataElenitsa, counter);
+  //   // document.querySelector("#elenitsa_idle").style.opacity = "0";
 
 
-    socket.emit("elenitsaStart", 0);
-  }
+  //   socket.emit("elenitsaStart", 0);
+  // }
   document.getElementById('elenitsaCryingAudio').controls = false;
   let gameStarted = false
 
@@ -599,7 +599,7 @@
     //   socket.emit('playIceGame', 1);
     //   socket.emit('playMinigamePagopoli', 1);
     // }
-    sequenceImageElenitsa.src = `${folderPathElenitsa}Elenitsa_PNG_${paddedFrame}.png`;
+    sequenceImageElenitsa.src = `${folderPathElenitsa}Elenitsa_PNG_GR_${paddedFrame}.png`;
   }
 
   function nextFrameElenitsa() {
