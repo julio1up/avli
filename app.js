@@ -420,18 +420,18 @@ io.on('connection', function(socket) {
 });
 
 
-// parser.on('data', function(data) {
-//   var buf = Buffer.from(JSON.stringify(data)).toString('base64');
-//   console.log(buf);
-//   io.emit('data', buf);
-// });
+parser.on('data', function(data) {
+  var buf = Buffer.from(JSON.stringify(data)).toString('base64');
+  console.log(buf);
+  io.emit('data', buf);
+});
 
-// parserCOM5.on('data', function(data) {
-//   console.log('COM5 data: ' + data);
-//   var buf = Buffer.from(JSON.stringify(data)).toString('base64');
-//   console.log('COM5: ' + buf);
-//   io.emit('elenitsaStart', 1);
-// });
+parserCOM5.on('data', function(data) {
+  console.log('COM5 data: ' + data);
+  var buf = Buffer.from(JSON.stringify(data)).toString('base64');
+  console.log('COM5: ' + buf);
+  io.emit('elenitsaStart', 1);
+});
 
 
 
