@@ -13,44 +13,44 @@ app.use(express.static(__dirname + '/public'));
 
 var index = fs.readFileSync('./views/index.html')
 
-// // Read Port From Arduino
-// const SerialPort          = require('serialport').SerialPort;
-// const { DelimiterParser } = require('@serialport/parser-delimiter');
-// var port = new SerialPort(
-//   { 
-//     path: 'COM2', 
-//     baudRate: 9600,
-//     dataBits: 8,
-//     parity: 'none',
-//     stopBits: 1,
-//     flowControl: false
-//   }
-// );
-// const parser = port.pipe(new DelimiterParser({ delimiter: '\n' }));
-// parser.on('open', function() {
-//   console.log('u hap!');
-// });
-// parser.on('error', function(err) {
-//   console.log(err);
-// });
+// Read Port From Arduino
+const SerialPort          = require('serialport').SerialPort;
+const { DelimiterParser } = require('@serialport/parser-delimiter');
+var port = new SerialPort(
+  { 
+    path: 'COM2', 
+    baudRate: 9600,
+    dataBits: 8,
+    parity: 'none',
+    stopBits: 1,
+    flowControl: false
+  }
+);
+const parser = port.pipe(new DelimiterParser({ delimiter: '\n' }));
+parser.on('open', function() {
+  console.log('u hap!');
+});
+parser.on('error', function(err) {
+  console.log(err);
+});
 
-// var portCOM5 = new SerialPort(
-//   { 
-//     path: 'COM5', 
-//     baudRate: 9600,
-//     dataBits: 8,
-//     parity: 'none',
-//     stopBits: 1,
-//     flowControl: false
-//   }
-// );
-// const parserCOM5 = portCOM5.pipe(new DelimiterParser({ delimiter: '\n' }));
-// parserCOM5.on('open', function() {
-//   console.log('u hap!');
-// });
-// parserCOM5.on('error', function(err) {
-//   console.log(err);
-// });
+var portCOM5 = new SerialPort(
+  { 
+    path: 'COM5', 
+    baudRate: 9600,
+    dataBits: 8,
+    parity: 'none',
+    stopBits: 1,
+    flowControl: false
+  }
+);
+const parserCOM5 = portCOM5.pipe(new DelimiterParser({ delimiter: '\n' }));
+parserCOM5.on('open', function() {
+  console.log('u hap!');
+});
+parserCOM5.on('error', function(err) {
+  console.log(err);
+});
 
 
 // Check serialport is open.
@@ -436,24 +436,24 @@ io.on('connection', function(socket) {
 
 
 
-// var portScene4 = new SerialPort(
-//   { 
-//     path: 'COM4', 
-//     baudRate: 9600,
-//     dataBits: 8,
-//     parity: 'none',
-//     stopBits: 1,
-//     flowControl: false
-//   }
-// );
-// const parserScene4 = portScene4.pipe(new DelimiterParser({ delimiter: '\n' }));
+var portScene4 = new SerialPort(
+  { 
+    path: 'COM4', 
+    baudRate: 9600,
+    dataBits: 8,
+    parity: 'none',
+    stopBits: 1,
+    flowControl: false
+  }
+);
+const parserScene4 = portScene4.pipe(new DelimiterParser({ delimiter: '\n' }));
 
-// parserScene4.on('data', function(data) {
-//   console.log('scene4 data :' + data);
-//   var buf = Buffer.from(JSON.stringify(data)).toString('base64');
-//   console.log('scene4:' + buf);
-//   io.emit('scene4', buf);
-// });
+parserScene4.on('data', function(data) {
+  console.log('scene4 data :' + data);
+  var buf = Buffer.from(JSON.stringify(data)).toString('base64');
+  console.log('scene4:' + buf);
+  io.emit('scene4', buf);
+});
 
 
 http.listen(3000, function() {

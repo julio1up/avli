@@ -220,8 +220,8 @@
     let stateStartFrameElenitsa = 0;
     let stateEndFrameElenitsa = 0;
 
-    let idleStartElenitsa = 526;
-    let idleEndElenitsa = 585;
+    let idleStartElenitsa = 23;
+    let idleEndElenitsa = 82;
 
 
   function resetGame() {
@@ -286,7 +286,7 @@
 
       // document.querySelector("#elenitsa_idle_crying").play();
       // document.querySelector("#elenitsa_idle_crying").style.opacity = "1";
-      playStateElenitsa(624,684)
+      playStateElenitsa(121,181)
       // document
         // .querySelector("#elenitsa_idle_crying")
         // .addEventListener("ended", function (evt) {
@@ -386,7 +386,7 @@
 
     // document.querySelector("#elenitsa_talking_2").style.opacity = "1";
     // document.querySelector("#elenitsa_talking_2").play();
-    playStateElenitsa(886,1537)
+    playStateElenitsa(383,1034)
 
     // document.querySelector("#elenitsa_bubble_2").style.opacity = "1";
     // document.querySelector("#elenitsa_bubble_2").play();
@@ -564,28 +564,28 @@
   function updateFrameElenitsa(frame) {
     const paddedFrame = String(frame).padStart(5, '0');
     
-    if(paddedFrame.toString() == "00684"){
-      playStateElenitsa(586,623)
+    if(paddedFrame.toString() == "00181"){
+      playStateElenitsa(83,120)
     }
-    if(paddedFrame.toString() == "00623"){
+    if(paddedFrame.toString() == "00120"){
       document.querySelector("#elenitsa_arrow_1").style.opacity = "1";
       document.querySelector("#elenitsa_arrow_1").play();
-      playStateElenitsa(685,885)
+      playStateElenitsa(182,382)
     }
-    if(paddedFrame.toString() == "00884"){
+    if(paddedFrame.toString() == "00381"){
       var socket = io();
       socket.emit('startElenitsa', 1)
       startResetLoop();
     }
-    if(paddedFrame.toString() == "00886"){
+    if(paddedFrame.toString() == "00383"){
       document.querySelector("#elenitsa_arrow_1").style.opacity = "0";
     }
 
-    if(paddedFrame.toString() == "01285"){
+    if(paddedFrame.toString() == "00782"){
       document.querySelector("#elenitsa_arrow_nikolas").style.opacity = "1";
         document.querySelector("#elenitsa_arrow_nikolas").play();
     }
-    if(paddedFrame.toString() == "01536"){
+    if(paddedFrame.toString() == "01033"){
       document.querySelector("#elenitsa_arrow_nikolas").style.opacity = "0";
       var socket = io();
       socket.emit("messageNikolasStep", 1);
