@@ -282,26 +282,34 @@
         // function_startGame();
         // })
         var timeoutID;
-
+        
+        var intervalId = window.setInterval(function(){
+            console.log("TIMEOUTID func, ",timeoutID)
+            // call your function here
+        }, 5000);
+        console.log(timeoutID)
 
         function startInactivityTimer() {
             timeoutID = setTimeout(function () {
                 console.log("No touch events detected for 50 seconds, reloading page.");
                 socket.emit("resetGameEleni", 1)
                 window.location.reload();
-console.log("u therrit starti ipari")
+                console.log("u therrit starti ipari")
             }, 50000);
         }
 
         function resetInactivityTimer() {
             clearTimeout(timeoutID);
             startInactivityTimer();
-console.log("u therrit reseti ipari")
+            console.log("u therrit reseti ipari")
         
         }
         function stopInactivityTimer() {
-        clearTimeout(timeoutID);
-    }
+            console.log("TIMEOUTID func, ",timeoutID)
+
+            console.log("RESET TIMERI tic tactoe html")
+            clearTimeout(timeoutID);
+        }
         // document.addEventListener('touchstart', function(event) {
         //     console.log('Touch event occurred.');
         //     resetInactivityTimer();
@@ -420,34 +428,35 @@ console.log("u therrit reseti ipari")
     </script>
 
     <script type="text/javascript">
-        function resetGame() {
+        function resetGameEleni() {
+            console.log("LALALALALAL")
             socket.emit("resetGameElenitsa", 1)
             window.location.reload()
         }
 
 
         //   document.getElementById('startGame').addEventListener('click', function_startGame);
-        function clickButton(event) {
-            clearTimeout(timeoutID);
-            
-            $(".item").click(function (event) {
-                resetInactivityTimer();
-                // Check if the clicked item already has the 'red' or 'blue' class
-                if (!$(this).hasClass('red') && !$(this).hasClass('blue')) {
-                    var playerOne = getPlayerOne();
-                    if (playerOne === "O") {
-                        $(this).addClass("blue") //playerOne is always blue
-                        jQuery('.playerO_' + this.id).css('opacity', '1');
-                        jQuery('#gameGrid').addClass('disabled');
-                    }
-                    playGame(); // Call playGame after every click to check for the winner & whose turn
-                } else {
-                    // Display a message to the user indicating that the cell is already occupied
-                    console.log("This cell is already occupied.");
+        $(".item").click(function (event) {
+            resetInactivityTimer();
+            // Check if the clicked item already has the 'red' or 'blue' class
+            if (!$(this).hasClass('red') && !$(this).hasClass('blue')) {
+                var playerOne = getPlayerOne();
+                if (playerOne === "O") {
+                    $(this).addClass("blue") //playerOne is always blue
+                    jQuery('.playerO_' + this.id).css('opacity', '1');
+                    jQuery('#gameGrid').addClass('disabled');
                 }
-            });
-        }
-        clickButton(event)
+                playGame(); // Call playGame after every click to check for the winner & whose turn
+            } else {
+                // Display a message to the user indicating that the cell is already occupied
+                console.log("This cell is already occupied.");
+            }
+        });
+        // function clickButton(event) {
+        //     clearTimeout(timeoutID);
+            
+        // }
+        // clickButton(event)
 
 
         function checkWhoseTurn() { //for this game, playerOne goes first
@@ -757,6 +766,7 @@ console.log("u therrit reseti ipari")
         });
 
         function playAfterWinO() {
+            
             stopInactivityTimer();
 
             document.querySelector('#nikolas_talking_2').load();
@@ -806,8 +816,8 @@ console.log("u therrit reseti ipari")
                 document.querySelector('#nikolas_talking_5').style.opacity = "0";
                 console.log('mbaroi nikolas talking 5')
                 console.log('efterpi.. ');
-
                 socket.emit('messageEfterpiStep', 1);
+                window.location.reload();
 
             });
 

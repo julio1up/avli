@@ -212,7 +212,7 @@
     const frameCount = 1537;
     const frameRate = 30;
 
-    let currentFrameElenitsa = 503;
+    let currentFrameElenitsa = 0;
     let isPlayingElenitsa = true;
     let intervalIdElenitsa = null;
 
@@ -243,8 +243,8 @@
     document.querySelector('#nikolas_arrow_efterpi').style.opacity = "0";
 
 
-    document.querySelector("#elenitsa_idle").play();
-    document.querySelector("#elenitsa_idle").style.opacity = "1";
+    // document.querySelector("#elenitsa_idle").play();
+    // document.querySelector("#elenitsa_idle").style.opacity = "1";
 
   }
 
@@ -263,6 +263,7 @@
   }
 
   function stopResetLoop() {
+    console.log("RESET TIMERI tic tactoe html")
     clearTimeout(timeoutID);
   }
   socket.on("messagegame2", function (data) {
@@ -358,18 +359,18 @@
 
     }
   });
-  function pauseVideosAndBubbles() {
-    document.querySelector("#elenitsa_talking_1").pause();
-    document.querySelector("#elenitsa_bubble_1").pause();
-    document.querySelector("#elenitsa_arrow_1").pause();
+  // function pauseVideosAndBubbles() {
+  //   document.querySelector("#elenitsa_talking_1").pause();
+  //   document.querySelector("#elenitsa_bubble_1").pause();
+  //   document.querySelector("#elenitsa_arrow_1").pause();
 
-    document.querySelector("#elenitsa_arrow_1").style.opacity = "0";
-    document.querySelector("#elenitsa_talking_1").style.opacity = "0";
-    document.querySelector("#elenitsa_bubble_1").style.opacity = "0";
-    document.querySelector("#elenitsa_idle").style.opacity = "0";
+  //   document.querySelector("#elenitsa_arrow_1").style.opacity = "0";
+  //   document.querySelector("#elenitsa_talking_1").style.opacity = "0";
+  //   document.querySelector("#elenitsa_bubble_1").style.opacity = "0";
+  //   document.querySelector("#elenitsa_idle").style.opacity = "0";
 
 
-  }
+  // }
 
   function playGame(data, dataElenitsa, counter) {
 
@@ -502,6 +503,7 @@
   });
 
   socket.on("messageEfterpiBubble", function (data) {
+    stopResetLoop()
     console.log("messageEfterpiBubble: " + data);
     if (data == 1) {
       document.querySelector("#efterpi_bubble_1").style.opacity = "1";
@@ -553,8 +555,8 @@
         element.style.opacity = "0";
       });
 
-      document.querySelector("#elenitsa_idle").style.opacity = "1";
-      document.querySelector("#elenitsa_idle").play();
+      // document.querySelector("#elenitsa_idle").style.opacity = "1";
+      // document.querySelector("#elenitsa_idle").play();
 
     }
   })
