@@ -135,9 +135,10 @@
         }
 
         function resetGame() {
+            console.log("U BE 50 SEKONDA PA PREK GJE")
             clearTimeout(timeoutID);
             socket.emit("resetGamePapou", 1);
-socket.emit("resetArrowPago",1)
+            socket.emit("resetArrowPago",1)
             const openingImage = document.querySelector('#openingImage');
             openingImage.style.opacity = 1;
             openingImage.style.display = "block";

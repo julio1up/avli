@@ -432,6 +432,7 @@
           const paddedFrame = String(frame).padStart(5, '0');
           if(paddedFrame.toString() == "00150"){
             handleVideoPlay(document.querySelector('#fwtografos_arrow_1'))
+            var socket = io();
             socket.emit("playFotografoGame", 1)
           }
           
