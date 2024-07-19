@@ -143,10 +143,11 @@
         </div>
       </div>
     </section>
-    <button id="startfunction"
+    <!-- <button id="startfunction"
         onclick="handleSceneKnock('eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw0OSw1OCwxMTIsMTA4LDk3LDEyMSwxM119')"
-        style="background-color: red; position: absolute; z-index: 99999999999;">START HERE----------------------------------</button>
+        style="background-color: red; position: absolute; z-index: 99999999999;">START HERE----------------------------------</button> -->
 
+        <!-- <button style="background-color: red; position: absolute;  top: 100px; z-index: 99999999999;" onclick="GAMESTATE()">GAME STATE</button> -->
   <script src="/socket.io/socket.io.js"></script>
   <script>
     let timeoutID;
@@ -157,6 +158,9 @@
       clearTimeout(timeoutID);
     }
 
+    // function GAMESTATE(){
+    //   console.log("STEJTI I LOJES", gameState)
+    // }
     function startKnockTimer() {
       console.log("startKnockTimer", "ktu mbas papu1111");
       if (isknocked == false) {
@@ -238,18 +242,21 @@
     }
 
     socket.on("messageGiagia_Talking_5", function (data) {
-      pagopoliMessage = true;
-      gameState = "waitingForKnock_Talking_5";
-      isknocked = false;
-      startKnockTimer();
-      startgame1 = 0;
+      if(data == 1){
 
-      // Preload the image before displaying it
-      const imageElement = document.querySelector("#knock_here");
-      preloadImage(imageElement.src, () => {
-        // imageElement.style.display = "block";
-        imageElement.style.opacity = 1; // Fade in the image
-      });
+        pagopoliMessage = true;
+        gameState = "waitingForKnock_Talking_5";
+        isknocked = false;
+        startKnockTimer();
+        startgame1 = 0;
+        console.log("SOCKET messageGiagia_Talking_5")
+        // Preload the image before displaying it
+        const imageElement = document.querySelector("#knock_here");
+        preloadImage(imageElement.src, () => {
+          // imageElement.style.display = "block";
+          imageElement.style.opacity = 1; // Fade in the image
+        });
+      }
     });
 
     socket.on("resetGameForGiagia", function (data) {
@@ -295,13 +302,16 @@
 
             }
             if (gameState === "waitingForKnock_Talking_5") {
+              console.log("PER T NDRUU GAMESATE PAS KNOCK 2")
+              gameState = "Pause"
+
               pagopoliMessage = false;
               isknocked = true;
               console.log(pagopoliMessage, "pagopoli messsage");
               console.log(isknocked, "isknocked");
 
               stopKnockTimer();
-              gameState = "playing_Talking_5";
+              // gameState = "playing_Talking_5";
               console.log(data, "inside knock for Giagia_Talking_5");
 
               // Cache DOM elements
@@ -311,7 +321,6 @@
               // Update elements
               knockHere.style.opacity = "0";
               knockHere.style.display = "none";
-
               playStateGiagia(964, 1414);
 
               socket.emit("messageGiagia_Talking_5", 0);
@@ -345,7 +354,10 @@
         gameState = "Pause"
         startgame1 = 0;
         isknocked - false;
-      }
+      }        
+      // if (paddedFrame.toString() == "00964") {
+      //   gameState = "Pause"
+      // }
       if (paddedFrame.toString() == "01221") {
         var socket = io();
         const giagiaArrow = document.getElementById("giagia_arrow");
@@ -356,9 +368,15 @@
       if (paddedFrame.toString() == "01413") {
         gameState = "idle";
       }
+      
+      if (paddedFrame.toString() == "01418") {
+        gameState = "Pause";
+      }
       if (paddedFrame.toString() == "01689") {
         var socket = io();
         socket.emit("messagegame1", 0);
+        resetGame();
+
         isknocked = false;
       }
       sequenceImageGiagia.src = `${folderPathGiagia}Giagia_PNG_GR_${paddedFrame}.png`;
