@@ -30,7 +30,7 @@
       width: 100%;
       left: 0;
       right: 0;
-      bottom: 0;
+      bottom: -40px;
       overflow: hidden;
     }
 
@@ -75,6 +75,10 @@
       height: 100%;
       opacity: 0;
     }
+    .efterpi-bubble-third{
+      bottom: 2px;
+    }
+
 
     #elenitsa_arrow_1,
     #elenitsa_arrow_nikolas,
@@ -162,13 +166,13 @@
     </video>
 
     <!--Efterpi Videos-->
-    <video id="efterpi_bubble_1" class="video-center efterpi-bubble" muted preload="auto">
+    <video id="efterpi_bubble_1" class="video-center efterpi-bubble efterpi-bubble-third" muted preload="auto">
       <source id="efterpi_bubble_source_1" src="/EfterpiBubbles/Efterpi_Bubble_1_gr" type="video/webm" />
     </video>
     <video id="efterpi_bubble_2" class="video-center efterpi-bubble" muted preload="auto">
       <source id="efterpi_bubble_source_2" src="/EfterpiBubbles/Efterpi_Bubble_2_gr" type="video/webm" />
     </video>
-    <video id="efterpi_bubble_3" class="video-center efterpi-bubble" muted preload="auto">
+    <video id="efterpi_bubble_3" class="video-center efterpi-bubble efterpi-bubble-third" muted preload="auto">
       <source id="efterpi_bubble_source_3" src="/EfterpiBubbles/Efterpi_Bubble_3_gr" type="video/webm" />
     </video>
   </section>
@@ -203,6 +207,7 @@
 
   //   socket.emit("elenitsaStart", 0);
   // }
+
   document.getElementById('elenitsaCryingAudio').controls = false;
   let gameStarted = false
 
@@ -222,6 +227,8 @@
 
     let idleStartElenitsa = 23;
     let idleEndElenitsa = 82;
+  document.querySelector("#efterpi_bubble_1").style.opacity = "1";
+  document.querySelector("#efterpi_bubble_1").play();
 
 
   function resetGame() {
