@@ -113,7 +113,7 @@
         const sequenceImageEfterpi = document.getElementById("sequenceImageEfterpi");
         const folderPathEfterpi = "/PngSequenceImg/Efterpi/";
         const frameCount = 1376;
-        const frameRate = 30;
+        const frameRate = 25;
     
         let currentFrameEfterpi = 439;
         let intervalIdEfterpi = null;
@@ -258,7 +258,7 @@
             playStateEfterpi(388,438)
             document.querySelector('.container').classList.remove("turn-on");
             console.log('game 2 end ....');
-            socket.emit('resetGameMonitor', 1);
+            socket.emit('resetGameMonitor', 2);
         }
         if (paddedFrame.toString() == "00438") {
             document.querySelector('#efterpi_background_empty').style.opacity="1"

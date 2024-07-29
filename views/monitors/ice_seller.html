@@ -102,7 +102,54 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-     
+        // timeri i ri
+        // variabla per timerin e ri
+        let inactivityTimeKnock = 0;
+        const inactivityLimit = 20; // 50 seconds
+        let timerInterval = null;
+        function GAMESTATE(){
+            console.log("STEJTI I LOJES", inactivityTimeKnock)
+        }
+        // funksionet e timerit
+        
+        // Function to start the inactivity timer
+        function startInactivityTimer() {
+          if (timerInterval === null) {
+            inactivityTimeKnock = 0; // Reset the timer
+            timerInterval = setInterval(() => {
+              inactivityTimeKnock++;
+              if (inactivityTimeKnock >= inactivityLimit) {
+                console.log("20 seconds of inactivity detected");
+                // Perform any actions needed for inactivity here
+                stopInactivityTimer();
+                resetGame()
+              }
+            }, 1000);
+          }
+        }
+        // Function to stop the inactivity timer
+        function stopInactivityTimer() {
+          console.log("[giagia.html] stopInactivityTimer ")
+          if (timerInterval !== null) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            inactivityTimeKnock = 0; // Reset the timer
+          }
+        }
+        // Function to reset the inactivity timer in worong answer
+        function resetInactivityTimerWrongAnswer() {
+          console.log("[giagia.html] resetInactivityTimer")
+          //   stopInactivityTimer(); // Stop the timer
+          inactivityTimeKnock = 0; // Reset the timer
+        }
+        //kur mbaron loja me i heq t gjitha timerat
+        function resetInactivityTimer() {
+          console.log("[giagia.html] resetInactivityTimer")
+          stopInactivityTimer(); // Stop the timer
+          inactivityTimeKnock = 0; // Reset the timer
+        }
+
+
         let result = document.querySelector(".result");
         result.addEventListener('touchstart', function (event) {
             event.stopPropagation();
@@ -127,12 +174,12 @@
         const elementsToControl = document.querySelectorAll('.wrongOnes1');
        let clickedOnce=false
 
-        function starttimeoutID() {
-            clearTimeout(timeoutID);
-            if (!isplayed) {
-                timeoutID = setTimeout(resetGame, 50000); // 50 seconds in milliseconds
-            }
-        }
+        // function starttimeoutID() {
+        //     clearTimeout(timeoutID);
+        //     if (!isplayed) {
+        //         timeoutID = setTimeout(resetGame, 50000); // 50 seconds in milliseconds
+        //     }
+        // }
 
         function resetGame() {
             console.log("U BE 50 SEKONDA PA PREK GJE")
@@ -161,7 +208,7 @@
             if (data == 1) {
                 document.querySelector('#openingImage').style.display = "none";
                 gameStartedIce = true;
-                starttimeoutID();
+                startInactivityTimer();
                 document.querySelector('#pagopoli_minigame').play();
             }
         });
@@ -195,13 +242,12 @@
         });
 
         function getValue(id, event) {
-
             if (gameStartedIce) {
                 clickedOnce=true
                 if (id === 1 && sendMessageGiagia === 1) {
                     clickedOnce=false
                     isplayed = true;
-                    clearTimeout(timeoutID);
+                    resetInactivityTimer()
                     sendMessageGiagia = 0;
                     document.getElementById("result_final").innerHTML = "✓";
                     let box = document.getElementById('result_final');
@@ -226,7 +272,7 @@
 
                     socket.emit('messageIceSeller', 1);
                 } else if (id !== 1 && sendMessageGiagia === 1) {
-                    starttimeoutID();  // Reset timeoutID on wrong answer
+                    resetInactivityTimerWrongAnswer();  // Reset timeoutID on wrong answer
                     event.target.style.opacity = 0.5;
                     removeResponse();
                 }

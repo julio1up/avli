@@ -134,11 +134,7 @@
           <!-- <img src="/PngSequenceImg/Giagia/Giagia_PNG_00044.png" alt="Giagia" style="position: absolute; top: 20%; left: 20.5%;"> -->
 
           <!-- kjo eshte per sekuencen e imazheve -->
-          <img
-            id="sequenceImageGiagia"
-            src=""
-            alt="Giagia"
-            style="position: absolute; top: 20%; left: 20.5%"
+          <img id="sequenceImageGiagia" src="" alt="Giagia" style="position: absolute; top: 20%; left: 20.5%"
           />
         </div>
       </div>
@@ -150,34 +146,79 @@
         <!-- <button style="background-color: red; position: absolute;  top: 100px; z-index: 99999999999;" onclick="GAMESTATE()">GAME STATE</button> -->
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    let timeoutID;
-    let knockTimeout;
+    // let timeoutID;
+    // let knockTimeout;
     let isknocked = false;
 
-    function stopGameTimer() {
-      clearTimeout(timeoutID);
-    }
+    // function stopGameTimer() {
+    //   clearTimeout(timeoutID);
+    // }
 
     // function GAMESTATE(){
-    //   console.log("STEJTI I LOJES", gameState)
+    //   console.log("STEJTI I LOJES", inactivityTimeKnock)
     // }
-    function startKnockTimer() {
-      console.log("startKnockTimer", "ktu mbas papu1111");
-      if (isknocked == false) {
-        knockTimeout = setTimeout(function () {
-          isknocked = false;
-          resetGame();
-          console.log("Game reset after 50 seconds without knocking.");
-        }, 50000);
+    // function startKnockTimer() {
+    //   console.log("startKnockTimer", "ktu mbas papu1111");
+    //   if (isknocked == false) {
+    //     knockTimeout = setTimeout(function () {
+    //       isknocked = false;
+    //       resetGame();
+    //       console.log("Game reset after 20 seconds without knocking.");
+    //     }, 50000);
+    //   }
+    // }
+    // console.log(knockTimeout, "knock timeout");
+    // function stopKnockTimer() {
+    //   console.log("a behet clear ky knock timer ");
+    //   document.querySelector("#knock_here").style.opacity = "0";
+
+    //   clearTimeout(knockTimeout);
+    // }
+
+
+    // timeri i ri
+    // variabla per timerin e ri
+    let inactivityTimeKnock = 0;
+    const inactivityLimit = 20; // 50 seconds
+    let timerInterval = null;
+
+    function GAMESTATE(){
+      console.log("STEJTI I LOJES", inactivityTimeKnock)
+    }
+
+    // funksionet e timerit
+    // Function to start the inactivity timer
+    function startInactivityTimer() {
+      if (timerInterval === null) {
+        inactivityTimeKnock = 0; // Reset the timer
+        timerInterval = setInterval(() => {
+          inactivityTimeKnock++;
+          if (inactivityTimeKnock >= inactivityLimit) {
+            console.log("20 seconds of inactivity detected");
+            // Perform any actions needed for inactivity here
+            stopInactivityTimer();
+            resetGame()
+          }
+        }, 1000);
       }
     }
-    console.log(knockTimeout, "knock timeout");
-    function stopKnockTimer() {
-      console.log("a behet clear ky knock timer ");
-      document.querySelector("#knock_here").style.opacity = "0";
-
-      clearTimeout(knockTimeout);
+    // Function to stop the inactivity timer
+    function stopInactivityTimer() {
+      console.log("[giagia.html] stopInactivityTimer ")
+      if (timerInterval !== null) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        inactivityTimeKnock = 0; // Reset the timer
+      }
     }
+    // Function to reset the inactivity timer
+    function resetInactivityTimer() {
+      console.log("[giagia.html] resetInactivityTimer")
+      stopInactivityTimer(); // Stop the timer
+      inactivityTimeKnock = 0; // Reset the timer
+    }
+
+
   </script>
   <script>
     const socket = io();
@@ -247,7 +288,7 @@
         pagopoliMessage = true;
         gameState = "waitingForKnock_Talking_5";
         isknocked = false;
-        startKnockTimer();
+        startInactivityTimer();
         startgame1 = 0;
         console.log("SOCKET messageGiagia_Talking_5")
         // Preload the image before displaying it
@@ -276,7 +317,7 @@
         console.log("loja ka filluar te giagia");
         document.querySelector("#mainContainer").style.opacity = "0";
         
-        startKnockTimer();
+        startInactivityTimer();
         gameState = "waitingForKnock"
 
         // })
@@ -289,7 +330,7 @@
               startgame1 = 1;
               isknocked = true;
 
-              stopKnockTimer();
+              resetInactivityTimer();
 
               console.log(data, "inside knock");
               console.log("Started talking");
@@ -310,7 +351,7 @@
               console.log(pagopoliMessage, "pagopoli messsage");
               console.log(isknocked, "isknocked");
 
-              stopKnockTimer();
+              resetInactivityTimer();
               // gameState = "playing_Talking_5";
               console.log(data, "inside knock for Giagia_Talking_5");
 
