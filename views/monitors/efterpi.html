@@ -44,6 +44,17 @@
         .container.turn-on video.talking{
             border: 8px solid green;
         }
+        
+        .efterpi-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            margin: 0 auto;
+        }
+
 
     </style>
 </head>
@@ -52,14 +63,14 @@
         <div id="efterpi_background_empty" class="efterpi_background_empty" style="background-image: url('/Efterpi/Efterpi_empty_window.png');">
             <!-- Your content here -->
         </div>
-        <video id="efterpi_enter" class="video-center" muted preload="auto">
+        
+        <!-- <video id="efterpi_enter" class="video-center" muted preload="auto">
             <source id="efterpi_enter_source" src="/Efterpi/Efterpi_Enter.mp4" type="video/mp4">
-        </video>
-
+        </video>    
+        
         <video id="efterpi_leave" class="video-center" muted preload="auto">
             <source id="efterpi_leave_source" src="/Efterpi/Efterpi_Leave.mp4" type="video/mp4">
-        </video>
-
+        </video>    
         <video id="efterpi_ilde" class="video-center" autoplay loop muted preload="auto">
             <source id="efterpi_ilde_source" src="/Efterpi/Efterpi_Talking_Idle.mp4" type="video/mp4">
         </video>
@@ -77,7 +88,18 @@
 
         <video id="efterpi_counting" class="video-center" muted preload="auto">
             <source id="efterpi_counting_source" src="/Efterpi/Efterpi_Counting_10seconds.mp4" type="video/mp4">
-        </video>
+        </video> -->
+        
+        <div id="mainContainer">
+            <div id="sequenceContainer">
+              <!-- kjo eshte me pa pozicionin -->
+              <!-- <img class="efterpi-img"  src="/PngSequenceImg/Efterpi/Efterpi_PNG_00044.png" alt="Efterpi" > -->
+    
+              <!-- kjo eshte per sekuencen e imazheve -->
+              <img class="efterpi-img" id="sequenceImageEfterpi" src="" alt="Efterpi" />
+            </div>
+        </div>
+
         <video id="efterpi_counting_layout" class="video-center" muted preload="auto">
             <source id="efterpi_counting_layout_source" src="/Efterpi/Efterpi_Countdown.webm" type="video/webm">
         </video>
@@ -87,32 +109,51 @@
     </div>
     <script src = "/socket.io/socket.io.js"></script>
     <script type="text/javascript">
-function resetGame() {
-    const videoElements = ['#efterpi_enter', '#efterpi_talking_1', '#efterpi_talking_2', '#efterpi_talking_3', '#efterpi_leave'];
-    videoElements.forEach(element => {
-        const video = document.querySelector(element);
-        video.currentTime = 0;
-        video.style.opacity = "0";
-    });
+        /* variablat per PNG Seqeunce Efterpi */
+        const sequenceImageEfterpi = document.getElementById("sequenceImageEfterpi");
+        const folderPathEfterpi = "/PngSequenceImg/Efterpi/";
+        const frameCount = 1376;
+        const frameRate = 30;
+    
+        let currentFrameEfterpi = 439;
+        let intervalIdEfterpi = null;
+    
+        let statePlayingEfterpi = false;
+        let stateStartFrameEfterpi = 0;
+        let stateEndFrameEfterpi = 0;
+    
+        let idleStartEfterpi = 439;
+        let idleEndEfterpi = 498;
 
-    document.querySelector('#efterpi_background_empty').style.opacity = "1";
+            // document.querySelector('#efterpi_ilde').style.opacity = "1";
+            // document.querySelector('#efterpi_ilde').load();
+            // document.querySelector('#efterpi_ilde').play();
 
-    document.querySelector('.container').classList.remove("turn-on");
+        function resetGame() {
+        
+            const videoElements = ['#efterpi_enter', '#efterpi_talking_1', '#efterpi_talking_2', '#efterpi_talking_3', '#efterpi_leave'];
+            videoElements.forEach(element => {
+                const video = document.querySelector(element);
+                video.currentTime = 0;
+                video.style.opacity = "0";
+            });
+            document.querySelector('#efterpi_background_empty').style.opacity = "1";
+            document.querySelector('.container').classList.remove("turn-on");
 
-}
-var socket = io();
+        }
+        var socket = io();
 
-socket.on("resetGameElenitsa", function (data){
-            if (data ==1){
-                resetGame() 
-            }
-        })
+        socket.on("resetGameElenitsa", function (data){
+                if (data ==1){
+                    resetGame() 
+                }
+            })
 
 
-        document.querySelector('#efterpi_ilde').style.opacity = "1";
-        document.querySelector('#efterpi_ilde').load();
-        document.querySelector('#efterpi_ilde').play();
-        socket.on('messageEfterpiStep', function(data) {
+            // document.querySelector('#efterpi_ilde').style.opacity = "1";
+            // document.querySelector('#efterpi_ilde').load();
+            // document.querySelector('#efterpi_ilde').play();
+            socket.on('messageEfterpiStep', function(data) {
             if (data == 1){
                 document.querySelector('#efterpi_background_empty').style.opacity="1"
             }
@@ -121,74 +162,143 @@ socket.on("resetGameElenitsa", function (data){
             console.log('nisi efterpi')
             document.querySelector('#efterpi_background_empty').style.opacity="0"
 
-            document.querySelector('#efterpi_enter').load();
-            document.querySelector('#efterpi_enter').play();
+            // document.querySelector('#efterpi_enter').load();
+            // document.querySelector('#efterpi_enter').play();
 
-            document.querySelector('#efterpi_ilde').style.opacity = "0";
-            document.querySelector('#efterpi_enter').style.opacity = "1";
+            // document.querySelector('#efterpi_ilde').style.opacity = "0";
+            // document.querySelector('#efterpi_enter').style.opacity = "1";
 
+            playStateEfterpi(280,387)
             document.querySelector('.container').classList.add("turn-on");
 
-            document.querySelector('#efterpi_enter').addEventListener('ended', function( evt ) {
-                document.querySelector('#efterpi_enter').style.opacity = "0";
+            // document.querySelector('#efterpi_enter').addEventListener('ended', function( evt ) {
+            //     document.querySelector('#efterpi_enter').style.opacity = "0";
 
-                document.querySelector('#efterpi_talking_1').style.opacity = "1";
-                document.querySelector('#efterpi_talking_1').play();
+            //     document.querySelector('#efterpi_talking_1').style.opacity = "1";
+            //     document.querySelector('#efterpi_talking_1').play();
 
-                socket.emit('messageEfterpiBubble', 1);
+            //     socket.emit('messageEfterpiBubble', 1);
 
-            });
-            document.querySelector('#efterpi_talking_1').addEventListener('ended', function( evt ) {
-                document.querySelector('#efterpi_talking_1').style.opacity = "0";
+            // });
+            // document.querySelector('#efterpi_talking_1').addEventListener('ended', function( evt ) {
+                // document.querySelector('#efterpi_talking_1').style.opacity = "0";
 
-                document.querySelector('#efterpi_counting').style.opacity = "1";
-                document.querySelector('#efterpi_counting').play();
-                document.querySelector('#efterpi_counting_layout').style.opacity = "1";
-                document.querySelector('#efterpi_counting_layout').play();
+                // document.querySelector('#efterpi_counting').style.opacity = "1";
+                // document.querySelector('#efterpi_counting').play();
+                // document.querySelector('#efterpi_counting_layout').style.opacity = "1";
+                // document.querySelector('#efterpi_counting_layout').play();
 
-                document.querySelector('#efterpi_talking_2').load();
-            });
-            document.querySelector('#efterpi_counting').addEventListener('ended', function( evt ) {
-                document.querySelector('#efterpi_counting').style.opacity = "0";
-                document.querySelector('#efterpi_counting').style.opacity = "0";
+                // document.querySelector('#efterpi_talking_2').load();
+            // });
+            // document.querySelector('#efterpi_counting').addEventListener('ended', function( evt ) {
+                // document.querySelector('#efterpi_counting').style.opacity = "0";
+                // document.querySelector('#efterpi_counting').style.opacity = "0";
                 
-                document.querySelector('#efterpi_talking_2').style.opacity = "1";
-                document.querySelector('#efterpi_talking_2').play();
+                // document.querySelector('#efterpi_talking_2').style.opacity = "1";
+                // document.querySelector('#efterpi_talking_2').play();
 
-                socket.emit('messageEfterpiBubble', 2);
+                // socket.emit('messageEfterpiBubble', 2);
 
-                document.querySelector('#efterpi_talking_3').load();
+                // document.querySelector('#efterpi_talking_3').load();
 
-            });
+            // });
 
-            document.querySelector('#efterpi_talking_2').addEventListener('ended', function( evt ) {
-                document.querySelector('#efterpi_talking_2').style.opacity = "0";
+            // document.querySelector('#efterpi_talking_2').addEventListener('ended', function( evt ) {
+                // document.querySelector('#efterpi_talking_2').style.opacity = "0";
                 
-                document.querySelector('#efterpi_talking_3').style.opacity = "1";
-                document.querySelector('#efterpi_talking_3').play();
+                // document.querySelector('#efterpi_talking_3').style.opacity = "1";
+                // document.querySelector('#efterpi_talking_3').play();
 
-                socket.emit('messageEfterpiBubble', 3);
-                document.querySelector('#efterpi_leave').load();
+                // socket.emit('messageEfterpiBubble', 3);
+                // document.querySelector('#efterpi_leave').load();
+            // });
 
-
-            });
-
-            document.querySelector('#efterpi_talking_3').addEventListener('ended', function( evt ) {
-                document.querySelector('#efterpi_talking_3').style.opacity = "0";
+            // document.querySelector('#efterpi_talking_3').addEventListener('ended', function( evt ) {
+                // document.querySelector('#efterpi_talking_3').style.opacity = "0";
                 
-                document.querySelector('#efterpi_leave').style.opacity = "1";
-                document.querySelector('#efterpi_leave').play();
+                // document.querySelector('#efterpi_leave').style.opacity = "1";
+                // document.querySelector('#efterpi_leave').play();
 
-                document.querySelector('.container').classList.remove("turn-on");
+                // document.querySelector('.container').classList.remove("turn-on");
                 
-                console.log('game 2 end ....');
-                socket.emit('resetGameMonitor', 1);
+                // console.log('game 2 end ....');
+                // socket.emit('resetGameMonitor', 1);
 
-            });
-            document.querySelector('#efterpi_leave').addEventListener('ended', function( evt ) {
-                document.querySelector('#efterpi_background_empty').style.opacity="1"
-            });
+            // });
+            // document.querySelector('#efterpi_leave').addEventListener('ended', function( evt ) {
+            //     document.querySelector('#efterpi_background_empty').style.opacity="1"
+            // });
         }
+
+        
+    function updateFrameEfterpi(frame) {
+        const paddedFrame = String(frame).padStart(5, "0");
+        if (paddedFrame.toString() == "00387") {
+            var socket = io();
+            playStateEfterpi(499,849)
+            socket.emit('messageEfterpiBubble', 1);
+        }
+        if (paddedFrame.toString() == "00849") {
+            playStateEfterpi(0,279)
+            document.querySelector('#efterpi_counting_layout').style.opacity = "1";
+            document.querySelector('#efterpi_counting_layout').play();
+        }
+        if (paddedFrame.toString() == "00279") {
+            var socket = io();
+            playStateEfterpi(850,1100)
+            socket.emit('messageEfterpiBubble', 2);
+        }
+        if (paddedFrame.toString() == "01100") {
+            var socket = io();
+            playStateEfterpi(1101,1376)
+            socket.emit('messageEfterpiBubble', 3);
+        }
+        if (paddedFrame.toString() == "01376") {
+            var socket = io();
+            playStateEfterpi(388,438)
+            document.querySelector('.container').classList.remove("turn-on");
+            console.log('game 2 end ....');
+            socket.emit('resetGameMonitor', 1);
+        }
+        if (paddedFrame.toString() == "00438") {
+            document.querySelector('#efterpi_background_empty').style.opacity="1"
+        }
+      sequenceImageEfterpi.src = `${folderPathEfterpi}Efterpi_PNG_${paddedFrame}.png`;
+    }
+    function nextFrameEfterpi() {
+      if (statePlayingEfterpi) {
+        if (currentFrameEfterpi < stateEndFrameEfterpi) {
+          currentFrameEfterpi++;
+        } else {
+          statePlayingEfterpi = false;
+          currentFrameEfterpi = idleStartEfterpi;
+        }
+      } else {
+        currentFrameEfterpi = (currentFrameEfterpi % frameCount) + 1;
+        if (currentFrameEfterpi >= idleEndEfterpi) {
+          currentFrameEfterpi = idleStartEfterpi;
+        }
+      }
+      updateFrameEfterpi(currentFrameEfterpi);
+    }
+    function playEfterpi() {
+      if (!intervalIdEfterpi) {
+        intervalIdEfterpi = setInterval(nextFrameEfterpi, 1000 / frameRate);
+      }
+    }
+    function playStateEfterpi(startFrame, endFrame) {
+      statePlayingEfterpi = true;
+      stateStartFrameEfterpi = startFrame;
+      stateEndFrameEfterpi = endFrame;
+      currentFrameEfterpi = stateStartFrameEfterpi;
+
+      updateFrameEfterpi(currentFrameEfterpi);
+      playEfterpi();
+    }
+
+    updateFrameEfterpi(currentFrameEfterpi);
+    playEfterpi();
+
 
         // START GAME 
         socket.on('messageEfterpiStep', function(data) {

@@ -166,7 +166,18 @@
     </video>
 
     <!--Efterpi Videos-->
-    <video id="efterpi_bubble_1" class="video-center efterpi-bubble efterpi-bubble-third" muted preload="auto">
+    
+    <div id="mainContainer">
+      <div id="sequenceContainer">
+        <!-- kjo eshte me pa pozicionin -->
+        <!-- <img src="/PngSequenceImg/Efterpi/Efterpi_Bubbles/Efterpi_Bubbles_PNG_00018.png" alt="Giagia" style="position: absolute; top: 0; left: 15%;"> -->
+
+        <!-- kjo eshte per sekuencen e imazheve -->
+        <img id="sequenceImageEfterpiBubble" src="" alt="EfterpiBuble" style="position: absolute; top: 0; left: 74%" />
+      </div>
+    </div>
+    
+    <!-- <video id="efterpi_bubble_1" class="video-center efterpi-bubble efterpi-bubble-third" muted preload="auto">
       <source id="efterpi_bubble_source_1" src="/EfterpiBubbles/Efterpi_Bubble_1_gr" type="video/webm" />
     </video>
     <video id="efterpi_bubble_2" class="video-center efterpi-bubble" muted preload="auto">
@@ -174,14 +185,14 @@
     </video>
     <video id="efterpi_bubble_3" class="video-center efterpi-bubble efterpi-bubble-third" muted preload="auto">
       <source id="efterpi_bubble_source_3" src="/EfterpiBubbles/Efterpi_Bubble_3_gr" type="video/webm" />
-    </video>
+    </video> -->
   </section>
   <!-- <button id="startfunction"
     onclick="playGame(1,'eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw1Myw1OCwxMTIsMTA4LDk3LDEyMSwxM119',1)"
     style="position: absolute; z-index: 99999999999;">START HERE----------------------------------</button> -->
   <!-- <button onclick="simulateGameStart()"  style=" position: absolute; left: 0; z-index: 9999999999999999999999999;">Start Game</button> -->
-  <!-- <button onclick="simulatePlayGame()"
-    style="position: absolute;right: 5%; z-index: 99999999999999999999999999999999999999999;">Play Game</button> -->
+  <button onclick="simulatePlayGame()"
+    style="position: absolute;right: 5%; z-index: 99999999999999999999999999999999999999999;">Play Game</button>
 </body>
 
 <script src="/socket.io/socket.io.js"></script>
@@ -192,21 +203,21 @@
 
   var socket = io();
 
-  // function simulatePlayGame() {
-  //   console.log("filloj pjesa e dyte e Elenitsa");
-  //   console.log("------------------------------------------------------------------------------------------------------------"
-  //   );
-  //   let dataElenitsa = 1
-  //   let counter = 0
-  //   let data = 1
+  function simulatePlayGame() {
+    console.log("filloj pjesa e dyte e Elenitsa");
+    console.log("------------------------------------------------------------------------------------------------------------"
+    );
+    let dataElenitsa = 1
+    let counter = 0
+    let data = 1
 
-  //   console.log(timeoutID, "2")
-  //   playGame(data, dataElenitsa, counter);
-  //   // document.querySelector("#elenitsa_idle").style.opacity = "0";
+    console.log(timeoutID, "2")
+    playGame(data, dataElenitsa, counter);
+    // document.querySelector("#elenitsa_idle").style.opacity = "0";
 
 
-  //   socket.emit("elenitsaStart", 0);
-  // }
+    socket.emit("elenitsaStart", 0);
+  }
 
   document.getElementById('elenitsaCryingAudio').controls = false;
   let gameStarted = false
@@ -214,8 +225,8 @@
     /* variablat per PNG Seqeunce Elenitsa */
     const sequenceImageElenitsa = document.getElementById('sequenceImageElenitsa');
     const folderPathElenitsa = '/PngSequenceImg/Elenitsa/';
-    const frameCount = 1537;
-    const frameRate = 30;
+    const frameCountElenista = 1537;
+    const frameRateElenista = 30;
 
     let currentFrameElenitsa = 0;
     let isPlayingElenitsa = true;
@@ -227,8 +238,25 @@
 
     let idleStartElenitsa = 23;
     let idleEndElenitsa = 82;
-  document.querySelector("#efterpi_bubble_1").style.opacity = "1";
-  document.querySelector("#efterpi_bubble_1").play();
+
+    /* variablat per PNG Seqeunce EfterpiBubble */
+    const sequenceImageEfterpiBubble = document.getElementById("sequenceImageEfterpiBubble");
+    const folderPathEfterpiBubble = "/PngSequenceImg/Efterpi/Efterpi_Bubbles/";
+    const frameCount = 877;
+    const frameRate = 30;
+
+    let currentFrameEfterpiBubble = 0;
+    let intervalIdEfterpiBubble = null;
+
+    let statePlayingEfterpiBubble = false;
+    let stateStartFrameEfterpiBubble = 0;
+    let stateEndFrameEfterpiBubble = 0;
+
+    let idleStartEfterpiBubble = 0;
+    let idleEndEfterpiBubble = 1;
+
+  // document.querySelector("#efterpi_bubble_1").style.opacity = "1";
+  // document.querySelector("#efterpi_bubble_1").play();
 
 
   function resetGame() {
@@ -285,54 +313,8 @@
       document.querySelector("#elenitsaCryingAudio").load();
       document.querySelector("#elenitsaCryingAudio").play();
 
-
-      // document.querySelector("#elenitsa_idle_start").load();
-      // document.querySelector("#elenitsa_idle_crying").load();
-
-      // Play video
-      // document.querySelector("#elenitsa_idle").style.opacity = "0";
-
-      // document.querySelector("#elenitsa_idle_crying").play();
-      // document.querySelector("#elenitsa_idle_crying").style.opacity = "1";
       playStateElenitsa(121,181)
-      // document
-        // .querySelector("#elenitsa_idle_crying")
-        // .addEventListener("ended", function (evt) {
-          // console.log("filloj qaj E");
-          // document.querySelector("#elenitsa_idle_crying").style.opacity = "0";
-          // document.querySelector("#elenitsa_idle_start").play();
-          // document.querySelector("#elenitsa_idle_start").style.opacity = "1";
-          // document.querySelector("#elenitsa_talking_1").load();
-          // document.querySelector("#elenitsa_arrow_1").load();
-          // document.querySelector("#elenitsa_bubble_1").load();
-
-
-        // });
-
-      // document.querySelector("#elenitsa_idle_start").addEventListener("ended", function (evt) {
-          // document.querySelector("#elenitsa_idle_start").style.opacity = "0";
-
-          // document.querySelector("#elenitsa_talking_1").style.opacity = "1";
-          // document.querySelector("#elenitsa_talking_1").play();
-
-          // document.querySelector("#elenitsa_arrow_1").style.opacity = "1";
-          // document.querySelector("#elenitsa_arrow_1").play();
-
-          // document.querySelector("#elenitsa_bubble_1").style.opacity = "1";
-          // document.querySelector("#elenitsa_bubble_1").play();
-        // });
-      // let eleniTalking1 = 0
-      // document
-        // .querySelector("#elenitsa_talking_1")
-        // .addEventListener("ended", function (evt) {
-          // document.querySelector("#elenitsa_talking_1").style.opacity = "0";
-          // document.querySelector("#elenitsa_bubble_1").style.opacity = "0";
-
-          // document.querySelector("#elenitsa_idle").style.opacity = "1";
-          // console.log("u mbyll pjesa e pare e Elenitsa");
-          // socket.emit('startElenitsa', 1)
-          // startResetLoop();
-        // });
+ 
 
       socket.on("elenitsaStart", function (dataElenitsa) {
         eleniSit = true
@@ -366,19 +348,6 @@
 
     }
   });
-  // function pauseVideosAndBubbles() {
-  //   document.querySelector("#elenitsa_talking_1").pause();
-  //   document.querySelector("#elenitsa_bubble_1").pause();
-  //   document.querySelector("#elenitsa_arrow_1").pause();
-
-  //   document.querySelector("#elenitsa_arrow_1").style.opacity = "0";
-  //   document.querySelector("#elenitsa_talking_1").style.opacity = "0";
-  //   document.querySelector("#elenitsa_bubble_1").style.opacity = "0";
-  //   document.querySelector("#elenitsa_idle").style.opacity = "0";
-
-
-  // }
-
   function playGame(data, dataElenitsa, counter) {
 
     console.log("111 kaloj kushtin data: " + data + " dataElenitsa: " + dataElenitsa + " counter: " + counter);
@@ -386,59 +355,8 @@
     stopResetLoop()
 
     const elenitsaIdle = document.querySelector("#elenitsa_idle");
-    // if (elenitsaIdle.style.opacity === "1") {
-    //   elenitsaIdle.style.opacity = "0";
-    // } else {
-    //   console.log("elenitsa_idle opacity is already 0");
-    // }
-
-    // document.querySelector("#elenitsa_talking_2").style.opacity = "1";
-    // document.querySelector("#elenitsa_talking_2").play();
     playStateElenitsa(383,1034)
 
-    // document.querySelector("#elenitsa_bubble_2").style.opacity = "1";
-    // document.querySelector("#elenitsa_bubble_2").play();
-
-    // document
-    //   .querySelector("#elenitsa_talking_2")
-    //   .addEventListener("ended", function (evt) {
-        // document.querySelector("#elenitsa_talking_2").style.opacity = "0";
-        // document.querySelector("#elenitsa_bubble_2").style.opacity = "0";
-        // document.querySelector("#elenitsa_talking_3").style.opacity = "1";
-
-        // document.querySelector("#elenitsa_talking_3").play();
-
-        // document.querySelector("#elenitsa_arrow_nikolas").style.opacity = "1";
-        // document.querySelector("#elenitsa_arrow_nikolas").play();
-
-        // document.querySelector("#elenitsa_bubble_3").style.opacity = "1";
-        // document.querySelector("#elenitsa_bubble_3").play();
-      // });
-
-    // document
-      // .querySelector("#elenitsa_talking_3")
-      // .addEventListener("ended", function (evt) {
-        // document.querySelector("#elenitsa_talking_3").style.opacity = "0";
-        // document.querySelector("#elenitsa_arrow_nikolas").style.opacity = "0";
-
-        // document.querySelector("#elenitsa_bubble_3").style.opacity = "0";
-
-        // document.querySelector("#elenitsa_idle_end").style.opacity = "1";
-        // document.querySelector("#elenitsa_idle_end").play();
-      // });
-
-    // document
-    //   .querySelector("#elenitsa_idle_end")
-    //   .addEventListener("ended", function (evt) {
-    //     document.querySelector("#elenitsa_idle_end").style.opacity = "0";
-    //     document.querySelector("#elenitsa_idle").style.opacity = "1";
-
-    //     console.log("u mbyll totalisht");
-    //     var socket = io();
-    //     socket.emit("messageNikolasStep", 1);
-
-        // socket.emit("messagegame2", 0);
-      // });
   }
 
   socket.on("messageNikolasBubble", function (data) {
@@ -513,36 +431,36 @@
     stopResetLoop()
     console.log("messageEfterpiBubble: " + data);
     if (data == 1) {
-      document.querySelector("#efterpi_bubble_1").style.opacity = "1";
-      document.querySelector("#efterpi_bubble_1").play();
-
-      document
-        .querySelector("#efterpi_bubble_1")
-        .addEventListener("ended", function (evt) {
-          document.querySelector("#efterpi_bubble_1").style.opacity = "0";
-        });
+      // document.querySelector("#efterpi_bubble_1").style.opacity = "1";
+      // document.querySelector("#efterpi_bubble_1").play();
+      playStateEfterpiBubble(0,350)
+      // document
+      //   .querySelector("#efterpi_bubble_1")
+      //   .addEventListener("ended", function (evt) {
+      //     document.querySelector("#efterpi_bubble_1").style.opacity = "0";
+      //   });
     }
     if (data == 2) {
       console.log("po luhet bubble 2 ");
-      document.querySelector("#efterpi_bubble_2").style.opacity = "1";
-      document.querySelector("#efterpi_bubble_2").play();
-
-      document
-        .querySelector("#efterpi_bubble_2")
-        .addEventListener("ended", function (evt) {
-          document.querySelector("#efterpi_bubble_2").style.opacity = "0";
-        });
+      // document.querySelector("#efterpi_bubble_2").style.opacity = "1";
+      // document.querySelector("#efterpi_bubble_2").play();
+      playStateEfterpiBubble(351, 602)
+      // document
+      //   .querySelector("#efterpi_bubble_2")
+      //   .addEventListener("ended", function (evt) {
+      //     document.querySelector("#efterpi_bubble_2").style.opacity = "0";
+      //   });
     }
     if (data == 3) {
-      console.log("po luhet bubble 3 ");
-      document.querySelector("#efterpi_bubble_3").style.opacity = "1";
-      document.querySelector("#efterpi_bubble_3").play();
-
-      document
-        .querySelector("#efterpi_bubble_3")
-        .addEventListener("ended", function (evt) {
-          document.querySelector("#efterpi_bubble_3").style.opacity = "0";
-        });
+      // console.log("po luhet bubble 3 ");
+      // document.querySelector("#efterpi_bubble_3").style.opacity = "1";
+      // document.querySelector("#efterpi_bubble_3").play();
+      playStateEfterpiBubble(603,877)
+      // document
+      //   .querySelector("#efterpi_bubble_3")
+      //   .addEventListener("ended", function (evt) {
+      //     document.querySelector("#efterpi_bubble_3").style.opacity = "0";
+      //   });
     }
   });
 
@@ -620,7 +538,7 @@
         currentFrameElenitsa = idleStartElenitsa;
       }
     } else {
-      currentFrameElenitsa = currentFrameElenitsa % frameCount + 1;
+      currentFrameElenitsa = currentFrameElenitsa % frameCountElenista + 1;
       if (currentFrameElenitsa >= idleEndElenitsa) {
         currentFrameElenitsa = idleStartElenitsa;
       }
@@ -629,7 +547,7 @@
   }
     function playElenitsa() {
       if (!intervalIdElenitsa) {
-        intervalIdElenitsa = setInterval(nextFrameElenitsa, 1000 / frameRate);
+        intervalIdElenitsa = setInterval(nextFrameElenitsa, 1000 / frameRateElenista);
       }
     }
     function playStateElenitsa(startFrame, endFrame) {
@@ -644,6 +562,50 @@
       updateFrameElenitsa(currentFrameElenitsa);
       playElenitsa();
 
+      // efterpi bubbles
+      function updateFrameEfterpiBubble(frame) {
+        const paddedFrame = String(frame).padStart(5, "0");
+        // if (paddedFrame.toString() == "00587") {
+        //   console.log("frejm 587");
+        //   var socket = io();
+        //   socket.emit("EfterpiBubbleEnded", 1);
+        // }
+        sequenceImageEfterpiBubble.src = `${folderPathEfterpiBubble}Efterpi_Bubbles_PNG_GR_${paddedFrame}.png`;
+      }
+    function nextFrameEfterpiBubble() {
+      if (statePlayingEfterpiBubble) {
+        if (currentFrameEfterpiBubble < stateEndFrameEfterpiBubble) {
+          currentFrameEfterpiBubble++;
+        } else {
+          statePlayingEfterpiBubble = false;
+          currentFrameEfterpiBubble = idleStartEfterpiBubble;
+        }
+      } 
+      // else {
+      //   currentFrameEfterpiBubble = (currentFrameEfterpiBubble % frameCount) + 1;
+      //   if (currentFrameEfterpiBubble >= idleEndEfterpiBubble) {
+      //     currentFrameEfterpiBubble = idleStartEfterpiBubble;
+      //   }
+      // }
+      updateFrameEfterpiBubble(currentFrameEfterpiBubble);
+    }
+    function playEfterpiBubble() {
+      if (!intervalIdEfterpiBubble) {
+        intervalIdEfterpiBubble = setInterval(nextFrameEfterpiBubble, 1000 / frameRate);
+      }
+    }
+    function playStateEfterpiBubble(startFrame, endFrame) {
+      statePlayingEfterpiBubble = true;
+      stateStartFrameEfterpiBubble = startFrame;
+      stateEndFrameEfterpiBubble = endFrame;
+      currentFrameEfterpiBubble = stateStartFrameEfterpiBubble;
+
+      updateFrameEfterpiBubble(currentFrameEfterpiBubble);
+      playEfterpiBubble();
+    }
+
+    updateFrameEfterpiBubble(currentFrameEfterpiBubble);
+    playEfterpiBubble();
 </script>
 
 </html>
