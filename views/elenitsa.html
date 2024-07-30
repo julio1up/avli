@@ -145,6 +145,17 @@
       </div>
     </div>
     
+    <!--Efterpi Videos-->
+    <video id="efterpi_bubble_1" class="video-center efterpi-bubble efterpi-bubble-third" muted preload="auto">
+      <source id="efterpi_bubble_source_1" src="/EfterpiBubbles/Efterpi_Bubble_1_gr" type="video/webm" />
+    </video>
+    <video id="efterpi_bubble_2" class="video-center efterpi-bubble" style="bottom: 0px;" muted preload="auto">
+      <source id="efterpi_bubble_source_2" src="/EfterpiBubbles/Efterpi_Bubble_2_gr" type="video/webm" />
+    </video>
+    <video id="efterpi_bubble_3" class="video-center efterpi-bubble efterpi-bubble-third" muted preload="auto">
+      <source id="efterpi_bubble_source_3" src="/EfterpiBubbles/Efterpi_Bubble_3_gr" type="video/webm" />
+    </video>
+    
   </section>
   <!-- <button id="startfunction"
     onclick="playGame(1,'eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw1Myw1OCwxMTIsMTA4LDk3LDEyMSwxM119',1)"
@@ -208,7 +219,7 @@
     const sequenceImageEfterpiBubble = document.getElementById("sequenceImageEfterpiBubble");
     const folderPathEfterpiBubble = "/PngSequenceImg/Efterpi/Efterpi_Bubbles/";
     const frameCount = 877;
-    const frameRate = 30;
+    const frameRate = 25;
 
     let currentFrameEfterpiBubble = 0;
     let intervalIdEfterpiBubble = null;
@@ -374,20 +385,57 @@
     }
   });
 
+  // socket.on("messageEfterpiBubble", function (data) {
+  //   resetInactivityTimer()
+  //   console.log("messageEfterpiBubble: " + data);
+  //   if (data == 1) {
+  //     playStateEfterpiBubble(0,350)
+  //   }
+  //   if (data == 2) {
+  //     console.log("po luhet bubble 2 ");
+  //     playStateEfterpiBubble(351, 602)
+  //   }
+  //   if (data == 3) {
+  //     playStateEfterpiBubble(603,877)
+  //   }
+  // });
   socket.on("messageEfterpiBubble", function (data) {
-    resetInactivityTimer()
+    // resetInactivityTimer()
     console.log("messageEfterpiBubble: " + data);
     if (data == 1) {
-      playStateEfterpiBubble(0,350)
+      document.querySelector("#efterpi_bubble_1").style.opacity = "1";
+      document.querySelector("#efterpi_bubble_1").play();
+
+      document
+        .querySelector("#efterpi_bubble_1")
+        .addEventListener("ended", function (evt) {
+          document.querySelector("#efterpi_bubble_1").style.opacity = "0";
+        });
     }
     if (data == 2) {
       console.log("po luhet bubble 2 ");
-      playStateEfterpiBubble(351, 602)
+      document.querySelector("#efterpi_bubble_2").style.opacity = "1";
+      document.querySelector("#efterpi_bubble_2").play();
+
+      document
+        .querySelector("#efterpi_bubble_2")
+        .addEventListener("ended", function (evt) {
+          document.querySelector("#efterpi_bubble_2").style.opacity = "0";
+        });
     }
     if (data == 3) {
-      playStateEfterpiBubble(603,877)
+      console.log("po luhet bubble 3 ");
+      document.querySelector("#efterpi_bubble_3").style.opacity = "1";
+      document.querySelector("#efterpi_bubble_3").play();
+
+      document
+        .querySelector("#efterpi_bubble_3")
+        .addEventListener("ended", function (evt) {
+          document.querySelector("#efterpi_bubble_3").style.opacity = "0";
+        });
     }
   });
+
 
   socket.on("resetGameEleni", function (data) {
     if (data == 1) {
