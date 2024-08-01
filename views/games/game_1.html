@@ -69,25 +69,40 @@
             width: 100%;
         }
 
-        button{
+        .start-button{
             background-color: #5584EE;
             filter: drop-shadow(7px 7px 11px rgba(0, 0, 0, 0.25));
+            
+            border: none;
+            border-radius: 25px;
+            padding: 85px 70px;
+            cursor: pointer;
+        }
+        .text-inside-start{
+            color: #FFFFFF;
             font-family: 'PFCosmonutProRegular';
             font-style: normal;
             font-weight: 700;
             font-size: 80px;
             line-height: 80px;
             text-align: center;
-            color: #FFFFFF;
+            margin: 0;
+        }
+        .flag-buttons{
+            background: none;
             border: none;
-            border-radius: 25px;
-            padding: 85px 70px;
+            padding: 0;
             cursor: pointer;
         }
-
-        button:focus {
+        .start-button:focus {
             background-color: rgba(0, 255, 64, 0.74);
             color: white;
+        }
+        .btn-flag-container{
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 30px;
+            margin: 30px 30px 0 0;
         }
 
         #personage{
@@ -120,24 +135,35 @@
 <body>
     <div class="container">
         <div id="start-step">
-            <h2 class="color_blue">Ένα νερό κυρά Βαγγελιώ...</h2>
-            <h2 class="color_pink">
+            <div class="btn-flag-container">
+                <button onclick="ChangeLanguageGameOne(`GR`)" class="flag-buttons" >
+                    <img width="50px" src="/images/GreekFlag.png" alt="EngFlag">
+                </button>
+                <button onclick="ChangeLanguageGameOne(`EN`)" class="flag-buttons">
+                    <img width="50px" src="/images/EngFlag.png" alt="GreekFlag">
+                </button>
+            </div>
+            <h2 class="color_blue" id="blue-text">Ένα νερό κυρά Βαγγελιώ...</h2>
+            <h2 class="color_pink" id="pink-text">
                 Η κυρά Βαγγελιώ μένει <br>
                 σε ένα από τα σπίτια της γειτονιάς.
             </h2>
             <div id="buttonContent" class="button_container">
-                <button id="1" class="btn-start-game">
-                    Ξεκίνα το παιχνίδι
+                <button clas id="1" class="start-button">
+                    <p id="button-text" class="text-inside-start">
+                        Ξεκίνα το παιχνίδι
+                    </p>
                 </button>
             </div>
             <img id="bubble" src="/images/games/bubble_1.png" />
             <img id="personage" src="/images/games/personage_1.png" />
         </div>
         <div id="final-step">
-            <h2 class="color_blue">
+            <h2 class="color_blue" id="continue-text">
                 Το παιχνίδι είναι σε εξέλιξη
             </h2>
         </div>
+
         
     </div>
     <script src="/socket.io/socket.io.js"></script>
@@ -151,8 +177,42 @@
 //     });
 // });
 
+        window.addEventListener('load', () => {
+            let language = localStorage.getItem('languageGameOne');
+            if(!language){
+                localStorage.setItem('languageGameOne', "GR");
+                language = "GR"
+            }
+            if (language) {
+                ChangeLanguageGameOne(language);
+            }
+        });
+
+        function ChangeLanguageGameOne(language){  
+            localStorage.setItem('languageGameOne', language);
+            // You can trigger a custom event to handle the change in the current tab immediately
+            window.dispatchEvent(new Event('storage'));
+            UpdateInnerText(language)
+        }
+
+        function UpdateInnerText(lang){
+            if(lang == "GR"){
+                document.getElementById('button-text').innerHTML = "Ξεκίνα το παιχνίδι"
+                document.getElementById('blue-text').innerHTML = "Ένα νερό κυρά Βαγγελιώ..."
+                document.getElementById('pink-text').innerHTML = "Η κυρά Βαγγελιώ μένει <br>σε ένα από τα σπίτια της γειτονιάς."
+                document.getElementById('continue-text').innerHTML = "Το παιχνίδι είναι σε εξέλιξη"
+                document.getElementById('bubble').src = "/images/games/bubble_1.png"
+            } else if(lang == "EN"){
+                document.getElementById('button-text').innerHTML = "Start the game"
+                document.getElementById('blue-text').innerHTML = "A bucket of water for Mrs. Vangelio"
+                document.getElementById('pink-text').innerHTML = "Mrs. Vangelio is living <br>in one of the houses in the neighbourhood"
+                document.getElementById('continue-text').innerHTML = "The game is in progress"
+                document.getElementById('bubble').src = "/images/games/bubble_1_Eng.png"
+            }
+            
+        }
         // STOP ZOOM IN OR ZOOM OUT!
-        let myButton = document.querySelector(".btn-start-game");
+        let myButton = document.querySelector(".start-button");
         myButton.addEventListener('click', function(event) {
             play_game();
             console.log("u klikua")

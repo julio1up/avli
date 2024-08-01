@@ -240,6 +240,8 @@
     let idleStart = 0;
     let idleEnd = 121;
 
+    let lang = ""
+
     /* variablat per PNG Seqeunce Fwtografos */
     const sequenceImageFwtografos = document.getElementById('sequenceImageFwtografos');
     const folderPathFwtografos = '/PngSequenceImg/Fwtografos/';
@@ -274,6 +276,33 @@
 
 
     const socket = io();
+
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'languageGameOne') {
+        const language = localStorage.getItem('languageGameOne');
+        if (language) {
+          // Update the game language
+          if(language == "GR"){
+            lang = "_GR"
+          }else {
+            lang = ""
+          }
+          console.log(`Language changed to: ${language}`);
+        }
+      }
+    });
+    window.addEventListener('load', () => {
+      const language = localStorage.getItem('languageGameOne');
+      if (language) {
+        if(language == "GR"){
+          lang = "_GR"
+        }else {
+          lang = ""
+        }
+      }
+    });
+
+
 
     function handleVideoPlay(videoElement) {
       var playPromise = videoElement.play();
@@ -518,7 +547,7 @@
             socket.emit('messageGiagia_Talking_5', 1);
           }
 
-          sequenceImagePagopolis.src = `${folderPathPagopolis}Pagopolis_PNG_GR_${paddedFrame}.png`;
+          sequenceImagePagopolis.src = `${folderPathPagopolis}Pagopolis_PNG${lang}_${paddedFrame}.png`;
       }
     function nextFramePagopolis() {
           if (statePlayingPagopolis) {

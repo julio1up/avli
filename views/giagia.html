@@ -139,9 +139,9 @@
         </div>
       </div>
     </section>
-    <!-- <button id="startfunction"
+    <button id="startfunction"
         onclick="handleSceneKnock('eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw0OSw1OCwxMTIsMTA4LDk3LDEyMSwxM119')"
-        style="background-color: red; position: absolute; z-index: 99999999999;">START HERE----------------------------------</button> -->
+        style="background-color: red; position: absolute; z-index: 99999999999;">START HERE----------------------------------</button>
 
         <!-- <button style="background-color: red; position: absolute;  top: 100px; z-index: 99999999999;" onclick="GAMESTATE()">GAME STATE</button> -->
   <script src="/socket.io/socket.io.js"></script>
@@ -222,6 +222,9 @@
   </script>
   <script>
     const socket = io();
+
+    let lang = ""
+
     let startgame1 = 0;
 
     /* variablat per PNG Seqeunce Giagia */
@@ -300,6 +303,32 @@
       }
     });
 
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'languageGameOne') {
+        const language = localStorage.getItem('languageGameOne');
+        if (language) {
+          // Update the game language
+          if(language == "GR"){
+            lang = "_GR"
+          }else {
+            lang = ""
+          }
+          console.log(`Language changed to: ${language}`);
+        }
+      }
+    });
+    window.addEventListener('load', () => {
+      const language = localStorage.getItem('languageGameOne');
+      if (language) {
+        if(language == "GR"){
+          lang = "_GR"
+        }else {
+          lang = ""
+        }
+      }
+    });
+
+
     socket.on("resetGameForGiagia", function (data) {
       if (data == 1) {
         console.log("a futetet ktu?");
@@ -309,6 +338,7 @@
     //ka bere start
     socket.on("messagegame1", function (data) {
       gameStartTime = new Date();
+
       if (data == 1) {
         socket.emit("gameHasStarted", 1);
         document.querySelector("#knock_here").style.opacity = "1";
@@ -420,7 +450,7 @@
 
         isknocked = false;
       }
-      sequenceImageGiagia.src = `${folderPathGiagia}Giagia_PNG_GR_${paddedFrame}.png`;
+      sequenceImageGiagia.src = `${folderPathGiagia}Giagia_PNG${lang}_${paddedFrame}.png`;
     }
     function nextFrameGiagia() {
       if (statePlayingGiagia) {

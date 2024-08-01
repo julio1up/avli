@@ -122,29 +122,31 @@
           />
         </div>
       </div>
-      <!-- <button
+      <button
         onclick="simulateGameStart()"
         id="startGame"
         style="position: absolute; left: 0; z-index: 9999999999999999999999999"
       >
         Start Game
-      </button> -->
+      </button>
     </section>
   </body>
 
   <script src="/socket.io/socket.io.js"></script>
 
   <script>
+        let lang = ""
+
     let startVideo;
     // document.getElementById("startGame").addEventListener("click", simulateGameStart);
-    // function simulateGameStart() {
-    //   console.log("papu but");
-    //   socket.emit(
-    //     "scene4",
-    //     "eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw1Miw1OCwxMTIsMTA4LDk3LDEyMSwxM119"
-    //   ); // Simulate game start event
-    //   startVideo = 0;
-    // }
+    function simulateGameStart() {
+      console.log("papu but");
+      socket.emit(
+        "scene4",
+        "eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw1Miw1OCwxMTIsMTA4LDk3LDEyMSwxM119"
+      ); // Simulate game start event
+      startVideo = 0;
+    }
 
     /* variablat per PNG Seqeunce Pappous */
     const sequenceImagePappous = document.getElementById(
@@ -203,6 +205,32 @@
         resetDocument();
       }
     });
+
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'languageGameOne') {
+        const language = localStorage.getItem('languageGameOne');
+        if (language) {
+          // Update the game language
+          if(language == "GR"){
+            lang = "_GR"
+          }else {
+            lang = ""
+          }
+          console.log(`Language changed to: ${language}`);
+        }
+      }
+    });
+    window.addEventListener('load', () => {
+      const language = localStorage.getItem('languageGameOne');
+      if (language) {
+        if(language == "GR"){
+          lang = "_GR"
+        }else {
+          lang = ""
+        }
+      }
+    });
+
     // document.querySelector("#Pappous_idle").load();
     // // document.querySelector("#Pappous_idle").play();
     // document.querySelector("#Pappous_idle_to_talk").load();
@@ -274,7 +302,7 @@
         socket.emit("pagopolisStart", 1);
       }
       //   console.log(paddedFrame.toString())
-      sequenceImagePappous.src = `${folderPathPappous}Pappous_PNG_GR_${paddedFrame}.png`;
+      sequenceImagePappous.src = `${folderPathPappous}Pappous_PNG${lang}_${paddedFrame}.png`;
     }
     function nextFramePappous() {
       if (statePlayingPappous) {
