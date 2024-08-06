@@ -240,8 +240,8 @@
     let idleStart = 0;
     let idleEnd = 121;
 
-    let lang = ""
-
+    let langOne = ""
+    let langThree = ""
     /* variablat per PNG Seqeunce Fwtografos */
     const sequenceImageFwtografos = document.getElementById('sequenceImageFwtografos');
     const folderPathFwtografos = '/PngSequenceImg/Fwtografos/';
@@ -283,23 +283,46 @@
         if (language) {
           // Update the game language
           if(language == "GR"){
-            lang = "_GR"
+            langOne = "_GR"
           }else {
-            lang = ""
+            langOne = ""
           }
           console.log(`Language changed to: ${language}`);
         }
       }
-    });
-    window.addEventListener('load', () => {
-      const language = localStorage.getItem('languageGameOne');
-      if (language) {
-        if(language == "GR"){
-          lang = "_GR"
-        }else {
-          lang = ""
+      if (event.key === 'languageGameThree') {
+        const language = localStorage.getItem('languageGameThree');
+        if (language) {
+          // Update the game language
+          if(language == "GR"){
+            langThree = "_GR"
+          }else {
+            langThree = ""
+          }
+          console.log(`Language Three changed to: ${language}`);
         }
       }
+
+    });
+    window.addEventListener('load', () => {
+      const languageOne = localStorage.getItem('languageGameOne');
+      if (languageOne) {
+        if(languageOne == "GR"){
+          langOne = "_GR"
+        }else {
+          langOne = ""
+        }
+      }
+
+      const languageThree = localStorage.getItem('languageGameThree');
+      if (languageThree) {
+        if(languageThree == "GR"){
+          langThree = "_GR"
+        }else {
+          langThree = ""
+        }
+      }
+
     });
 
 
@@ -433,7 +456,7 @@
             socket.emit('messageRaftis_End', 1);
           }
         //   console.log(paddedFrame.toString())
-          sequenceImageRaftis.src = `${folderPath}Raftis_PNG_GR_${paddedFrame}.png`;
+          sequenceImageRaftis.src = `${folderPath}Raftis_PNG${langThree}_${paddedFrame}.png`;
       }
     function nextFrameRaftis() {
           if (statePlaying) {
@@ -496,7 +519,7 @@
             socket.emit('messageFwtografos_End', 1);
             socket.emit('resetGamePhoto', 1);
           }
-          sequenceImageFwtografos.src = `${folderPathFwtografos}Fwtografos_PNG_GR_${paddedFrame}.png`;
+          sequenceImageFwtografos.src = `${folderPathFwtografos}Fwtografos_PNG${langThree}_${paddedFrame}.png`;
       }
     function nextFrameFwtografos() {
           if (statePlayingFwtografos) {
@@ -547,7 +570,7 @@
             socket.emit('messageGiagia_Talking_5', 1);
           }
 
-          sequenceImagePagopolis.src = `${folderPathPagopolis}Pagopolis_PNG${lang}_${paddedFrame}.png`;
+          sequenceImagePagopolis.src = `${folderPathPagopolis}Pagopolis_PNG${langOne}_${paddedFrame}.png`;
       }
     function nextFramePagopolis() {
           if (statePlayingPagopolis) {

@@ -69,7 +69,7 @@
             width: 100%;
         }
 
-        button {
+        .btn-start-game {
             background-color: #5584EE;
             filter: drop-shadow(7px 7px 11px rgba(0, 0, 0, 0.25));
             font-family: 'PFCosmonutProRegular';
@@ -85,7 +85,7 @@
             cursor: pointer;
         }
 
-        button:focus {
+        .btn-start-game:focus {
             background-color: rgba(0, 255, 64, 0.74);
             color: white;
         }
@@ -111,6 +111,31 @@
             font-size: 90px;
             line-height: 90px;
         }
+        .btn-flag-container{
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 30px;
+            margin: 30px 30px 0 0;
+        }
+        .flag-buttons{
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+        .text-inside-start{
+            color: #FFFFFF;
+            font-family: 'PFCosmonutProRegular';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 80px;
+            line-height: 80px;
+            text-align: center;
+            margin: 0;
+        }
+
+
+
 
         /* button.btn-start-game {
             -webkit-touch-callout: none;
@@ -122,14 +147,24 @@
 <body>
     <div class="container">
         <div id="start-step">
-            <h2 class="color_blue">Τίνος είναι κυρ’ Αντώνη ο ντουλαμάς;</h2>
-            <h2 class="color_pink">
+            <div class="btn-flag-container">
+                <button onclick="ChangeLanguageGameThree(`GR`)" class="flag-buttons" >
+                    <img width="50px" src="/images/GreekFlag.png" alt="EngFlag">
+                </button>
+                <button onclick="ChangeLanguageGameThree(`EN`)" class="flag-buttons">
+                    <img width="50px" src="/images/EngFlag.png" alt="GreekFlag">
+                </button>
+            </div>
+            <h2 class="color_blue" id="blue-text">Τίνος είναι κυρ’ Αντώνη ο ντουλαμάς;</h2>
+            <h2 class="color_pink" id="pink-text">
                 Ο κυρ Αντώνης εργάζεται <br>
                 σε ένα από τα κτήρια της γειτονιάς.
             </h2>
             <div id="buttonContent" class="button_container">
                 <button id="1" class="btn-start-game" onClick="play_game(this.id)">
-                    Ξεκίνα το παιχνίδι
+                    <p id="button-text" class="text-inside-start">
+                        Ξεκίνα το παιχνίδι
+                    </p>
                 </button>
             </div>
             <img id="bubble" src="/images/games/bubble_2.png" />
@@ -137,7 +172,7 @@
             <img id="personage" src="/images/games/personage_2.png" />
         </div>
         <div id="final-step">
-            <h2 class="color_blue">
+            <h2 class="color_blue" id="continue-text">
                 Το παιχνίδι είναι σε εξέλιξη
             </h2>
         </div>
@@ -154,6 +189,41 @@
         //         event.preventDefault(); // Prevent default touch behavior
         //     });
         // });
+
+        window.addEventListener('load', () => {
+            let language = localStorage.getItem('languageGameThree');
+            if(!language){
+                localStorage.setItem('languageGameThree', "GR");
+                language = "GR"
+            }
+            if (language) {
+                ChangeLanguageGameThree(language);
+            }
+        });
+
+        function ChangeLanguageGameThree(language){  
+            localStorage.setItem('languageGameThree', language);
+            // You can trigger a custom event to handle the change in the current tab immediately
+            window.dispatchEvent(new Event('storage'));
+            UpdateInnerText(language)
+        }
+
+        function UpdateInnerText(lang){
+            if(lang == "GR"){
+                document.querySelector(".btn-start-game").innerHTML = "Ξεκίνα το παιχνίδι"
+                document.getElementById('blue-text').innerHTML = "Τίνος είναι κυρ’ Αντώνη ο ντουλαμάς..."
+                document.getElementById('pink-text').innerHTML = "Ο κυρ Αντώνης εργάζεται<br>σε ένα από τα κτήρια της γειτονιάς."
+                document.getElementById('continue-text').innerHTML = "Το παιχνίδι είναι σε εξέλιξη"
+                document.getElementById('bubble').src = "/images/games/bubble_3.png"
+            } else if(lang == "EN"){
+                document.querySelector(".btn-start-game").innerHTML = "Start the game"
+                document.getElementById('blue-text').innerHTML = "Whose doulamas (overcoat) is it, Mr. Antonis?"
+                document.getElementById('pink-text').innerHTML = "Mr. Antonis is working<br>in one of neighbourhood’s buildings."
+                document.getElementById('continue-text').innerHTML = "The game is in progress"
+                document.getElementById('bubble').src = "/images/games/bubble_3_Eng.png"
+            }
+            
+        }
 
         // STOP ZOOM IN OR ZOOM OUT!
         let myButton = document.querySelector(".btn-start-game");

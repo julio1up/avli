@@ -114,20 +114,28 @@
 
     <!--Nikolas Videos-->
     <video id="nikolas_bubble_1" class="video-center talking-bubble" muted preload="auto">
-      <source id="nikolas_bubble_source_1" src="/NikolasBubbles/Nikolas_Bubble_1_gr" type="video/webm" />
+      <source id="nikolas_bubble_source_1" src="/NikolasBubbles/Nikolas_Bubble_1_GR" type="video/webm" />
+      <source id="nikolas_bubble_source_1_EN" src="/NikolasBubbles/Nikolas_Bubble_1" type="video/webm" />
+
     </video>
     <video id="nikolas_bubble_2" class="video-center talking-bubble" muted preload="auto">
-      <source id="nikolas_bubble_source_2" src="/NikolasBubbles/Nikolas_Bubble_2_gr" type="video/webm" />
+      <source id="nikolas_bubble_source_2" src="/NikolasBubbles/Nikolas_Bubble_2_GR" type="video/webm" />
+      <source id="nikolas_bubble_source_2_EN" src="/NikolasBubbles/Nikolas_Bubble_2" type="video/webm" />
     </video>
     <video id="nikolas_bubble_3" class="video-center talking-bubble" muted preload="auto">
-      <source id="nikolas_bubble_source_3" src="/NikolasBubbles/Nikolas_Bubble_3_gr" type="video/webm" />
+      <source id="nikolas_bubble_source_3" src="/NikolasBubbles/Nikolas_Bubble_3_GR" type="video/webm" />
+      <source id="nikolas_bubble_source_3_EN" src="/NikolasBubbles/Nikolas_Bubble_3" type="video/webm" />
+
     </video>
 
     <video id="nikolas_bubble_4" class="video-center talking-bubble" muted preload="auto">
-      <source id="nikolas_bubble_source_4" src="/NikolasBubbles/Nikolas_Bubble_4_gr" type="video/webm" />
+      <source id="nikolas_bubble_source_4" src="/NikolasBubbles/Nikolas_Bubble_4_GR" type="video/webm" />
+      <source id="nikolas_bubble_source_4_EN" src="/NikolasBubbles/Nikolas_Bubble_4" type="video/webm" />
+
     </video>
     <video id="nikolas_bubble_5" class="video-center talking-bubble" muted preload="auto">
-      <source id="nikolas_bubble_source_5" src="/NikolasBubbles/Nikolas_Bubble_5_gr" type="video/webm" />
+      <source id="nikolas_bubble_source_5" src="/NikolasBubbles/Nikolas_Bubble_5_GR" type="video/webm" />
+      <source id="nikolas_bubble_source_5_EN" src="/NikolasBubbles/Nikolas_Bubble_5" type="video/webm" />
     </video>
     <video id="nikolas_arrow_efterpi" class="video-center talking-bubble" muted preload="auto">
       <source id="nikolas_arrow_source_efterpi" src="/NikolasBubbles/Nikolas_Arrow_to_Efterpi" type="video/webm" />
@@ -147,13 +155,16 @@
     
     <!--Efterpi Videos-->
     <video id="efterpi_bubble_1" class="video-center efterpi-bubble efterpi-bubble-third" muted preload="auto">
-      <source id="efterpi_bubble_source_1" src="/EfterpiBubbles/Efterpi_Bubble_1_gr" type="video/webm" />
+      <source id="efterpi_bubble_source_1" src="/EfterpiBubbles/Efterpi_Bubble_1_GR" type="video/webm" />
+      <source id="efterpi_bubble_source_1_EN" src="/EfterpiBubbles/Efterpi_Bubble_1" type="video/webm" />
     </video>
     <video id="efterpi_bubble_2" class="video-center efterpi-bubble" style="bottom: 0px;" muted preload="auto">
-      <source id="efterpi_bubble_source_2" src="/EfterpiBubbles/Efterpi_Bubble_2_gr" type="video/webm" />
+      <source id="efterpi_bubble_source_2" src="/EfterpiBubbles/Efterpi_Bubble_2_GR" type="video/webm" />
+      <source id="efterpi_bubble_source_2_EN" src="/EfterpiBubbles/Efterpi_Bubble_2" type="video/webm" />
     </video>
     <video id="efterpi_bubble_3" class="video-center efterpi-bubble efterpi-bubble-third" muted preload="auto">
-      <source id="efterpi_bubble_source_3" src="/EfterpiBubbles/Efterpi_Bubble_3_gr" type="video/webm" />
+      <source id="efterpi_bubble_source_3" src="/EfterpiBubbles/Efterpi_Bubble_3_GR" type="video/webm" />
+      <source id="efterpi_bubble_source_3_EN" src="/EfterpiBubbles/Efterpi_Bubble_3" type="video/webm" />
     </video>
     
   </section>
@@ -170,6 +181,7 @@
 <script>
   // let timeoutID
   let eleniSit = false
+  let lang = ""
 
   // variabla per timerin e ri
   let inactivityTime = 0;
@@ -234,6 +246,97 @@
   // document.querySelector("#efterpi_bubble_1").style.opacity = "1";
   // document.querySelector("#efterpi_bubble_1").play();
 
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'languageGameTwo') {
+      const language = localStorage.getItem('languageGameTwo');
+      if (language) {
+        // Update the game language
+        if(language == "GR"){
+          lang = "_GR"
+          document.getElementById("efterpi_bubble_1").src = '/EfterpiBubbles/Efterpi_Bubble_1_GR'
+          document.getElementById("efterpi_bubble_2").src = '/EfterpiBubbles/Efterpi_Bubble_2_GR'
+          document.getElementById("efterpi_bubble_3").src = '/EfterpiBubbles/Efterpi_Bubble_3_GR'
+          document.getElementById("nikolas_bubble_1").src = '/NikolasBubbles/Nikolas_Bubble_1_GR'
+          document.getElementById("nikolas_bubble_2").src = '/NikolasBubbles/Nikolas_Bubble_2_GR'
+          document.getElementById("nikolas_bubble_3").src = '/NikolasBubbles/Nikolas_Bubble_3_GR'
+          document.getElementById("nikolas_bubble_4").src = '/NikolasBubbles/Nikolas_Bubble_4_GR'
+          document.getElementById("nikolas_bubble_5").src = '/NikolasBubbles/Nikolas_Bubble_5_GR'
+        }else {
+          lang = ""
+          document.getElementById("efterpi_bubble_1").src = '/EfterpiBubbles/Efterpi_Bubble_1'
+          document.getElementById("efterpi_bubble_2").src = '/EfterpiBubbles/Efterpi_Bubble_2'
+          document.getElementById("efterpi_bubble_3").src = '/EfterpiBubbles/Efterpi_Bubble_3'
+          document.getElementById("nikolas_bubble_1").src = '/NikolasBubbles/Nikolas_Bubble_1'
+          document.getElementById("nikolas_bubble_2").src = '/NikolasBubbles/Nikolas_Bubble_2'
+          document.getElementById("nikolas_bubble_3").src = '/NikolasBubbles/Nikolas_Bubble_3'
+          document.getElementById("nikolas_bubble_4").src = '/NikolasBubbles/Nikolas_Bubble_4'
+          document.getElementById("nikolas_bubble_5").src = '/NikolasBubbles/Nikolas_Bubble_5'
+
+        }
+
+        // for (let i = 1; i <= 3; i++) {
+        //     let video = document.getElementById('nikolas_bubble_source_' + i);
+        //     let source = video.getElementsByTagName('source')[0];
+        //     source.src = '/NikolasBubbles/Nikolas_Bubble_' + i + lang + '.webm';
+        //     video.load(); // Reload the video with the new source
+        //     console.log('/nikolas_bubble_source_' + i + lang + '.webm')
+
+        // }
+        // for (let i = 1; i <= 5; i++) {
+        //     let video = document.getElementById('nikolas_bubble_' + i);
+        //     if (video) {
+        //         let source = video.querySelector('source');
+        //         if (source) {
+        //             source.src = '/NikolasBubbles/Nikolas_Bubble_' + i + lang + '.webm';
+        //             video.load(); // Reload the video with the new source
+        //         } else {
+        //             console.error('Source element not found for video' + i);
+        //         }
+        //     } else {
+        //         console.error('Video element not found: video' + i);
+        //     }
+        // }
+
+        // for (let i = 1; i <= 5; i++) {
+        //     let video = document.getElementById('nikolas_bubble_' + i);
+        //     let source = video.getElementsByTagName('source')[0];
+        //     source.src = '/nikolas_bubble_source_' + i + lang + '.webm';
+        //     video.load(); // Reload the video with the new source
+        //     console.log('/nikolas_bubble_source_' + i + lang + '.webm')
+        // }
+
+        // document.getElementById("efterpi_bubble_source_1").src=`/EfterpiBubbles/Efterpi_Bubble_1${lang}.webm`
+        // document.getElementById("efterpi_bubble_source_2").src=`/EfterpiBubbles/Efterpi_Bubble_2${lang}.webm`
+        // document.getElementById("efterpi_bubble_source_3").src=`/EfterpiBubbles/Efterpi_Bubble_3${lang}.webm`
+        // document.getElementById("nikolas_bubble_source_1").src=`/NikolasBubbles/Nikolas_Bubble_1${lang}.webm`
+        // document.getElementById("nikolas_bubble_source_2").src=`/NikolasBubbles/Nikolas_Bubble_2${lang}.webm`
+        // document.getElementById("nikolas_bubble_source_3").src=`/NikolasBubbles/Nikolas_Bubble_3${lang}.webm`
+        // document.getElementById("nikolas_bubble_source_4").src=`/NikolasBubbles/Nikolas_Bubble_4${lang}.webm`
+        // document.getElementById("nikolas_bubble_source_5").src=`/NikolasBubbles/Nikolas_Bubble_5${lang}.webm`
+
+        
+        
+        
+        
+        
+        
+        
+        
+
+        console.log(`Language changed to: ${language}`);
+      }
+    }
+  })
+    window.addEventListener('load', () => {
+      const language = localStorage.getItem('languageGameTwo');
+      if (language) {
+        if(language == "GR"){
+          lang = "_GR"
+        }else {
+          lang = ""
+        }
+      }
+    });
 
   function resetGame() {
     console.log("loja elenit per reset")
@@ -499,7 +602,7 @@
     //   socket.emit('playIceGame', 1);
     //   socket.emit('playMinigamePagopoli', 1);
     // }
-    sequenceImageElenitsa.src = `${folderPathElenitsa}Elenitsa_PNG_GR_${paddedFrame}.png`;
+    sequenceImageElenitsa.src = `${folderPathElenitsa}Elenitsa_PNG${lang}_${paddedFrame}.png`;
   }
 
   function nextFrameElenitsa() {
@@ -543,7 +646,7 @@
     //   var socket = io();
     //   socket.emit("EfterpiBubbleEnded", 1);
     // }
-    sequenceImageEfterpiBubble.src = `${folderPathEfterpiBubble}Efterpi_Bubbles_PNG_GR_${paddedFrame}.png`;
+    sequenceImageEfterpiBubble.src = `${folderPathEfterpiBubble}Efterpi_Bubbles_PNG${lang}_${paddedFrame}.png`;
   }
   function nextFrameEfterpiBubble() {
     if (statePlayingEfterpiBubble) {

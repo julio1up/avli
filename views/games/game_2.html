@@ -68,7 +68,7 @@
             width: 100%;
         }
 
-        button{
+        .btn-start-game{
             background-color: #5584EE;
             filter: drop-shadow(7px 7px 11px rgba(0, 0, 0, 0.25));
             font-family: 'PFCosmonutProRegular';
@@ -83,8 +83,18 @@
             padding: 85px 70px;
             cursor: pointer;
         }
+        .text-inside-start{
+            color: #FFFFFF;
+            font-family: 'PFCosmonutProRegular';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 80px;
+            line-height: 80px;
+            text-align: center;
+            margin: 0;
+        }
 
-        button:focus {
+        .btn-start-game:focus {
             background-color: rgba(0, 255, 64, 0.74);
             color: white;
         }
@@ -110,6 +120,20 @@
             font-size: 90px;
             line-height: 90px;
         }
+        .flag-buttons{
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .btn-flag-container{
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 30px;
+            margin: 30px 30px 0 0;
+        }
+
         /* button.btn-start-game {
   -webkit-touch-callout: none; 
 } */
@@ -119,21 +143,31 @@
 <body>
     <div class="container">
         <div id="start-step">
-            <h2 class="color_blue">Πού ‘ναι η μπάλα, πού ‘ναι και τ’ αλογάκι...</h2>
-            <h2 class="color_pink">
+            <div class="btn-flag-container">
+                <button onclick="ChangeLanguageGameTwo(`GR`)" class="flag-buttons" >
+                    <img width="50px" src="/images/GreekFlag.png" alt="EngFlag">
+                </button>
+                <button onclick="ChangeLanguageGameTwo(`EN`)" class="flag-buttons">
+                    <img width="50px" src="/images/EngFlag.png" alt="GreekFlag">
+                </button>
+            </div>
+            <h2 class="color_blue" id="blue-text">Πού ‘ναι η μπάλα, πού ‘ναι και τ’ αλογάκι...</h2>
+            <h2 class="color_pink" id="pink-text">
                 Η Ελενίτσα μένει<br>
                 σε ένα από τα κτήρια της γειτονιάς.
             </h2>
             <img id="bubble" src="/images/games/bubble_3.png" />
             <div id="buttonContent" class="button_container">
                 <button  id="1" class="btn-start-game" onClick="play_game(this.id)">
-                    Ξεκίνα το παιχνίδι
+                    <p id="button-text" class="text-inside-start">
+                        Ξεκίνα το παιχνίδι
+                    </p>
                 </button>
             </div>
             <img id="personage" src="/images/games/personage_3.png" />
         </div>
-        <div id="final-step">
-            <h2 class="color_blue">
+        <div id="final-step" >
+            <h2 class="color_blue" id="continue-text">
                 Το παιχνίδι είναι σε εξέλιξη
             </h2>
         </div>
@@ -149,6 +183,42 @@
 //         event.preventDefault(); // Prevent default touch behavior
 //     });
 // });
+
+        window.addEventListener('load', () => {
+            let language = localStorage.getItem('languageGameTwo');
+            if(!language){
+                localStorage.setItem('languageGameTwo', "GR");
+                language = "GR"
+            }
+            if (language) {
+                ChangeLanguageGameTwo(language);
+            }
+        });
+
+        function ChangeLanguageGameTwo(language){  
+            localStorage.setItem('languageGameTwo', language);
+            // You can trigger a custom event to handle the change in the current tab immediately
+            window.dispatchEvent(new Event('storage'));
+            UpdateInnerText(language)
+        }
+
+        function UpdateInnerText(lang){
+            if(lang == "GR"){
+                document.getElementById('button-text').innerHTML = "Ξεκίνα το παιχνίδι"
+                document.getElementById('blue-text').innerHTML = "Πού ‘ναι η μπάλα, πού ‘ναι και τ’ αλογάκι..."
+                document.getElementById('pink-text').innerHTML = "Η Ελενίτσα μένει<br>σε ένα από τα κτήρια της γειτονιάς."
+                document.getElementById('continue-text').innerHTML = "Το παιχνίδι είναι σε εξέλιξη"
+                document.getElementById('bubble').src = "/images/games/bubble_3.png"
+            } else if(lang == "EN"){
+                document.getElementById('button-text').innerHTML = "Start the game"
+                document.getElementById('blue-text').innerHTML = "Where’s the ball, and where is the toy horse..."
+                document.getElementById('pink-text').innerHTML = "Elenitsa is living<br>in one of neighbourhood’s buildings."
+                document.getElementById('continue-text').innerHTML = "The game is in progress"
+                document.getElementById('bubble').src = "/images/games/bubble_3_Eng.png"
+            }
+            
+        }
+
 
         // STOP ZOOM IN OR ZOOM OUT!
         let myButton = document.querySelector(".btn-start-game");
