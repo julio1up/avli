@@ -122,7 +122,7 @@
       <source id="nikolas_bubble_source_2" src="/NikolasBubbles/Nikolas_Bubble_2_GR" type="video/webm" />
       <source id="nikolas_bubble_source_2_EN" src="/NikolasBubbles/Nikolas_Bubble_2" type="video/webm" />
     </video>
-    <video id="nikolas_bubble_3" class="video-center talking-bubble" muted preload="auto">
+    <video id="nikolas_bubble_3" class="video-center talking-bubble" muted preload="auto" >
       <source id="nikolas_bubble_source_3" src="/NikolasBubbles/Nikolas_Bubble_3_GR" type="video/webm" />
       <source id="nikolas_bubble_source_3_EN" src="/NikolasBubbles/Nikolas_Bubble_3" type="video/webm" />
 
@@ -172,8 +172,8 @@
     onclick="playGame(1,'eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw1Myw1OCwxMTIsMTA4LDk3LDEyMSwxM119',1)"
     style="position: absolute; z-index: 99999999999;">START HERE----------------------------------</button> -->
   <!-- <button onclick="simulateGameStart()"  style=" position: absolute; left: 0; z-index: 9999999999999999999999999;">Start Game</button> -->
-  <button onclick="simulatePlayGame()"
-    style="position: absolute;right: 5%; z-index: 99999999999999999999999999999999999999999;">Play Game</button>
+  <!-- <button onclick="simulatePlayGame()"
+    style="position: absolute;right: 5%; z-index: 99999999999999999999999999999999999999999;">Play Game</button> -->
 </body>
 
 <script src="/socket.io/socket.io.js"></script>
@@ -192,20 +192,20 @@
 
   var socket = io();
 
-  function simulatePlayGame() {
-    console.log("filloj pjesa e dyte e Elenitsa");
-    console.log("------------------------------------------------------------------------------------------------------------"
-    );
-    let dataElenitsa = 1
-    let counter = 0
-    let data = 1
+  // function simulatePlayGame() {
+  //   console.log("filloj pjesa e dyte e Elenitsa");
+  //   console.log("------------------------------------------------------------------------------------------------------------"
+  //   );
+  //   let dataElenitsa = 1
+  //   let counter = 0
+  //   let data = 1
 
-    playGame(data, dataElenitsa, counter);
-    // document.querySelector("#elenitsa_idle").style.opacity = "0";
+  //   playGame(data, dataElenitsa, counter);
+  //   // document.querySelector("#elenitsa_idle").style.opacity = "0";
 
 
-    socket.emit("elenitsaStart", 0);
-  }
+  //   socket.emit("elenitsaStart", 0);
+  // }
 
   document.getElementById('elenitsaCryingAudio').controls = false;
   let gameStarted = false
@@ -260,6 +260,7 @@
           document.getElementById("nikolas_bubble_2").src = '/NikolasBubbles/Nikolas_Bubble_2_GR'
           document.getElementById("nikolas_bubble_3").src = '/NikolasBubbles/Nikolas_Bubble_3_GR'
           document.getElementById("nikolas_bubble_4").src = '/NikolasBubbles/Nikolas_Bubble_4_GR'
+          document.getElementById("nikolas_bubble_4").style.left = "0px"
           document.getElementById("nikolas_bubble_5").src = '/NikolasBubbles/Nikolas_Bubble_5_GR'
         }else {
           lang = ""
@@ -270,6 +271,7 @@
           document.getElementById("nikolas_bubble_2").src = '/NikolasBubbles/Nikolas_Bubble_2'
           document.getElementById("nikolas_bubble_3").src = '/NikolasBubbles/Nikolas_Bubble_3'
           document.getElementById("nikolas_bubble_4").src = '/NikolasBubbles/Nikolas_Bubble_4'
+          document.getElementById("nikolas_bubble_4").style.left = "-75px"
           document.getElementById("nikolas_bubble_5").src = '/NikolasBubbles/Nikolas_Bubble_5'
 
         }
