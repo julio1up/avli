@@ -206,9 +206,23 @@
       }
     });
 
-    window.addEventListener('storage', (event) => {
-      if (event.key === 'languageGameOne') {
-        const language = localStorage.getItem('languageGameOne');
+    // window.addEventListener('storage', (event) => {
+    //   if (event.key === 'languageGameOne') {
+    //     const language = localStorage.getItem('languageGameOne');
+    //     if (language) {
+    //       // Update the game language
+    //       if(language == "GR"){
+    //         lang = "_GR"
+    //       }else {
+    //         lang = ""
+    //       }
+    //       console.log(`Language changed to: ${language}`);
+    //     }
+    //   }
+    // });
+    socket.on("languageOneChanged", function (data) { 
+      // console.log(data,"language te giagia")
+        const language = data;
         if (language) {
           // Update the game language
           if(language == "GR"){
@@ -218,17 +232,17 @@
           }
           console.log(`Language changed to: ${language}`);
         }
-      }
-    });
+    })
     window.addEventListener('load', () => {
-      const language = localStorage.getItem('languageGameOne');
-      if (language) {
-        if(language == "GR"){
-          lang = "_GR"
-        }else {
-          lang = ""
-        }
-      }
+      lang = "_GR"
+      // const language = localStorage.getItem('languageGameOne');
+      // if (language) {
+      //   if(language == "GR"){
+      //     lang = "_GR"
+      //   }else {
+      //     lang = ""
+      //   }
+      // }
     });
 
     // document.querySelector("#Pappous_idle").load();

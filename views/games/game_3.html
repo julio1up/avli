@@ -191,20 +191,22 @@
         // });
 
         window.addEventListener('load', () => {
-            let language = localStorage.getItem('languageGameThree');
-            if(!language){
-                localStorage.setItem('languageGameThree', "GR");
-                language = "GR"
-            }
-            if (language) {
-                ChangeLanguageGameThree(language);
-            }
+            ChangeLanguageGameThree("GR");
+            // let language = localStorage.getItem('languageGameThree');
+            // if(!language){
+            //     localStorage.setItem('languageGameThree', "GR");
+            //     language = "GR"
+            // }
+            // if (language) {
+            //     ChangeLanguageGameThree(language);
+            // }
         });
 
-        function ChangeLanguageGameThree(language){  
-            localStorage.setItem('languageGameThree', language);
+        function ChangeLanguageGameThree(language){
+            // localStorage.setItem('languageGameThree', language);
             // You can trigger a custom event to handle the change in the current tab immediately
-            window.dispatchEvent(new Event('storage'));
+            socket.emit("languageThreeChanged", language)
+            // window.dispatchEvent(new Event('storage'));
             UpdateInnerText(language)
         }
 

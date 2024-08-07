@@ -178,20 +178,14 @@
 // });
 
         window.addEventListener('load', () => {
-            let language = localStorage.getItem('languageGameOne');
-            if(!language){
-                localStorage.setItem('languageGameOne', "GR");
-                language = "GR"
-            }
-            if (language) {
-                ChangeLanguageGameOne(language);
-            }
+            ChangeLanguageGameOne("GR");
         });
 
         function ChangeLanguageGameOne(language){  
-            localStorage.setItem('languageGameOne', language);
+            // localStorage.setItem('languageGameOne', language);
+            socket.emit("languageOneChanged", language)
             // You can trigger a custom event to handle the change in the current tab immediately
-            window.dispatchEvent(new Event('storage'));
+            // window.dispatchEvent(new Event('storage'));
             UpdateInnerText(language)
         }
 

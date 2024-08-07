@@ -277,9 +277,9 @@
 
     const socket = io();
 
-    window.addEventListener('storage', (event) => {
-      if (event.key === 'languageGameOne') {
-        const language = localStorage.getItem('languageGameOne');
+    socket.on("languageOneChanged", function (data) { 
+      // console.log(data,"language te giagia")
+        const language = data;
         if (language) {
           // Update the game language
           if(language == "GR"){
@@ -289,9 +289,10 @@
           }
           console.log(`Language changed to: ${language}`);
         }
-      }
-      if (event.key === 'languageGameThree') {
-        const language = localStorage.getItem('languageGameThree');
+    })
+    socket.on("languageThreeChanged", function (data) {
+      // console.log(data,"language te giagia")
+        const language = data;
         if (language) {
           // Update the game language
           if(language == "GR"){
@@ -299,29 +300,58 @@
           }else {
             langThree = ""
           }
-          console.log(`Language Three changed to: ${language}`);
+          console.log(`Language changed to: ${language}`)
         }
-      }
+    })
 
-    });
+
+    // window.addEventListener('storage', (event) => {
+      // if (event.key === 'languageGameOne') {
+      //   const language = localStorage.getItem('languageGameOne');
+      //   if (language) {
+      //     // Update the game language
+      //     if(language == "GR"){
+      //       langOne = "_GR"
+      //     }else {
+      //       langOne = ""
+      //     }
+      //     console.log(`Language changed to: ${language}`);
+      //   }
+      // }
+      // if (event.key === 'languageGameThree') {
+      //   const language = localStorage.getItem('languageGameThree');
+      //   if (language) {
+      //     // Update the game language
+      //     if(language == "GR"){
+      //       langThree = "_GR"
+      //     }else {
+      //       langThree = ""
+      //     }
+      //     console.log(`Language Three changed to: ${language}`);
+      //   }
+      // }
+
+    // });
     window.addEventListener('load', () => {
-      const languageOne = localStorage.getItem('languageGameOne');
-      if (languageOne) {
-        if(languageOne == "GR"){
-          langOne = "_GR"
-        }else {
-          langOne = ""
-        }
-      }
+      // const languageOne = localStorage.getItem('languageGameOne');
+      // if (languageOne) {
+      //   if(languageOne == "GR"){
+      //     langOne = "_GR"
+      //   }else {
+      //     langOne = ""
+      //   }
+      // }
+      langOne = "_GR"
 
-      const languageThree = localStorage.getItem('languageGameThree');
-      if (languageThree) {
-        if(languageThree == "GR"){
-          langThree = "_GR"
-        }else {
-          langThree = ""
-        }
-      }
+      // const languageThree = localStorage.getItem('languageGameThree');
+      // if (languageThree) {
+      //   if(languageThree == "GR"){
+      //     langThree = "_GR"
+      //   }else {
+      //     langThree = ""
+      //   }
+      // }
+      langThree = "_GR"
 
     });
 
@@ -493,33 +523,33 @@
 
     // funksionet sekuenciale Fwtografos
     function updateFrameFwtografos(frame) {
-          const paddedFrame = String(frame).padStart(5, '0');
-          if(paddedFrame.toString() == "00150"){
-            handleVideoPlay(document.querySelector('#fwtografos_arrow_1'))
-            var socket = io();
-            socket.emit("playFotografoGame", 1)
-          }
+      const paddedFrame = String(frame).padStart(5, '0');
+      if(paddedFrame.toString() == "00150"){
+        handleVideoPlay(document.querySelector('#fwtografos_arrow_1'))
+        var socket = io();
+        socket.emit("playFotografoGame", 1)
+      }
           
-          if(paddedFrame.toString() == "00394"){
-            var socket = io();
-            socket.emit("playFotografoGame", 1)
-            socket.emit('messageFwtografos_3_talkings', 1);
-          }
-          if(paddedFrame.toString() == "00394"){
-            var socket = io();
-            socket.emit("playFotografoGame", 1)
-            socket.emit('messageFwtografos_3_talkings', 1);
-          }
-          if(paddedFrame.toString() == "00400"){
-            fwtografos_arrow_1.style.opacity = "0";
-          }
-          fwtografos_arrow_1
-          if(paddedFrame.toString() == "01022"){
-            var socket = io();
-            socket.emit('messageFwtografos_End', 1);
-            socket.emit('resetGamePhoto', 1);
-          }
-          sequenceImageFwtografos.src = `${folderPathFwtografos}Fwtografos_PNG${langThree}_${paddedFrame}.png`;
+      if(paddedFrame.toString() == "00394"){
+        var socket = io();
+        socket.emit("playFotografoGame", 1)
+        socket.emit('messageFwtografos_3_talkings', 1);
+      }
+      if(paddedFrame.toString() == "00394"){
+        var socket = io();
+        socket.emit("playFotografoGame", 1)
+        socket.emit('messageFwtografos_3_talkings', 1);
+      }
+      if(paddedFrame.toString() == "00400"){
+        fwtografos_arrow_1.style.opacity = "0";
+      }
+          
+      if(paddedFrame.toString() == "01022"){
+        var socket = io();
+        socket.emit('messageFwtografos_End', 1);
+        socket.emit('resetGamePhoto', 1);
+      }
+      sequenceImageFwtografos.src = `${folderPathFwtografos}Fwtografos_PNG${langThree}_${paddedFrame}.png`;
       }
     function nextFrameFwtografos() {
           if (statePlayingFwtografos) {

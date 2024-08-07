@@ -302,7 +302,6 @@ io.on('connection', function(socket) {
   socket.on('messageIceSeller', function (message) {
     io.emit('messageIceSeller', message);
   });
-  
   socket.on('pagopolisStart', function (message) {
     io.emit('pagopolisStart', message);
   });
@@ -417,7 +416,21 @@ io.on('connection', function(socket) {
   socket.on('scene4', function (message) {
     io.emit('scene4', message);
   });
+
+  // language sockets
+  socket.on('languageOneChanged', function (message) {
+    io.emit('languageOneChanged', message);
+  });
+  socket.on('languageTwoChanged', function (message) {
+    io.emit('languageTwoChanged', message);
+  });
+  socket.on('languageThreeChanged', function (message) {
+    io.emit('languageThreeChanged', message);
+  });
 });
+
+
+
 
 
 // parser.on('data', function(data) {

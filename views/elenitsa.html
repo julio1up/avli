@@ -172,8 +172,8 @@
     onclick="playGame(1,'eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw1Myw1OCwxMTIsMTA4LDk3LDEyMSwxM119',1)"
     style="position: absolute; z-index: 99999999999;">START HERE----------------------------------</button> -->
   <!-- <button onclick="simulateGameStart()"  style=" position: absolute; left: 0; z-index: 9999999999999999999999999;">Start Game</button> -->
-  <!-- <button onclick="simulatePlayGame()"
-    style="position: absolute;right: 5%; z-index: 99999999999999999999999999999999999999999;">Play Game</button> -->
+  <button onclick="simulatePlayGame()"
+    style="position: absolute;right: 5%; z-index: 99999999999999999999999999999999999999999;">Play Game</button>
 </body>
 
 <script src="/socket.io/socket.io.js"></script>
@@ -192,20 +192,20 @@
 
   var socket = io();
 
-  // function simulatePlayGame() {
-  //   console.log("filloj pjesa e dyte e Elenitsa");
-  //   console.log("------------------------------------------------------------------------------------------------------------"
-  //   );
-  //   let dataElenitsa = 1
-  //   let counter = 0
-  //   let data = 1
+  function simulatePlayGame() {
+    console.log("filloj pjesa e dyte e Elenitsa");
+    console.log("------------------------------------------------------------------------------------------------------------"
+    );
+    let dataElenitsa = 1
+    let counter = 0
+    let data = 1
 
-  //   playGame(data, dataElenitsa, counter);
-  //   // document.querySelector("#elenitsa_idle").style.opacity = "0";
+    playGame(data, dataElenitsa, counter);
+    // document.querySelector("#elenitsa_idle").style.opacity = "0";
 
 
-  //   socket.emit("elenitsaStart", 0);
-  // }
+    socket.emit("elenitsaStart", 0);
+  }
 
   document.getElementById('elenitsaCryingAudio').controls = false;
   let gameStarted = false
@@ -246,9 +246,9 @@
   // document.querySelector("#efterpi_bubble_1").style.opacity = "1";
   // document.querySelector("#efterpi_bubble_1").play();
 
-  window.addEventListener('storage', (event) => {
-    if (event.key === 'languageGameTwo') {
-      const language = localStorage.getItem('languageGameTwo');
+  socket.on("languageTwoChanged", function (data) { 
+    // console.log(data,"language te giagia")
+      const language = data;
       if (language) {
         // Update the game language
         if(language == "GR"){
@@ -273,69 +273,69 @@
           document.getElementById("nikolas_bubble_5").src = '/NikolasBubbles/Nikolas_Bubble_5'
 
         }
-
-        // for (let i = 1; i <= 3; i++) {
-        //     let video = document.getElementById('nikolas_bubble_source_' + i);
-        //     let source = video.getElementsByTagName('source')[0];
-        //     source.src = '/NikolasBubbles/Nikolas_Bubble_' + i + lang + '.webm';
-        //     video.load(); // Reload the video with the new source
-        //     console.log('/nikolas_bubble_source_' + i + lang + '.webm')
-
-        // }
-        // for (let i = 1; i <= 5; i++) {
-        //     let video = document.getElementById('nikolas_bubble_' + i);
-        //     if (video) {
-        //         let source = video.querySelector('source');
-        //         if (source) {
-        //             source.src = '/NikolasBubbles/Nikolas_Bubble_' + i + lang + '.webm';
-        //             video.load(); // Reload the video with the new source
-        //         } else {
-        //             console.error('Source element not found for video' + i);
-        //         }
-        //     } else {
-        //         console.error('Video element not found: video' + i);
-        //     }
-        // }
-
-        // for (let i = 1; i <= 5; i++) {
-        //     let video = document.getElementById('nikolas_bubble_' + i);
-        //     let source = video.getElementsByTagName('source')[0];
-        //     source.src = '/nikolas_bubble_source_' + i + lang + '.webm';
-        //     video.load(); // Reload the video with the new source
-        //     console.log('/nikolas_bubble_source_' + i + lang + '.webm')
-        // }
-
-        // document.getElementById("efterpi_bubble_source_1").src=`/EfterpiBubbles/Efterpi_Bubble_1${lang}.webm`
-        // document.getElementById("efterpi_bubble_source_2").src=`/EfterpiBubbles/Efterpi_Bubble_2${lang}.webm`
-        // document.getElementById("efterpi_bubble_source_3").src=`/EfterpiBubbles/Efterpi_Bubble_3${lang}.webm`
-        // document.getElementById("nikolas_bubble_source_1").src=`/NikolasBubbles/Nikolas_Bubble_1${lang}.webm`
-        // document.getElementById("nikolas_bubble_source_2").src=`/NikolasBubbles/Nikolas_Bubble_2${lang}.webm`
-        // document.getElementById("nikolas_bubble_source_3").src=`/NikolasBubbles/Nikolas_Bubble_3${lang}.webm`
-        // document.getElementById("nikolas_bubble_source_4").src=`/NikolasBubbles/Nikolas_Bubble_4${lang}.webm`
-        // document.getElementById("nikolas_bubble_source_5").src=`/NikolasBubbles/Nikolas_Bubble_5${lang}.webm`
-
-        
-        
-        
-        
-        
-        
-        
-        
+        document.getElementById("efterpi_bubble_1").load()
+        document.getElementById("efterpi_bubble_2").load()
+        document.getElementById("efterpi_bubble_3").load()
+        document.getElementById("nikolas_bubble_1").load()
+        document.getElementById("nikolas_bubble_2").load()
+        document.getElementById("nikolas_bubble_3").load()
+        document.getElementById("nikolas_bubble_4").load()
+        document.getElementById("nikolas_bubble_5").load()
 
         console.log(`Language changed to: ${language}`);
       }
-    }
-  })
+
+    })
+
+  // window.addEventListener('storage', (event) => {
+  //   if (event.key === 'languageGameTwo') {
+  //     const language = localStorage.getItem('languageGameTwo');
+  //     if (language) {
+  //       // Update the game language
+  //       if(language == "GR"){
+  //         lang = "_GR"
+  //         document.getElementById("efterpi_bubble_1").src = '/EfterpiBubbles/Efterpi_Bubble_1_GR'
+  //         document.getElementById("efterpi_bubble_2").src = '/EfterpiBubbles/Efterpi_Bubble_2_GR'
+  //         document.getElementById("efterpi_bubble_3").src = '/EfterpiBubbles/Efterpi_Bubble_3_GR'
+  //         document.getElementById("nikolas_bubble_1").src = '/NikolasBubbles/Nikolas_Bubble_1_GR'
+  //         document.getElementById("nikolas_bubble_2").src = '/NikolasBubbles/Nikolas_Bubble_2_GR'
+  //         document.getElementById("nikolas_bubble_3").src = '/NikolasBubbles/Nikolas_Bubble_3_GR'
+  //         document.getElementById("nikolas_bubble_4").src = '/NikolasBubbles/Nikolas_Bubble_4_GR'
+  //         document.getElementById("nikolas_bubble_5").src = '/NikolasBubbles/Nikolas_Bubble_5_GR'
+  //       }else {
+  //         lang = ""
+  //         document.getElementById("efterpi_bubble_1").src = '/EfterpiBubbles/Efterpi_Bubble_1'
+  //         document.getElementById("efterpi_bubble_2").src = '/EfterpiBubbles/Efterpi_Bubble_2'
+  //         document.getElementById("efterpi_bubble_3").src = '/EfterpiBubbles/Efterpi_Bubble_3'
+  //         document.getElementById("nikolas_bubble_1").src = '/NikolasBubbles/Nikolas_Bubble_1'
+  //         document.getElementById("nikolas_bubble_2").src = '/NikolasBubbles/Nikolas_Bubble_2'
+  //         document.getElementById("nikolas_bubble_3").src = '/NikolasBubbles/Nikolas_Bubble_3'
+  //         document.getElementById("nikolas_bubble_4").src = '/NikolasBubbles/Nikolas_Bubble_4'
+  //         document.getElementById("nikolas_bubble_5").src = '/NikolasBubbles/Nikolas_Bubble_5'
+
+  //       }
+  //       document.getElementById("efterpi_bubble_1").load()
+  //       document.getElementById("efterpi_bubble_2").load()
+  //       document.getElementById("efterpi_bubble_3").load()
+  //       document.getElementById("nikolas_bubble_1").load()
+  //       document.getElementById("nikolas_bubble_2").load()
+  //       document.getElementById("nikolas_bubble_3").load()
+  //       document.getElementById("nikolas_bubble_4").load()
+  //       document.getElementById("nikolas_bubble_5").load()
+
+  //       console.log(`Language changed to: ${language}`);
+  //     }
+  //   }
+  // })
     window.addEventListener('load', () => {
-      const language = localStorage.getItem('languageGameTwo');
-      if (language) {
-        if(language == "GR"){
-          lang = "_GR"
-        }else {
-          lang = ""
-        }
-      }
+      lang = "_GR"
+      // const language = localStorage.getItem('languageGameTwo');
+      // if (language) {
+      //   if(language == "GR"){
+      //   }else {
+      //     lang = ""
+      //   }
+      // }
     });
 
   function resetGame() {

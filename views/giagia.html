@@ -139,9 +139,9 @@
         </div>
       </div>
     </section>
-    <!-- <button id="startfunction"
+    <button id="startfunction"
         onclick="handleSceneKnock('eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzExOCw0OSw1OCwxMTIsMTA4LDk3LDEyMSwxM119')"
-        style="background-color: red; position: absolute; z-index: 99999999999;">START HERE----------------------------------</button> -->
+        style="background-color: red; position: absolute; z-index: 99999999999;">START HERE----------------------------------</button>
 
         <!-- <button style="background-color: red; position: absolute;  top: 100px; z-index: 99999999999;" onclick="GAMESTATE()">GAME STATE</button> -->
   <script src="/socket.io/socket.io.js"></script>
@@ -302,10 +302,9 @@
         });
       }
     });
-
-    window.addEventListener('storage', (event) => {
-      if (event.key === 'languageGameOne') {
-        const language = localStorage.getItem('languageGameOne');
+    socket.on("languageOneChanged", function (data) { 
+      // console.log(data,"language te giagia")
+        const language = data;
         if (language) {
           // Update the game language
           if(language == "GR"){
@@ -315,18 +314,31 @@
           }
           console.log(`Language changed to: ${language}`);
         }
-      }
-    });
+    })
+    // window.addEventListener('storage', (event) => {
+    //   if (event.key === 'languageGameOne') {
+    //     const language = localStorage.getItem('languageGameOne');
+    //     if (language) {
+    //       // Update the game language
+    //       if(language == "GR"){
+    //         lang = "_GR"
+    //       }else {
+    //         lang = ""
+    //       }
+    //       console.log(`Language changed to: ${language}`);
+    //     }
+    //   }
+    // });
     window.addEventListener('load', () => {
-      const language = localStorage.getItem('languageGameOne');
-      if (language) {
-        if(language == "GR"){
-          lang = "_GR"
-        }else {
-          lang = ""
-        }
-      }
-    });
+      lang = "_GR"
+      //   const language = localStorage.getItem('languageGameOne');
+      //   if (language) {
+      //     if(language == "GR"){
+      //     }else {
+      //       lang = ""
+      //     }
+      //   }
+      });
 
 
     socket.on("resetGameForGiagia", function (data) {
