@@ -128,7 +128,7 @@
 
     </video>
 
-    <video id="nikolas_bubble_4" class="video-center talking-bubble" muted preload="auto">
+    <video id="nikolas_bubble_4" class="video-center talking-bubble" muted preload="auto" >
       <source id="nikolas_bubble_source_4" src="/NikolasBubbles/Nikolas_Bubble_4_GR" type="video/webm" />
       <source id="nikolas_bubble_source_4_EN" src="/NikolasBubbles/Nikolas_Bubble_4" type="video/webm" />
 
@@ -243,9 +243,6 @@
     let idleStartEfterpiBubble = 0;
     let idleEndEfterpiBubble = 1;
 
-  // document.querySelector("#efterpi_bubble_1").style.opacity = "1";
-  // document.querySelector("#efterpi_bubble_1").play();
-
   socket.on("languageTwoChanged", function (data) { 
     // console.log(data,"language te giagia")
       const language = data;
@@ -261,6 +258,7 @@
           document.getElementById("nikolas_bubble_3").src = '/NikolasBubbles/Nikolas_Bubble_3_GR'
           document.getElementById("nikolas_bubble_4").src = '/NikolasBubbles/Nikolas_Bubble_4_GR'
           document.getElementById("nikolas_bubble_4").style.left = "0px"
+          document.getElementById("nikolas_bubble_4").style.bottom = "0px"
           document.getElementById("nikolas_bubble_5").src = '/NikolasBubbles/Nikolas_Bubble_5_GR'
         }else {
           lang = ""
@@ -272,6 +270,7 @@
           document.getElementById("nikolas_bubble_3").src = '/NikolasBubbles/Nikolas_Bubble_3'
           document.getElementById("nikolas_bubble_4").src = '/NikolasBubbles/Nikolas_Bubble_4'
           document.getElementById("nikolas_bubble_4").style.left = "-75px"
+          document.getElementById("nikolas_bubble_4").style.bottom = "110px"
           document.getElementById("nikolas_bubble_5").src = '/NikolasBubbles/Nikolas_Bubble_5'
 
         }
